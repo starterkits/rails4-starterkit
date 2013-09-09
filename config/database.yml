@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: airship_development
   pool: 5
-  username: airship
+  username: postgres
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: airship_test
   pool: 5
-  username: airship
+  username: postgres
   password:
 
 production:
