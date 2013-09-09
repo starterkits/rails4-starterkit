@@ -3,3 +3,7 @@
 TODO
 
 * Install FactoryGirl
+* Install Devise Security Extension https://github.com/phatworx/devise_security_extension
+
+* Review config/initializers/devise.rb
+
