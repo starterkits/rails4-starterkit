@@ -1,22 +1,18 @@
 !!!
 %html
   %head
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    %title= content_for?(:title) ? yield(:title) : "Airship"
-    %meta{:content => content_for?(:description) ? yield(:description) : "Airship", :name => "description"}/
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "data-turbolinks-track" => true
+    %meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
+    %title= content_for?(:title) ? yield(:title) : 'Airship'
+    %meta{:content => content_for?(:description) ? yield(:description) : 'Airship', name: 'description'}/
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    /[if lt IE 9]
+      = javascript_include_tag 'ie',  'data-turbolinks-track' => true
     = csrf_meta_tags
     = yield(:head)
-  %body{:class => "#{controller_name} #{action_name}"}
+  %body{class: "#{controller_name} #{action_name}"}
     = render 'layouts/navigation'
-    #main{:role => "main"}
-      .container
-        .content
-          .row
-            .span12
-              = render 'layouts/messages'
-              = yield
-          %footer
-      / ! end of .container
-    / ! end of #main
+    .container
+      = render 'layouts/messages'
+      = yield
+      %footer
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
