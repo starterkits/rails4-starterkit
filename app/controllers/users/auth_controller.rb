@@ -1,6 +1,5 @@
 class Users::AuthController < ApplicationController
-  # todo: enable skip when cancan is installed
-  #skip_authorization_check
+  skip_authorization_check
   before_filter :setup
 
   # capture metrics and redirect

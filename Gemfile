@@ -10,6 +10,7 @@ gem 'turbolinks' # https://github.com/rails/turbolinks
 gem 'jbuilder', '~> 1.2' # https://github.com/rails/jbuilder
 
 gem 'devise'
+gem 'cancan'
 gem 'omniauth'
 gem 'omniauth-facebook'
 # gem 'omniauth-twitter'

@@ -38,6 +38,7 @@ GEM
     atomic (1.1.13)
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
+    cancan (1.6.10)
     coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -195,6 +196,7 @@ PLATFORMS
 DEPENDENCIES
   addressable
   bootstrap-sass!
+  cancan
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise
