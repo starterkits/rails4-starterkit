@@ -21,9 +21,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def build_resource(*args)
     super
-    resource.tos_accepted_at = Time.now
     set_resource_fields(:email)
-    set_resource_fields(:username, :nickname)
+    set_resource_fields(:first_name)
+    set_resource_fields(:last_name)
+    set_resource_fields(:image_url)
+    # set_resource_fields(:username, :nickname)
     resource
   end
 
@@ -36,6 +38,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @prompt_user =  cached_user_for_prompt
   end
 
+  # Set field from session or omniauth if available
+  # Field may have been cached in the session during an OAuth or custom sign up flow
   def set_resource_fields(field, *lookup_fields)
     return unless resource[field].blank?
     lookup_fields = [field] if lookup_fields.blank?
