@@ -14,6 +14,7 @@ gem 'omniauth-facebook'
 # gem 'omniauth-twitter'
 # gem 'omniauth-linkedin'
 
+gem 'simple_form', '~> 3.0.0.rc'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
