@@ -44,8 +44,8 @@ OmniAuth.config.full_host = full_host if full_host.present?
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :facebook, auth_config[:facebook][:consumer_key], auth_config[:facebook][:consumer_secret], scope: FACEBOOK_OAUTH_SCOPE
-  provider :twitter, auth_config[:twitter][:consumer_key], auth_config[:twitter][:consumer_secret]
-  provider :linkedin, auth_config[:linkedin][:consumer_key], auth_config[:linkedin][:consumer_secret]
+  # provider :twitter, auth_config[:twitter][:consumer_key], auth_config[:twitter][:consumer_secret]
+  # provider :linkedin, auth_config[:linkedin][:consumer_key], auth_config[:linkedin][:consumer_secret]
   # provider :google, auth_config[:google][:consumer_key], auth_config[:google][:consumer_secret], \
   #   access_type: 'offline', approval_prompt: 'force', scope: 'https://www.google.com/m8/feeds,userinfo.email,userinfo.profile'
 
