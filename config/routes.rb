@@ -1,5 +1,16 @@
 Airship::Application.routes.draw do
-  devise_for :users
+
+  post '/auth/:provider/callback' => 'oauth#create'
+  match '/auth/failure' => 'oauth#auth_failure', via: [:get, :post]
+  get '/auth/:provider' => 'oauth#passthru', as: 'provider_auth'
+  get '/auth' => redirect('/a/signup')
+  devise_for :users, path: '/a',
+    controllers: {registrations: 'users/registrations', passwords: 'users/reset_password'},
+    path_names: {sign_up: 'signup', sign_in: 'login', sign_out: 'logout'}
+  get '/a' => redirect('/a/signup')
+  get '/login/done' => 'users/auth#after_login', as: 'user_root'
+  get '/signup/done/:id' => 'users/auth#after_sign_up', as: 'after_sign_up'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

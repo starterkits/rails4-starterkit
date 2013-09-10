@@ -9,6 +9,10 @@ gem 'jquery-rails'
 gem 'turbolinks' # https://github.com/rails/turbolinks
 gem 'jbuilder', '~> 1.2' # https://github.com/rails/jbuilder
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+# gem 'omniauth-twitter'
+# gem 'omniauth-linkedin'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -27,4 +31,5 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'debugger'
+  gem 'factory_girl_rails'
 end

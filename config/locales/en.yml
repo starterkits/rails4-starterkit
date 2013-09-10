@@ -21,3 +21,10 @@
 
 en:
   hello: "Hello world"
+
+  accounts:
+    connected: "Success!"
+
+  errors:
+    unknown: 'Oops! Something went wrong. Please try again.'
+
