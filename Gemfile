@@ -18,6 +18,7 @@ gem 'omniauth-facebook'
 gem 'simple_form', '~> 3.0.0.rc'
 # gem 'country_select'
 gem 'addressable'
+gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', branch: '3'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
