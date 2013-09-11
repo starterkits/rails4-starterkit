@@ -9,4 +9,7 @@ class User < ActiveRecord::Base
 
    has_many :authentications, dependent: :destroy
 
+   def needs_password?
+     encrypted_password.blank?
+   end
 end

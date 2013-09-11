@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_filter :setup
-  after_filter :handle_oauth_create, only: :create
+  before_action :setup
+  before_action :configure_permitted_parameters
+  after_action :handle_oauth_create, only: :create
 
   def create
     super
@@ -18,6 +19,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name]
+  end
 
   def build_resource(*args)
     super

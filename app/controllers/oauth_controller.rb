@@ -5,8 +5,8 @@ class OauthController < ApplicationController
 
   skip_authorization_check
   protect_from_forgery except: [:create]
-  skip_before_filter :authenticate_user!
-  before_filter :set_vars
+  skip_before_action :authenticate_user!
+  before_action :set_vars
 
   # omniauth passthru to use for route naming
   def passthru

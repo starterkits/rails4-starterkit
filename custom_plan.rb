@@ -9,7 +9,6 @@ class CustomPlan < Zeus::Rails
   def test
     require 'simplecov'
     SimpleCov.start 
-    # SimpleCov.start 'rails' if using RoR
 
     # require all ruby files
     Dir["#{Rails.root}/app/**/*.rb"].each { |f| load f }

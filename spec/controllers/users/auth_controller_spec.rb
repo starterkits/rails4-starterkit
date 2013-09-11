@@ -8,7 +8,7 @@ describe Users::AuthController do
   end
   def has_redirect_js?(path)
     # look for home path in JS code in page
-    response.body.should have_content("path: \"#{path}\"")
+    response.body.should have_content("path = \"#{path}\"")
   end
 
   describe "#after_sign_up" do
@@ -16,12 +16,11 @@ describe Users::AuthController do
     before :each do
       sign_in user
     end
-
     it "should redirect to path" do
       path = '/some/unique/path/to/match/in/page/abc/123'
       get :after_sign_up, path: path
       response.should be_success
-      response.body.should have_selector('.wizard')
+      response.body.should have_css('body.after_sign_up')
       has_redirect_js?(path)
     end
     it "should redirect to user home" do

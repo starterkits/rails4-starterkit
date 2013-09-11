@@ -37,7 +37,6 @@ end
 # gem 'capistrano', group: :development
 
 group :development do
-  gem 'pry'
   gem 'quiet_assets'
   # gem 'guard-rspec'
 end
@@ -46,6 +45,20 @@ group :development, :test do
   gem 'zeus'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+
+  gem 'debugger'
+  gem 'pry'
+  # gem 'pry-stack_explorer'
+  # gem 'pry-rescue'
+  gem "debugger-pry", :require => "debugger/pry"
+
+  # Add save_and_open_page support to rspec
+  # gem 'poltergeist' # alternative to webkit
+  gem 'capybara-webkit'
+  gem 'launchy'
+
+  # Add debug support to javascript tests
+  # gem 'capybara-firebug'
 end
 
 group :test do

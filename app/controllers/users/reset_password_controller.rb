@@ -1,5 +1,5 @@
 class Users::ResetPasswordController < Devise::PasswordsController
-  prepend_before_filter :force_logout, only: :edit
+  prepend_before_action :force_logout, only: :edit
 
   protected
 

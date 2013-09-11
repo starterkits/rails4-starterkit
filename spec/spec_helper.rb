@@ -8,8 +8,11 @@ end
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-# require 'rspec/autorun'
+#require 'rspec/autorun' # disabled for zeus?
 require 'database_cleaner'
+require 'capybara/rspec'
+#require 'capybara/firebug'
+
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -27,6 +30,10 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
+
+  # Use :webkit for headless tests and :selenium for everything else
+  Capybara.javascript_driver = :webkit
+  # Capybara.javascript_driver = :selenium
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

@@ -1,6 +1,6 @@
 class Users::AuthController < ApplicationController
   skip_authorization_check
-  before_filter :setup
+  before_action :setup
 
   # capture metrics and redirect
   def after_sign_up

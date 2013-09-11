@@ -7,3 +7,20 @@ TODO
 
 * Review config/initializers/devise.rb
 
+
+
+IN PROGRESS ...
+
+Setting up gems from https://github.com/alex-klepa/rails4-bootstrap-devise-cancan-omniauth
+
+Need to go through each config, initializer, etc. associated with each gem.
+
+Process:
+
+For each gem in gemfile that has not been thoroughly installed,
+- review gem docs
+- finish setting up gem
+
+Then finish configuring omniauth and devise views
+
+Then get rspecs green
