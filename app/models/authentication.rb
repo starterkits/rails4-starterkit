@@ -3,7 +3,7 @@ class Authentication < ActiveRecord::Base
 
   belongs_to :user
 
-  validates_presence_of :user_id, :provider, :proid
+  validates :user_id, :provider, :proid, presence: true
 
   default_scope { select((column_names - ['oauth_data_json']).map { |column_name| "#{table_name}.#{column_name}" }) }
 
