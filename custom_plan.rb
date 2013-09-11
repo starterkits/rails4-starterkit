@@ -8,10 +8,10 @@ class CustomPlan < Zeus::Rails
 
   def test
     require 'simplecov'
-    SimpleCov.start 
+    require 'spec/support/simplecov_helpers'
+    SimpleCov.start 'rails'
 
-    # require all ruby files
-    Dir["#{Rails.root}/app/**/*.rb"].each { |f| load f }
+    SimpleCovHelpers::load_files_for_coverage
 
     # run the tests
     super
