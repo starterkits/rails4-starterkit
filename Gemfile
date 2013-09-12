@@ -8,6 +8,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks' # https://github.com/rails/turbolinks
 gem 'jbuilder', '~> 1.2' # https://github.com/rails/jbuilder
+gem 'rack-timeout', '~> 0.1.0beta'
 
 gem 'devise'
 gem 'cancan'
