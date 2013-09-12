@@ -13,6 +13,14 @@ class OauthController < ApplicationController
     render :nothing, status: 404
   end
 
+  def on_omniauth_failure(env)
+    message_key = env['omniauth.error.type']
+    origin = env['omniauth.origin'] || ''
+    # todo: replace with path name now that this code is in a controller...
+    new_path = "#{env['SCRIPT_NAME']}#{OmniAuth.config.path_prefix}/failure?message=#{message_key}&origin=#{CGI.escape(origin)}"
+    Rack::Response.new(['302 Moved'], 302, 'Location' => new_path).finish
+  end
+
   # oauth callback
   def create
     #return render text: '<pre>' + request.env["omniauth.origin"].to_yaml + "\n\n" + request.env["omniauth.auth"].to_yaml + '</pre>'

@@ -49,10 +49,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   # provider :google, auth_config[:google][:consumer_key], auth_config[:google][:consumer_secret], \
   #   access_type: 'offline', approval_prompt: 'force', scope: 'https://www.google.com/m8/feeds,userinfo.email,userinfo.profile'
 
-  on_failure do |env|
-    message_key = env['omniauth.error.type']
-    origin = env['omniauth.origin'] || ''
-    new_path = "#{env['SCRIPT_NAME']}#{OmniAuth.config.path_prefix}/failure?message=#{message_key}&origin=#{CGI.escape(origin)}"
-    [302, {'Location' => new_path, 'Content-Type'=> 'text/html'}, []]
+  on_failure = Proc.new do |env|
+    OAuthController.action(:on_omniauth_failure).call(env)
   end
 end
