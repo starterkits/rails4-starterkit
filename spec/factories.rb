@@ -1,10 +1,3 @@
-def length_at_least(count)
-  begin
-    result = yield
-  end while result.length < count
-  result
-end
-
 FactoryGirl.define do
   factory :user do
     email       { Faker::Internet.email }

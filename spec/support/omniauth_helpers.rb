@@ -9,11 +9,6 @@ module OmniauthHelpers
     @omniauth_mocks = YAML.load(yml)
   end
 
-  def mock_omniauth(provider, options = {})
-    @oauth_data = @omniauth_mocks[provider.to_s]
-    OmniAuth.config.mock_auth[provider.to_sym] = oauth_data
-  end
-
   def user_data(options = {})
     unless options[:user].is_a?(User)
       attrs = options[:attrs] && options[:attrs].symbolize_keys || {}

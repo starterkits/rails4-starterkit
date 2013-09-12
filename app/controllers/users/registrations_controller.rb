@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :setup
-  before_action :configure_permitted_parameters
+  before_action :permit_params, only: :create
   after_action :handle_oauth_create, only: :create
 
   def create
@@ -20,7 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def configure_permitted_parameters
+  def permit_params
     devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name]
   end
 
