@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Airship::Application.load_tasks
+ExampleApp::Application.load_tasks

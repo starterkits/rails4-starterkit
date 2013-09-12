@@ -2,8 +2,8 @@
 %html
   %head
     %meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
-    %title= content_for?(:title) ? yield(:title) : 'Airship'
-    %meta{:content => content_for?(:description) ? yield(:description) : 'Airship', name: 'description'}/
+    %title= content_for?(:title) ? yield(:title) : 'ExampleApp'
+    %meta{:content => content_for?(:description) ? yield(:description) : 'ExampleApp', name: 'description'}/
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     /[if lt IE 9]
       = javascript_include_tag 'ie',  'data-turbolinks-track' => true

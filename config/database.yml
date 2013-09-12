@@ -17,7 +17,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: airship_development
+  database: exampleapp_development
   pool: 5
   username: postgres
   password:
@@ -46,7 +46,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: airship_test
+  database: exampleapp_test
   pool: 5
   username: postgres
   password:
@@ -54,7 +54,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: airship_production
+  database: exampleapp_production
   pool: 5
-  username: airship
+  username: exampleapp
   password:

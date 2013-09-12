@@ -1,4 +1,4 @@
-Airship::Application.routes.draw do
+ExampleApp::Application.routes.draw do
 
   match '/home' => 'pages#user_home', via: [:get, :post], as: 'user_home'
   match '/error' => 'pages#error', via: [:get, :post], as: 'error_page'

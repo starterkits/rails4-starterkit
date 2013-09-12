@@ -1,4 +1,4 @@
-auth_config = Airship::Application.config.oauth = {}
+auth_config = ExampleApp::Application.config.oauth = {}
 
 auth_config[:twitter] = {
   consumer_key: '@@OAUTH_TWITTER_APP_KEY@@',
