@@ -1,6 +1,4 @@
 ExampleApp::Application.routes.draw do
-
-  match '/home' => 'pages#user_home', via: [:get, :post], as: 'user_home'
   match '/error' => 'pages#error', via: [:get, :post], as: 'error_page'
 
   # OAuth
@@ -14,6 +12,7 @@ ExampleApp::Application.routes.draw do
     controllers: {registrations: 'users/registrations', passwords: 'users/reset_password'},
     path_names: {sign_up: 'signup', sign_in: 'login', sign_out: 'logout'}
   get '/a' => redirect('/a/signup')
+  get '/home' => 'users#show', as: 'user_home'
   get '/login/done' => 'users/auth#after_login', as: 'user_root'
   get '/signup/done/:id' => 'users/auth#after_sign_up', as: 'after_sign_up'
 

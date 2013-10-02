@@ -1,8 +1,6 @@
 class PagesController < ApplicationController
-  def home
-  end
 
-  def user_home
+  def home
   end
 
   def error
