@@ -1,23 +1,23 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+gem 'rails', '~> 4.0.0'
 gem 'pg'
-gem 'sass-rails', '~> 4.0.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks' # https://github.com/rails/turbolinks
-gem 'jbuilder', '~> 1.2' # https://github.com/rails/jbuilder
+gem 'jbuilder'   # https://github.com/rails/jbuilder
 gem 'rack-timeout', '~> 0.1.0beta'
 
 gem 'devise'
 gem 'cancan'
 gem 'omniauth'
 gem 'omniauth-facebook'
-# gem 'omniauth-twitter'
+gem 'omniauth-twitter'
 # gem 'omniauth-linkedin'
 
-gem 'simple_form', '~> 3.0.0.rc'
+gem 'simple_form'
 # gem 'country_select'
 gem 'addressable'
 gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', branch: '3'
@@ -43,7 +43,9 @@ group :development do
 end
 
 group :development, :test do
-  gem 'zeus'
+  # Zeus should be installed and run outside of bundler
+  # gem 'zeus'
+
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 
