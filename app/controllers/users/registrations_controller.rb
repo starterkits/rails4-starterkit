@@ -1,11 +1,22 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :setup
   before_action :permit_params, only: :create
-  after_action :handle_oauth_create, only: :create
 
   # Additional resource fields to permit
   # Devise already permits email, password, etc.
   SANITIZED_PARAMS = [:first_name, :last_name].freeze
+
+  # Fields to lookup and set from OAuth session data
+  # See OmniauthConcern
+  # First element is the field name followed by any number of fields
+  # to try and lookup in session data. If only the first element is
+  # present, it will be used as the lookup key.
+  LOOKUP_PARAMS = [
+    [:email],
+    [:first_name],
+    [:last_name],
+    [:image_url],
+    [:username, :username, :nickname]
+  ].freeze
 
   # GET /resource/sign_up
   def new
@@ -15,15 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-  rescue => e
-    if resource
-      resource.destroy if resource.persisted?
-      sign_out(resource)
-    end
-    report_error(e)
-    flash.clear
-    flash[:error] = I18n.t 'errors.unknown'
-    redirect_to error_page_path
+    create_auth if after_oauth? && resource.persisted?
   end
 
   # GET /resource/edit
@@ -58,21 +61,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def build_resource(*args)
     super
-    set_resource_fields(:email)
-    set_resource_fields(:first_name)
-    set_resource_fields(:last_name)
-    set_resource_fields(:image_url)
-    # set_resource_fields(:username, :nickname)
+    LOOKUP_FIELDS.each do |args|
+      set_resource_fields(*args)
+    end
     resource
-  end
-
-  def setup
-    @modal =        @layout == 'modal'
-    @prompt =       params[:prompt]
-    @after_oauth =  params[:after_oauth] == 'true' && @prompt.blank?
-    @failed =       params[:failed]
-    @provider =     params[:provider]
-    @prompt_user =  cached_user_for_prompt
   end
 
   # Set field from session or omniauth if available
@@ -81,24 +73,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
     return unless resource[field].blank?
     lookup_fields = [field] if lookup_fields.blank?
     lookup_fields.each do |lf|
-      resource[field] = if session[lf].present?
-        session[lf]
-      elsif session[:omniauth] && session[:omniauth][:info] && session[:omniauth][:info][lf].present?
-        session[:omniauth][:info][lf]
-      end
+      # Add additional session lookup here if data was cached as part of a custom flow
+      resource[field] = session[:omniauth].to_h[:info].to_h[lf].presence
     end
   end
 
-  def handle_oauth_create
-    if resource.persisted?
-      if @after_oauth && session[:omniauth]
-        auth = resource.authentications.build
-        auth.update_from_omniauth(session[:omniauth])
-      end
-      # clear out omniauth session regardless of how we got here to prevent session bloat
-      session.delete(:omniauth)
-    end
-    true
+  def after_oauth?
+    params[:after_oauth] == 'true' && session[:omniauth]
+  end
+
+  def create_auth
+    auth = resource.authentications.build
+    auth.update_from_omniauth(session[:omniauth])
+    # clear out omniauth session regardless of how we got here to prevent session bloat
+    session.delete(:omniauth)
+  rescue ActiveRecordError => e
+    # rollback registration if auth failed to get created
+    resource.destroy
+    sign_out(resource)
+    report_error(e)
+    flash.clear
+    flash[:error] = I18n.t 'errors.unknown'
+    redirect_to error_page_path
   end
 
   def after_sign_up_path_for(resource)
