@@ -7,19 +7,47 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # Devise already permits email, password, etc.
   SANITIZED_PARAMS = [:first_name, :last_name].freeze
 
+  # GET /resource/sign_up
+  def new
+    super
+  end
+
+  # POST /resource
   def create
     super
   rescue => e
-    resource.destroy if resource && resource.persisted?
-    flash.clear
-    sign_out(resource)
+    if resource
+      resource.destroy if resource.persisted?
+      sign_out(resource)
+    end
     report_error(e)
+    flash.clear
     flash[:error] = I18n.t 'errors.unknown'
     redirect_to error_page_path
   end
 
+  # GET /resource/edit
+  def edit
+    super
+  end
+
+  # PUT /resource
+  def update
+    super
+  end
+
+  # DELETE /resource
   def delete
-    redirect_to edit_user_path(current_user)
+    super
+  end
+
+  # GET /resource/cancel
+  # Forces the session data which is usually expired after sign
+  # in to be expired now. This is useful if the user wants to
+  # cancel oauth signing in/up in the middle of the process,
+  # removing all OAuth session data.
+  def cancel
+    super
   end
 
   protected
