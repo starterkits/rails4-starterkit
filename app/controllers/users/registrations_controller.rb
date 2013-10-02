@@ -3,6 +3,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :permit_params, only: :create
   after_action :handle_oauth_create, only: :create
 
+  # Additional resource fields to permit
+  # Devise already permits email, password, etc.
+  SANITIZED_PARAMS = [:first_name, :last_name].freeze
+
   def create
     super
   rescue => e
@@ -21,7 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def permit_params
-    devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name]
+    devise_parameter_sanitizer.for(:sign_up) << SANITIZED_PARAMS
   end
 
   def build_resource(*args)
