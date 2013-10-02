@@ -108,7 +108,7 @@ class OauthController < ApplicationController
     end
     origin_params = (@origin.present? ? CGI::parse(@origin.split('?').last) : {})
     @layout   = origin_params['layout'].to_a.first || params['layout']
-    @popup    = ((origin_params['popup'].to_a.first || params['popup']) == '1' ? true : false)
+    # @popup    = ((origin_params['popup'].to_a.first || params['popup']) == '1' ? true : false)
     flow      = origin_params['flow'].to_a.first || params['flow']
     @flow     = flow.present? && flow.to_sym || nil
     @prompt   = nil
@@ -124,14 +124,14 @@ class OauthController < ApplicationController
     )
 
     @url = ((opts.include?(@flow) && opts[@flow].present?) ? opts[@flow] : @origin) || user_root_path
-    if @popup
-      @url.sub!('popup=1', '')
-      @url.sub!('layout=popup', '')
-      @url.sub!(/&?flow=\w*/, '')
-      @url.sub!(/&{2,}/, '')
-      @close_modal = opts[:close_modal]
-      render 'auth/popup_callback', layout: 'popup'
-    else
+    # if @popup
+    #   @url.sub!('popup=1', '')
+    #   @url.sub!('layout=popup', '')
+    #   @url.sub!(/&?flow=\w*/, '')
+    #   @url.sub!(/&{2,}/, '')
+    #   @close_modal = opts[:close_modal]
+    #   render 'auth/popup_callback', layout: 'popup'
+    # else
       redirect_to @url
     end
   end
