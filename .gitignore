@@ -16,4 +16,4 @@
 /tmp
 
 /coverage
-
+.zeus.sock
