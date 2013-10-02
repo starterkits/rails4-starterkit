@@ -62,8 +62,6 @@ class OauthController < ApplicationController
     # Reconnecting Existing Account
     # Auth exists but we're not in login or signup flow
     elsif @auth
-      @auth.import_data(true)
-      remember_job_ids(@auth)
       handle_redirect
 
     # Connecting New Account
@@ -71,7 +69,6 @@ class OauthController < ApplicationController
     elsif user_signed_in?
       @auth = Authentication.build_from_omniauth(@omniauth)
       current_user.authentications << @auth
-      remember_job_ids(@auth)
       flash[:notice] = I18n.t 'accounts.connected'
       handle_redirect
 

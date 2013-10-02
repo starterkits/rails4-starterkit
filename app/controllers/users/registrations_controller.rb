@@ -62,7 +62,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if @after_oauth && session[:omniauth]
         auth = resource.authentications.build
         auth.update_from_omniauth(session[:omniauth])
-        remember_job_ids(auth)
       end
       # clear out omniauth session regardless of how we got here to prevent session bloat
       session.delete(:omniauth)
