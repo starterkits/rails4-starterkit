@@ -2,7 +2,8 @@ if defined?(Rack::Timeout)
   if Rails.env.production? || Rails.env.staging?
     Rack::Timeout.timeout = 20 # seconds
   else
-    Rack::Timeout.unregister_state_change_observer(:logger)
+    Rails.configuration.middleware.delete Rack::Timeout
+    # Rack::Timeout.unregister_state_change_observer(:logger)
   end
 
   # class TimeoutObserver
