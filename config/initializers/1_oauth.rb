@@ -39,7 +39,7 @@ auth_config[:google] = {
   :consumer_secret => "@@OAUTH_GOOGLE_APP_SECRET@@"
 }
 
-full_host = '@@OAUTH_FULL_PATH@@'
+full_host = '' # set to url as needed
 OmniAuth.config.full_host = full_host if full_host.present?
 
 Rails.application.config.middleware.use OmniAuth::Builder do
