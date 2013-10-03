@@ -9,13 +9,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # See OmniauthConcern
   # First element is the field name followed by any number of fields
   # to try and lookup in session data. If only the first element is
-  # present, it will be used as the lookup key.
+  # present, it will also be used as the lookup key.
   LOOKUP_PARAMS = [
     [:email],
     [:first_name],
     [:last_name],
-    [:image_url],
-    [:username, :username, :nickname]
+    [:image_url]
+    # [:username, :username, :nickname]
   ].freeze
 
   # GET /resource/sign_up
@@ -61,7 +61,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def build_resource(*args)
     super
-    LOOKUP_FIELDS.each do |args|
+    LOOKUP_PARAMS.each do |args|
       set_resource_fields(*args)
     end
     resource
