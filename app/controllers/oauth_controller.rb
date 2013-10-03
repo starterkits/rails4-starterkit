@@ -132,8 +132,8 @@ class OauthController < ApplicationController
     #   @close_modal = opts[:close_modal]
     #   render 'auth/popup_callback', layout: 'popup'
     # else
-      redirect_to @url
-    end
+    redirect_to @url
+    # end
   end
 
   def set_cached_user_for_prompt
