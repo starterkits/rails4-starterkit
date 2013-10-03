@@ -12,11 +12,30 @@ After cloning...
 
 1. Generate new security tokens
 2. Search and replace `ExampleApp` with your app name
+3. Edit RegistrationController and migrations to customize user fields as needed
+
+```bash
+# OSX
+gem install rb-fsevent
+gem install zeus
+gem install guard
+```
+
+```bash
+zeus start
+bundle exec guard
+```
 
 
 TODO
 
+* add support for username
 * Install Devise Security Extension https://github.com/phatworx/devise_security_extension
 * Review config/initializers/devise.rb
 * Convert to lazy registration https://github.com/mwlang/lazy_registration_demos
 
+
+Philosophy
+==========
+
+BDD is fun. Best practices increase productivity. Setting up frameworks is a waste of time.
