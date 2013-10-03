@@ -2,15 +2,40 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 gem 'rails', '~> 4.0.0'
-gem 'pg'
-gem 'sass-rails'
-gem 'uglifier'
-gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'turbolinks' # https://github.com/rails/turbolinks
-gem 'jbuilder'   # https://github.com/rails/jbuilder
-gem 'rack-timeout', '~> 0.1.0beta'
 
+# Monitoring
+gem 'rack-timeout', '~> 0.1.0beta'
+# gem 'newrelic_rpm'
+# gem 'rack-google-analytics'
+
+# Data
+gem 'pg'
+gem 'jbuilder'
+
+# Assets
+gem 'sass-rails'
+gem 'haml-rails'
+gem 'simple_form'
+gem 'uglifier'
+
+# Javascript
+gem 'jquery-rails'
+gem 'turbolinks'
+# gem 'jquery-turbolinks'
+
+# CoffeeScript
+# Not needed in production if precompiling assets
+gem 'coffee-rails'
+# Uncomment if node.js is not installed
+# gem 'therubyracer', platforms: :ruby
+
+# Design
+gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', branch: '3'
+# gem 'bourbon'
+# gem 'neat'
+# gem 'country_select'
+
+# Authentication
 gem 'devise'
 gem 'cancan'
 gem 'omniauth'
@@ -18,59 +43,62 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 # gem 'omniauth-linkedin'
 
-gem 'simple_form'
-# gem 'country_select'
+# Utils
 gem 'addressable'
-gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', branch: '3'
-gem 'haml-rails'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
 group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+  gem 'sdoc', require: false    # bundle exec rake doc:rails
 end
 
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
 group :development do
-  gem 'quiet_assets'
-  # gem 'guard-rspec'
+  # Errors
+  # gem 'better_errors'
+  # gem 'binding_of_caller'     # extra features for better_errors
+  # gem 'meta_request'          # for rails_panel chrome extension
+
+  # Deployment
+  # gem 'capistrano'
+
+  # Guard
+  gem 'terminal-notifier-guard' # osx only
   gem 'guard-rspec'
+  # gem 'guard-livereload'
+  # gem 'rack-livereload'
 end
 
 group :development, :test do
-  # Zeus should be installed and run outside of bundler
-  # gem 'zeus'
+  gem 'zeus'                    # required in gemfile for guard
 
+  # Debugging
+  gem 'jazz_hands'              # lots of debugging goodies
+  # gem 'pry-rescue'            # not included in jazz_hands
+
+  # Testing
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-
-  gem 'debugger'
-  gem 'pry'
-  # gem 'pry-stack_explorer'
-  # gem 'pry-rescue'
-  gem "debugger-pry", :require => "debugger/pry"
-
-  # Add save_and_open_page support to rspec
-  # gem 'poltergeist' # alternative to webkit
   gem 'capybara-webkit'
-  gem 'launchy'
-
-  # Add debug support to javascript tests
+  # gem 'poltergeist'           # alternative to capybara-webkit
   # gem 'capybara-firebug'
+  # gem 'launchy'               # save_and_open_page support for rspec
+  # gem 'zeus-parallel_tests'   # speed up lengthy tests
+
+  # Logging
+  gem 'quiet_assets'
+
+  # Events
+  gem 'rb-fsevent'              # osx only
+  # gem 'rb-inotify'            # linux only
 end
 
 group :test do
+  # Helpers
   gem 'ffaker'
+  gem 'shoulda-matchers'
   gem 'database_cleaner'
-  gem 'simplecov', require: false
 
-  # gem 'rb-inotify' # linux
-  gem 'rb-fsevent' # osx
+  # Coverage
+  gem 'simplecov', require: false
 end
