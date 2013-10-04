@@ -12,7 +12,6 @@ defaults: &defaults
     facebook:
       name: Facebook
       logout: 'https://www.facebook.com'
-      appid: <%= ENV['AUTH_FACEBOOK_APPID'] %>
       key: <%= ENV['AUTH_FACEBOOK_KEY'] %>
       secret: <%= ENV['AUTH_FACEBOOK_SECRET'] %>
       # Settings listed in oauth are included in the omniauth provider configuration
