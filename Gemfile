@@ -1,12 +1,20 @@
 source 'https://rubygems.org'
+
+# byebug requires ruby 2.0.0-p247 or higher
 ruby '2.0.0'
 
 gem 'rails', '~> 4.0.0'
+
+
+# Server
+# gem 'unicorn'
+
 
 # Monitoring
 gem 'rack-timeout', '~> 0.1.0beta'
 # gem 'newrelic_rpm'
 # gem 'rack-google-analytics'
+
 
 # Data
 gem 'pg'
@@ -47,12 +55,10 @@ gem 'omniauth-twitter'
 gem 'addressable'
 gem 'settingslogic'
 
+# Docs
 group :doc do
   gem 'sdoc', require: false    # bundle exec rake doc:rails
 end
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 group :development do
   # Errors
@@ -74,8 +80,18 @@ group :development, :test do
   gem 'zeus'                    # required in gemfile for guard
 
   # Debugging
-  gem 'jazz_hands'              # lots of debugging goodies
-  # gem 'pry-rescue'            # not included in jazz_hands
+  gem 'awesome_print'
+  gem 'byebug'                  # ruby 2.0 debugger with built-in pry
+  gem 'pry'                     # better than irb
+  gem 'pry-rails'               # adds rails specific commands to pry
+  gem 'pry-byebug'              # add debugging commands to pry
+  gem 'pry-stack_explorer'      # navigate call stack
+  # gem 'pry-rescue'            # start pry session on uncaught exception
+  # gem 'pry-doc'               # browse docs from console
+  # gem 'pry-git'               # add git support to console
+  # gem 'pry-remote'            # connect remotely to pry console
+  # gem 'coolline'              # sytax highlighting as you type
+  # gem 'coderay'               # use with coolline
 
   # Testing
   gem 'rspec-rails'
