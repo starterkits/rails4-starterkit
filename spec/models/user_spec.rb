@@ -14,7 +14,7 @@ describe User do
     it "should require email" do
       user.email = nil
       user.should_not be_valid
-      user.email = 'test@connect.me'
+      user.email = 'test@example.com'
       user.should be_valid
     end
   end
