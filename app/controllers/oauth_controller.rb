@@ -23,7 +23,8 @@ class OauthController < ApplicationController
 
   # oauth callback
   def create
-    #return render text: '<pre>' + request.env["omniauth.origin"].to_yaml + "\n\n" + request.env["omniauth.auth"].to_yaml + '</pre>'
+    # Uncomment to debug oauth response
+    # return render 'users/auth/debug_oauth_response'
 
     @auth = Authentication.unscoped.find_by_provider_and_proid(@provider, @omniauth['uid'])
 
