@@ -1,0 +1,7 @@
+- width ||= 530
+%div.fb-facepile
+  %iframe{src: "https://www.facebook.com/plugins/facepile.php?app_id=#{ExampleApp::AuthConfig.providers.facebook.appid}&width=#{width}&max_rows=4&size=medium",
+    scrolling: 'no',
+    frameborder: '0',
+    style: "border:none; overflow:hidden; width:#{width}px; height: 90px",
+    allowTransparency: 'true'}
