@@ -26,8 +26,14 @@ zeus start
 bundle exec guard
 ```
 
+Demo
+====
+
+Twitter demo app credentials uses a callback url of http://0.0.0.0:3000/auth/twitter/callback
+
 
 TODO
+====
 
 * add support for username
 * Install Devise Security Extension https://github.com/phatworx/devise_security_extension
