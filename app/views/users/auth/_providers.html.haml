@@ -1,0 +1,15 @@
+- flow        ||= 'login'
+- layout      ||= 'application' # or 'modal'
+- css_class   ||= 'btn'
+- providers   ||= auth_providers
+- prefix      ||= ''
+
+.auth.providers.large
+  - providers.each do |provider|
+    .wrap<>
+      = link_to provider_auth_path(provider), data: {flow: flow, provider: provider}, class: "oauth #{css_class}" do
+        .provider{class: provider}
+        %span= "#{prefix}#{auth_provider_name(provider)}"
+
+- content_for :on_ready do
+  new ExampleApp.Views.AuthProviders({layout: '#{layout}'})

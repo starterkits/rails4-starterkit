@@ -1,17 +1,71 @@
-%h2 Sign up
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div
-    = f.label :password
-    %br/
-    = f.password_field :password
-  %div
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-  %div= f.submit "Sign up"
-= render "users/shared/links"
+/ = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+/   = devise_error_messages!
+/   %div
+/     = f.label :email
+/     %br/
+/     = f.email_field :email, :autofocus => true
+/   %div
+/     = f.label :password
+/     %br/
+/     = f.password_field :password
+/   %div
+/     = f.label :password_confirmation
+/     %br/
+/     = f.password_field :password_confirmation
+/   %div= f.submit "Sign up"
+/ = render "users/shared/links"
+/ 
+
+- disable_reveal = resource.errors.present? || @after_oauth || false
+
+.signup
+  - if @failed
+    = render 'users/auth/failed', provider: @provider
+  - if @prompt == 'login'
+    = render 'users/auth/login_prompt', provider: @provider, user: @prompt_user
+
+  - if @modal
+    .modal-header
+      %button.close{data: {dismiss: 'modal'}}x
+      = render 'users/registrations/header', after_oauth: @after_oauth
+  - else
+    = render 'users/registrations/header', after_oauth: @after_oauth
+
+  %div.reveal-container{class: (@modal ? "modal-body" : '')}
+    .well
+      .social
+        - if @after_oauth
+          %p
+            We filled in some of your info from
+            = succeed '.' do
+              = provider_name(@provider)
+            %br
+            Now choose a username and password and you're good to go.
+        - else
+          = render 'users/auth/providers', flow: 'signup', layout: @layout, icons: true, color: true, prefix: 'Sign up with '
+          %hr.or
+
+      = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
+        = hidden_field_tag :after_oauth, @after_oauth
+        = f.input :email, label: false, required: true, placeholder: 'your email', input_html: {class: 'reveal-trigger', data: {'reveal-scroll' => '.modal-body'}}
+
+        .reveal-show{class: disable_reveal ? 'shown' : ''}
+          / = render 'users/username_input', form: f, prefix: true
+          = f.input :password, label: false, required: true, placeholder: 'password'
+          = f.error :base
+          = f.button :submit, 'Sign up', class: 'btn-primary'
+          .terms
+            / By joining, you agree to the
+            / = link_to 'Terms of Service', tos_page_path, target: '_blank'
+            / and
+            / = link_to 'Privacy Policy', privacy_page_path, target: '_blank'
+
+
+    - unless @after_oauth
+      = render 'users/social/facepile'
+
+  %div{class: (@modal ? 'modal-footer' : 'links')}
+    Already a member?
+    = link_to "Login", new_session_path(resource_name)
+    %hr
+    / = render 'users/authentications/info'
