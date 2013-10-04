@@ -45,6 +45,7 @@ gem 'omniauth-twitter'
 
 # Utils
 gem 'addressable'
+gem 'settingslogic'
 
 group :doc do
   gem 'sdoc', require: false    # bundle exec rake doc:rails
