@@ -1,0 +1,56 @@
+defaults: &defaults
+  # List of providers to show on login/signup
+  # If empty, all of the providers will be included
+  # Example: ['facebook', 'twitter']
+  login_providers:
+
+  # List of providers that allow multiple connected accounts
+  # Users often have multiple Twitter accounts not Facebook or LinkedIn
+  allow_multiple: ['twitter']
+
+  providers:
+    facebook:
+      name: Facebook
+      logout: 'https://www.facebook.com'
+      appid: <%= ENV['AUTH_FACEBOOK_APPID'] %>
+      key: <%= ENV['AUTH_FACEBOOK_KEY'] %>
+      secret: <%= ENV['AUTH_FACEBOOK_SECRET'] %>
+      # Settings listed in oauth are included in the omniauth provider configuration
+      # See config/initializers/1_auth.rb
+      oauth:
+        # Common Facebook Scopes:
+        # email,user_about_me,user_interests,user_activities,user_likes,user_location,user_website
+        # friends_about_me,friends_interests,friends_activities,friends_likes,friends_location
+        scope: email
+
+    twitter:
+      name: Twitter
+      logout: 'https://twitter.com/i/#!/logout'
+      anywhere_key:
+      key: <%= ENV['AUTH_TWITTER_KEY'] %>
+      secret: <%= ENV['AUTH_TWITTER_SECRET'] %>
+
+    # linkedin:
+    #   name: LinkedIn
+    #   logout: 'https://www.linkedin.com'
+    #   key: <%= ENV['AUTH_LINKEDIN_KEY'] %>
+    #   secret: <%= ENV['AUTH_LINKEDIN_SECRET'] %>
+    #
+    # google:
+    #   name: Google
+    #   logout: 'https://www.google.com'
+    #   key: <%= ENV['AUTH_GOOGLE_KEY'] %>
+    #   secret: <%= ENV['AUTH_GOOGLE_SECRET'] %>
+    #   oauth:
+    #     access_type: offline
+    #     approval_prompt: force
+    #     scope: https://www.google.com/m8/feeds,userinfo.email,userinfo.profile
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
