@@ -8,31 +8,25 @@ class OauthController < ApplicationController
   skip_before_action :authenticate_user!
   before_action :set_vars
 
-  # omniauth passthru to use for route naming
+  # OmniAuth passthru to use for route naming
   def passthru
     render :nothing, status: 404
   end
 
-  def on_omniauth_failure(env)
-    message_key = env['omniauth.error.type']
-    origin = env['omniauth.origin'] || ''
-    # todo: replace with path name now that this code is in a controller...
-    new_path = "#{env['SCRIPT_NAME']}#{OmniAuth.config.path_prefix}/failure?message=#{message_key}&origin=#{CGI.escape(origin)}"
-    Rack::Response.new(['302 Moved'], 302, 'Location' => new_path).finish
-  end
-
-  # oauth callback
+  # OAuth Callback
   def create
     # Uncomment to debug oauth response
     # return render 'users/auth/debug_oauth_response'
 
     @auth = Authentication.unscoped.find_by_provider_and_proid(@provider, @omniauth['uid'])
 
-    # check for possible orphaned authentication record
-    if @auth && @auth.user.nil?
-      @auth = @auth.destroy && nil
+    # Check for possible orphaned authentication record
+    if @auth && @auth.user.blank?
+      @auth.destroy
+      @auth = nil
     end
 
+    # Update auth with latest data
     @auth.update_from_omniauth(@omniauth) if @auth
 
     # make sure session is cleared from any previous requests
@@ -41,29 +35,31 @@ class OauthController < ApplicationController
 
     # Account Merge
     # Auth credentials exist and user is logged in
+    # Typical action is to prompt user to merge or switch accounts
     if @auth && user_signed_in? && @auth.user != current_user
       set_cached_user_for_prompt
       @flow = :merge
-      handle_redirect(merge: new_user_merge_path(current_user))
+      redirect_to new_user_merge_path(current_user)
 
     # Login
     # Auth credentials exist and user is not logged in
     elsif @auth && (@flow == :login || @flow == :signup)
       @flow = :login
-      sign_in(@auth.user)
-      handle_redirect(login: @origin, close_modal: true)
+      sign_in @auth.user
+      redirect_to @origin.presence || user_root_path
 
     # Failed Sign-up
     # Auth already exists so prompt user to login
     # elsif @auth && @flow == :signup
-    #   @prompt = :login
     #   set_cached_user_for_prompt
-    #   handle_redirect
+    #   redirect_to new_user_registration_path(failed: 'exists')
 
     # Reconnecting Existing Account
-    # Auth exists but we're not in login or signup flow
+    # Auth exists but user is not in login or signup flow
+    # Used after prompting user to reimport data from a provider
+    # Typical action is to return user to origin; probably connect accounts page
     elsif @auth
-      handle_redirect
+      redirect_to @origin.presence || user_root_path
 
     # Connecting New Account
     # Auth credentials are new and the user is logged in
@@ -71,13 +67,17 @@ class OauthController < ApplicationController
       @auth = Authentication.build_from_omniauth(@omniauth)
       current_user.authentications << @auth
       flash[:notice] = I18n.t 'accounts.connected'
-      handle_redirect
+      redirect_to @origin.presence || user_root_path
 
     # Sign-up
     # Auth credentials are new and the user is not logged in
     else
       session[:omniauth] = @omniauth
-      handle_redirect
+      # If sign up requires certain info, redirect back to signup
+      # and prefill the regular form with oauth data.
+      redirect_to after_sign_up_path
+
+      # Best practice is to just keep it simple and log user in
     end
 
   rescue Exception => e
@@ -85,13 +85,18 @@ class OauthController < ApplicationController
     raise
   end
 
-  def auth_failure
+  def failure
     report_omniauth_error(AuthError.new(params[:message]))
-    handle_redirect(
-      signup: new_user_registration_path(failed: params[:message], layout: @layout, provider: @provider),
-      login: new_user_session_path(failed: params[:message], layout: @layout),
-      connect: authentications_route(failed: params[:message]),
-    )
+    url = case @flow
+    when :login
+      new_user_session_path(failed: params[:message], provider: @provider)
+    when :signup
+      new_user_registration_path(failed: params[:message], provider: @provider)
+    when :connect
+      authentications_route(failed: params[:message], provider: @provider)
+    end
+    url ||= auth_failure_path
+    redirect_to url
   end
 
   protected
@@ -108,37 +113,14 @@ class OauthController < ApplicationController
       @origin = user_root_path(u.query_values)
     end
     origin_params = (@origin.present? ? CGI::parse(@origin.split('?').last) : {})
-    @layout   = origin_params['layout'].to_a.first || params['layout']
-    # @popup    = ((origin_params['popup'].to_a.first || params['popup']) == '1' ? true : false)
     flow      = origin_params['flow'].to_a.first || params['flow']
     @flow     = flow.present? && flow.to_sym || nil
-    @prompt   = nil
     @provider = @omniauth && @omniauth[:provider] || session && session[:oauth] && session[:oauth].first.first
     @provider = @provider.downcase if @provider.is_a?(String)
   end
 
-  def handle_redirect(opts = {})
-    opts.reverse_merge!(
-      signup: new_user_registration_path(layout: @layout, after_oauth: true, prompt: @prompt, provider: @provider),
-      login: new_user_session_path(layout: @layout, failed: 'no_account', provider: @provider),
-      connect: authentications_route(failed: params[:message]),
-    )
-
-    @url = ((opts.include?(@flow) && opts[@flow].present?) ? opts[@flow] : @origin) || user_root_path
-    # if @popup
-    #   @url.sub!('popup=1', '')
-    #   @url.sub!('layout=popup', '')
-    #   @url.sub!(/&?flow=\w*/, '')
-    #   @url.sub!(/&{2,}/, '')
-    #   @close_modal = opts[:close_modal]
-    #   render 'auth/popup_callback', layout: 'popup'
-    # else
-    redirect_to @url
-    # end
-  end
-
   def set_cached_user_for_prompt
-    @prompt_user = cached_user_for_prompt({
+    cached_user_for_prompt({
       auth_id:    @auth && @auth.id || nil,
       image_url:  @omniauth[:info][:image],
       name:       @omniauth[:info][:name] || @omniauth[:info][:first_name],
