@@ -1,14 +1,8 @@
+# Use ruby 2.0.0-p247 or higher for byebug compatibility
+
 source 'https://rubygems.org'
-
-# byebug requires ruby 2.0.0-p247 or higher
 ruby '2.0.0'
-
 gem 'rails', '~> 4.0.0'
-
-
-# Server
-# gem 'unicorn'
-
 
 # Monitoring
 gem 'rack-timeout', '~> 0.1.0beta'
@@ -123,5 +117,6 @@ end
 group :production do
   gem 'dalli'                   # memcached
   gem 'memcachier'              # heroku add-on for auto config of dalli
+  gem 'unicorn'
 end
 
