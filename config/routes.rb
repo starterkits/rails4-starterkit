@@ -1,11 +1,13 @@
+# Route prefixes use a single letter to allow for vanity urls of two or more characters
 ExampleApp::Application.routes.draw do
   match '/error' => 'pages#error', via: [:get, :post], as: 'error_page'
 
   # OAuth
-  get '/auth/:provider/callback' => 'oauth#create'
-  get '/auth/failure' => 'oauth#auth_failure'
-  get '/auth/:provider' => 'oauth#passthru', as: 'provider_auth'
-  get '/auth' => redirect('/a/signup')
+  # Route prefix set in config/initializers/auth.rb
+  get '/o/:provider/callback' => 'oauth#create'
+  get '/o/failure' => 'oauth#failure'
+  get '/o/:provider' => 'oauth#passthru', as: 'provider_auth'
+  get '/o' => redirect('/a/login')
 
   # User registration and login
   devise_for :users, path: '/a',

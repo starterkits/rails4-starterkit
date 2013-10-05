@@ -11,6 +11,7 @@ end
 # full_host = '' # set to url as needed
 # OmniAuth.config.full_host = full_host if full_host.present?
 OmniAuth.config.logger = Rails.logger
+OmniAuth.config.path_prefix = '/o'
 
 ExampleApp::Application.config.middleware.use OmniAuth::Builder do
   ExampleApp::AuthConfig.providers.each do |k, v|
