@@ -1,8 +1,9 @@
 class Users::AuthController < ApplicationController
   skip_authorization_check
+  skip_before_action :authenticate_user!, only: :failure
   before_action :setup
 
-  # capture metrics and redirect
+  # Capture metrics and redirect
   def after_sign_up
     session.delete(:omniauth)
     @path = params[:path] || user_home_path
@@ -13,10 +14,11 @@ class Users::AuthController < ApplicationController
   def after_login
     session.delete(:omniauth)
 
-    # force user to have a password
+    # Force user to have a password
+    # TODO: add config var to control this behavior
     return redirect_to add_password_user_path(current_user) if current_user.needs_password?
 
-    # clear out path stored by devise
+    # Clear out path stored by devise
     path = stored_location_for(current_user)
     path ||= user_home_path
     @path = path
@@ -24,10 +26,15 @@ class Users::AuthController < ApplicationController
     @flow = :login
   end
 
+  # Generic auth failure page
+  # /a/failure
+  def failure
+  end
+
   protected
 
   def setup
-    # clear flash message so it doesn't clutter up the UI
+    # Clear flash message so it doesn't clutter the UI
     flash.clear
   end
 
