@@ -119,3 +119,8 @@ group :test do
   # Coverage
   gem 'simplecov', require: false
 end
+
+group :production do
+  gem 'dalli'                   # memcached
+end
+
