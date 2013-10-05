@@ -36,9 +36,34 @@ TODO
 ====
 
 * add support for username
+* Setup Rack::Cache https://devcenter.heroku.com/articles/rack-cache-memcached-rails31
 * Install Devise Security Extension https://github.com/phatworx/devise_security_extension
 * Review config/initializers/devise.rb
 * Convert to lazy registration https://github.com/mwlang/lazy_registration_demos
+
+
+Compatibility
+=============
+
+* IE 8+ unless additional shims are added
+  * See app/assets/stylesheets/icons_social.scss
+
+
+Configure
+=========
+
+Replace values in config/env.rb with development values or delete the file if not needed.
+
+Debugging
+=========
+
+Use `byebug` instead of `debugger`.
+
+
+Auth Flows
+==========
+
+Sign Up -> After Login
 
 
 Philosophy
