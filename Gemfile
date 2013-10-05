@@ -49,12 +49,10 @@ gem 'omniauth-twitter'
 gem 'addressable'
 gem 'settingslogic'
 
-# Docs
-group :doc do
-  gem 'sdoc', require: false    # bundle exec rake doc:rails
-end
-
 group :development do
+  # Docs
+  gem 'sdoc', require: false    # bundle exec rake doc:rails
+
   # Errors
   # gem 'better_errors'
   # gem 'binding_of_caller'     # extra features for better_errors
