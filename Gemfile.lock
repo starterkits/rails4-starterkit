@@ -174,7 +174,6 @@ GEM
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
-    rack-timeout (0.1.0beta3)
     rails (4.0.0)
       actionmailer (= 4.0.0)
       actionpack (= 4.0.0)
@@ -295,7 +294,6 @@ DEPENDENCIES
   pry-rails
   pry-stack_explorer
   quiet_assets
-  rack-timeout (~> 0.1.0beta)
   rails (~> 4.0.0)
   rb-fsevent
   rspec-rails

@@ -5,7 +5,7 @@ ruby '2.0.0'
 gem 'rails', '~> 4.0.0'
 
 # Monitoring
-gem 'rack-timeout', '~> 0.1.0beta'
+# gem 'rack-timeout', '~> 0.1.0beta'
 # gem 'newrelic_rpm'
 # gem 'rack-google-analytics'
 
