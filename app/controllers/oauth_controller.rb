@@ -77,7 +77,7 @@ class OauthController < ApplicationController
       # Best practice is to just keep it simple and log user in
     end
 
-  rescue Exception => e
+  rescue => e
     report_omniauth_error(e)
     raise
   end
