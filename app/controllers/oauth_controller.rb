@@ -1,3 +1,6 @@
+# Manage OAuth flows
+# OauthController handles the business logic for OmniAuth
+
 require 'addressable/uri'
 
 class OauthController < ApplicationController
@@ -47,12 +50,6 @@ class OauthController < ApplicationController
       @flow = :login
       sign_in @auth.user
       redirect_to @origin.presence || user_root_path
-
-    # Failed Sign-up
-    # Auth already exists so prompt user to login
-    # elsif @auth && @flow == :signup
-    #   set_cached_user_for_prompt
-    #   redirect_to new_user_registration_path(failed: 'exists')
 
     # Reconnecting Existing Account
     # Auth exists but user is not in login or signup flow
