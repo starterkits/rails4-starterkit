@@ -17,8 +17,4 @@ ExampleApp::Application.config.middleware.use OmniAuth::Builder do
     opts = (v.try(:[], 'oauth') || {}).symbolize_keys
     provider k, v['key'], v['secret'], opts
   end
-
-  on_failure = Proc.new do |env|
-    OAuthController.action(:on_omniauth_failure).call(env)
-  end
 end
