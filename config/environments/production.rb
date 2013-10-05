@@ -52,7 +52,8 @@ ExampleApp::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production.
-  config.cache_store = :mem_cache_store,
+  # If using Memcachier on Heroku, the memcachier gem will auto config servers
+  config.cache_store = :mem_cache_store, *ENV[MEMCACHE_SERVERS]
     namespace: 'exampleapp', :expires_in => 30.day, :compress => true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
