@@ -9,21 +9,23 @@ ExampleApp::Application.routes.draw do
   get '/o/:provider' => 'oauth#passthru', as: 'provider_auth'
   get '/o' => redirect('/a/login')
 
-  # User registration and login
+  # Devise
   devise_for :users, path: '/a',
-      controllers: {registrations: 'users/registrations', passwords: 'users/reset_password'},
+      controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/reset_password'},
       path_names: {sign_up: 'signup', sign_in: 'login', sign_out: 'logout'}
-  get '/a' => redirect('/a/signup')
-  get '/home' => 'users#show', as: 'user_home'
-  get '/login/done' => 'users/auth#after_login', as: 'user_root'
-  get '/signup/done/:id' => 'users/auth#after_sign_up', as: 'after_sign_up'
+  get '/a' => redirect('/a/login')
+
+  # Auth
+  get '/a/login/done' => 'users/auth#after_login', as: 'user_root'
+  get '/a/signup/done/:id' => 'users/auth#after_sign_up', as: 'after_sign_up'
+  get '/a/failure' => 'users/auth#failure', as: 'auth_failure'
 
   # User
   resources :users, path: '/u', only: :show do
     get :add_password, on: :member
     put :update_password, on: :member
   end
-
+  get '/home' => 'users#show', as: 'user_home'
 
   root 'pages#home'
 end
