@@ -7,7 +7,7 @@
 .auth.providers.large
   - providers.each do |provider|
     .wrap<>
-      = link_to provider_auth_path(provider), data: {flow: flow, provider: provider}, class: "oauth #{css_class}" do
+      = link_to provider_auth_path(provider, flow: flow), data: {flow: flow, provider: provider}, class: "oauth #{css_class}" do
         .provider{class: provider}
         %span= "#{prefix}#{auth_provider_name(provider)}"
 
