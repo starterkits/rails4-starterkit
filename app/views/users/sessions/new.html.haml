@@ -1,4 +1,7 @@
 %h2 Sign in
+
+= render 'users/auth/providers', flow: 'login', icons: true, color: true, prefix: 'Login in with '
+
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   %div
     = f.label :email
