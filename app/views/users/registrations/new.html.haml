@@ -16,13 +16,9 @@
 / = render "users/shared/links"
 / 
 
-- disable_reveal = resource.errors.present? || @after_oauth || false
-
 .signup
   - if @failed
-    = render 'users/auth/failed', provider: @provider
-  - if @prompt == 'login'
-    = render 'users/auth/login_prompt', provider: @provider, user: @prompt_user
+    = render 'users/registrations/failed', provider: @provider
 
   - if @modal
     .modal-header
@@ -42,23 +38,20 @@
             %br
             Now choose a username and password and you're good to go.
         - else
-          = render 'users/auth/providers', flow: 'signup', layout: @layout, icons: true, color: true, prefix: 'Sign up with '
+          = render 'users/auth/providers', flow: 'signup', icons: true, color: true, prefix: 'Sign up with '
           %hr.or
 
       = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
         = hidden_field_tag :after_oauth, @after_oauth
         = f.input :email, label: false, required: true, placeholder: 'your email', input_html: {class: 'reveal-trigger', data: {'reveal-scroll' => '.modal-body'}}
-
-        .reveal-show{class: disable_reveal ? 'shown' : ''}
-          / = render 'users/username_input', form: f, prefix: true
-          = f.input :password, label: false, required: true, placeholder: 'password'
-          = f.error :base
-          = f.button :submit, 'Sign up', class: 'btn-primary'
-          .terms
-            / By joining, you agree to the
-            / = link_to 'Terms of Service', tos_page_path, target: '_blank'
-            / and
-            / = link_to 'Privacy Policy', privacy_page_path, target: '_blank'
+        = f.input :password, label: false, required: true, placeholder: 'password'
+        = f.error :base
+        = f.button :submit, 'Sign up', class: 'btn-primary'
+        .terms
+          / By joining, you agree to the
+          / = link_to 'Terms of Service', tos_page_path, target: '_blank'
+          / and
+          / = link_to 'Privacy Policy', privacy_page_path, target: '_blank'
 
 
     - unless @after_oauth
@@ -67,5 +60,3 @@
   %div{class: (@modal ? 'modal-footer' : 'links')}
     Already a member?
     = link_to "Login", new_session_path(resource_name)
-    %hr
-    / = render 'users/authentications/info'
