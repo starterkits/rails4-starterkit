@@ -2,18 +2,10 @@
 
 = render 'users/auth/providers', flow: 'login', icons: true, color: true, prefix: 'Login in with '
 
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div
-    = f.label :password
-    %br/
-    = f.password_field :password
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  = f.input :email, placeholder: 'you@example.com', autofocus: true, required: true
+  = f.input :password, hint: false, required: true
   - if devise_mapping.rememberable?
-    %div
-      = f.check_box :remember_me
-      = f.label :remember_me
-  %div= f.submit "Sign in"
+    = f.input :remember_me, as: :hidden, value: true
+  = f.button :submit, 'Sign in'
 = render "users/shared/links"
