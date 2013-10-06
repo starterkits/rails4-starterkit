@@ -6,6 +6,6 @@
   = f.input :email, placeholder: 'you@example.com', autofocus: true, required: true
   = f.input :password, hint: false, required: true
   - if devise_mapping.rememberable?
-    = f.input :remember_me, as: :hidden, value: true
+    = f.input :remember_me, as: :hidden, input_html: {value: true}
   = f.button :submit, 'Sign in'
 = render "users/shared/links"
