@@ -49,14 +49,14 @@ class Users::OauthController < ApplicationController
     elsif @auth && (@flow == :login || @flow == :signup)
       @flow = :login
       sign_in @auth.user
-      redirect_to @origin.presence || user_root_path
+      redirect_to @origin
 
     # Reconnecting Existing Account
     # Auth exists but user is not in login or signup flow
     # Used after prompting user to reimport data from a provider
     # Typical action is to return user to origin; probably connect accounts page
     elsif @auth
-      redirect_to @origin.presence || user_root_path
+      redirect_to @origin
 
     # Connecting New Account
     # Auth credentials are new and the user is logged in
@@ -64,7 +64,7 @@ class Users::OauthController < ApplicationController
       @auth = Authentication.build_from_omniauth(@omniauth)
       current_user.authentications << @auth
       flash[:notice] = I18n.t 'accounts.connected'
-      redirect_to @origin.presence || user_root_path
+      redirect_to @origin
 
     # Sign-up
     # Auth credentials are new and the user is not logged in
@@ -106,11 +106,11 @@ class Users::OauthController < ApplicationController
   def set_vars
     @omniauth = request.env['omniauth.auth'] || {}
     @origin   = request.env['omniauth.origin'].to_s.presence || params[:origin]
-    u = Addressable::URI.parse(@origin)
-    if u && (u.path == '/' || u.path.blank?)
-      @origin = user_root_path(u.query_values)
+    uri = Addressable::URI.parse(@origin)
+    # Override origin url if user was on home, sign up, or login pages
+    if [root_path, new_user_registration_path, new_user_session_path].include?(uri.path.presence)
+      @origin = user_root_path
     end
-    origin_params = (@origin.present? ? CGI::parse(@origin.split('?').last) : {})
     flow      = request.env['omniauth.params'].try(:[], 'flow') || params['flow']
     @flow     = flow.present? && flow.to_sym || nil
     @provider = @omniauth && @omniauth[:provider] || session && session[:oauth] && session[:oauth].first.first
