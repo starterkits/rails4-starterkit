@@ -63,7 +63,45 @@ Use `byebug` instead of `debugger`.
 Auth Flows
 ==========
 
-Sign Up -> After Login
+* origin = page user was on when auth flow started
+* after auth = page where user can be prompted to enter any
+  additional required account info like email address
+
+### Sign Up
+
+Start at /a/signup
+
+**OAuth:**
+
+1. RegistrationsController#after_auth
+2. If user.valid?, redirect to origin or user_root_path
+3. If !user.valid?, show interrupt page so user can add additional info
+  1. Post to RegistrationsController#create
+
+If user already had an account via the OAuth provider, he/she is simply logged in.
+
+**Username/Password:**
+
+1. Post to RegistrationsController#create
+2. Redirect to origin or user_root_path
+
+
+### Login
+
+**OAuth:**
+
+If user does not already have an account via the OAuth provider, redirect to signup page.
+
+Otherwise, login user and redirect to either...
+
+1. RegistrationsController#after_auth if additional account info is needed
+2. Origin page if specified
+3. user_root_path
+
+**Username/Password:**
+
+Same as OAuth flow above.
+
 
 
 Philosophy
