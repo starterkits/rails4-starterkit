@@ -6,19 +6,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # Devise already permits email, password, etc.
   SANITIZED_PARAMS = [:first_name, :last_name].freeze
 
-  # Fields to lookup and set from OAuth session data
-  # See OmniauthConcern
-  # First element is the field name followed by any number of fields
-  # to try and lookup in session data. If only the first element is
-  # present, it will also be used as the lookup key.
-  LOOKUP_PARAMS = [
-    [:email],
-    [:first_name],
-    [:last_name],
-    [:image_url]
-    # [:username, :username, :nickname]
-  ].freeze
-
   # GET /resource/sign_up
   def new
     super
@@ -35,31 +22,32 @@ class Users::RegistrationsController < Devise::RegistrationsController
       authenticate_scope!
     else
       build_resource({})
-      if after_oauth?
-        # User has "authed "via OAuth but not via Devise
-        # Show user a modified sign up form with prefilled OAuth data
-        auth = Authentication.build_from_omniauth(session[:omniauth])
-        resource.authentications << auth
-        resource.reverse_merge_attributes_from_auth(auth)
-      else
-        return redirect_to new_user_registration_path
-      end
     end
-    if resource.persisted? && resource.valid?
+    if !signed_in? && @auth.blank?
+      # Something went wrong with OmniAuth, redirect user back to sign up page
+      redirect_to new_user_registration_path
+    elsif resource.persisted? && resource.valid?
+      # Everything is good, send user on his/her way
       path = stored_location_for(current_user)
       path ||= user_home_path
       redirect_to path
     else
-      auth ||= nil
-      respond_with(resource, template: 'users/auth/after_auth', auth: auth)
+      # User needs to update some info before proceeding
+      respond_with(resource, template: 'users/auth/interrupt', auth: @auth)
     end
   end
 
   # POST /resource
   def create
     super
-    # Check if there's a valid omniauth session to attach to the resource
-    create_auth if after_oauth? && resource.persisted?
+    @auth.save! if @auth.present? && resource.persisted?
+  rescue ActiveRecord::ActiveRecordError => e
+    resource.destroy
+    sign_out(resource) if signed_in?
+    report_error(e)
+    flash.clear
+    flash[:error] = I18n.t 'errors.unknown'
+    redirect_to error_page_path
   end
 
   # GET /resource/edit
@@ -94,25 +82,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def build_resource(*args)
     super
-    LOOKUP_PARAMS.each do |args|
-      set_resource_fields(*args)
+    @auth = nil
+    if session[:omniauth].present?
+      @auth = Authentication.build_from_omniauth(session[:omniauth])
+      resource.authentications << @auth
+      resource.reverse_merge_attributes_from_auth(@auth)
     end
     resource
-  end
-
-  # Set field from session or omniauth if available
-  # Field may have been cached in the session during an OAuth or custom sign up flow
-  def set_resource_fields(field, *lookup_fields)
-    return unless resource[field].blank?
-    lookup_fields = [field] if lookup_fields.blank?
-    lookup_fields.each do |lf|
-      # Add additional session lookup here if data was cached as part of a custom flow
-      resource[field] = session[:omniauth].to_h[:info].to_h[lf].presence
-    end
-  end
-
-  def after_oauth?
-    session[:omniauth].present?
   end
 
   # Clear out omniauth session to prevent session bloat
@@ -120,25 +96,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session.delete(:omniauth) if resource.persisted?
   end
 
-  def create_auth
-    auth = resource.authentications.build
-    auth.update_from_omniauth(session[:omniauth])
-  rescue ActiveRecordError => e
-    # rollback registration if auth failed to get created
-    resource.destroy
-    sign_out(resource)
-    report_error(e)
-    flash.clear
-    flash[:error] = I18n.t 'errors.unknown'
-    redirect_to error_page_path
-  end
-
   def after_sign_up_path_for(resource)
     path = after_sign_in_path_for(resource)
-    if path == after_auth_path
-      after_auth_path resource.id
+    if path == user_root_path
+      user_root_path resource.id
     else
-      after_auth_path resource.id, path: path
+      user_root_path resource.id, path: path
     end
   end
 end
