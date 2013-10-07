@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :timeoutable, :lockable
 
-   has_many :authentications, dependent: :destroy
+   has_many :authentications, dependent: :destroy, validate: false
 
    # Override Devise to allow for Authentication or password
    def password_required?
