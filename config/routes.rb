@@ -21,10 +21,6 @@ ExampleApp::Application.routes.draw do
   get '/a/signup/done/:id' => 'users/auth#after_sign_up', as: 'after_sign_up'
 
   # User
-  resources :users, path: '/u', only: :show do
-    get :add_password, on: :member
-    put :update_password, on: :member
-  end
   get '/home' => 'users#show', as: 'user_home'
 
   root 'pages#home'
