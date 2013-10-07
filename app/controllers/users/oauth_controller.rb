@@ -72,7 +72,7 @@ class Users::OauthController < ApplicationController
       session[:omniauth] = @omniauth
       # Do not log user in yet, redirect to after_auth so user
       # can fill in any additional registration requirements like email
-      redirect_to after_auth_path
+      redirect_to user_root_path
     end
 
   rescue => e

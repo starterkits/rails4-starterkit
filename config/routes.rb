@@ -11,16 +11,15 @@ ExampleApp::Application.routes.draw do
 
   # Devise
   devise_for :users, path: '/a',
-      controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/reset_password'},
-      path_names: {sign_up: 'signup', sign_in: 'login', sign_out: 'logout'}
-  get '/a/after' => 'users/registrations#after_auth', as: 'after_auth'
+    controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/reset_password'},
+    path_names: {sign_up: 'signup', sign_in: 'login', sign_out: 'logout'}
+  devise_scope :user do
+    get '/a/after' => 'users/registrations#after_auth', as: 'user_root'
+  end
   get '/a' => redirect('/a/login')
 
-  # Auth
-  get '/a/login/done' => 'users/auth#after_login', as: 'user_root'
-  get '/a/signup/done/:id' => 'users/auth#after_sign_up', as: 'after_sign_up'
-
   # User
+  resources :users, path: '/u', only: :show
   get '/home' => 'users#show', as: 'user_home'
 
   root 'pages#home'

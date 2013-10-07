@@ -1,4 +1,6 @@
-- if after_oauth && session[:omniauth] && session[:omniauth][:info]
+-# todo: refactor along with after_auth
+- after_oauth = false
+- if after_oauth && session[:omniauth].present? && session[:omniauth][:info]
   .card.auth
     .avatar
       - if session[:omniauth][:info][:image].present?
