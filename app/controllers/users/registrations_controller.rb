@@ -1,5 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :permit_params, only: :create
+  after_action :cleanup_oauth, only: [:create, :update]
 
   # Additional resource fields to permit
   # Devise already permits email, password, etc.
@@ -55,6 +56,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
+    # Check if there's a valid omniauth session to attach to the resource
     create_auth if after_oauth? && resource.persisted?
   end
 
@@ -111,11 +113,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session[:omniauth].present?
   end
 
+  # Clear out omniauth session to prevent session bloat
+  def cleanup_oauth
+    session.delete(:omniauth) if resource.persisted?
+  end
+
   def create_auth
     auth = resource.authentications.build
     auth.update_from_omniauth(session[:omniauth])
-    # clear out omniauth session regardless of how we got here to prevent session bloat
-    session.delete(:omniauth)
   rescue ActiveRecordError => e
     # rollback registration if auth failed to get created
     resource.destroy
