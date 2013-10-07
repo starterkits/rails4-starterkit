@@ -46,7 +46,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       path ||= user_home_path
       redirect_to path
     else
-      respond_with(resource, auth: auth)
+      respond_with(resource, template: 'users/auth/after_auth', auth: auth)
     end
   end
 
