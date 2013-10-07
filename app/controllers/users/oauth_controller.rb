@@ -111,7 +111,7 @@ class Users::OauthController < ApplicationController
       @origin = user_root_path(u.query_values)
     end
     origin_params = (@origin.present? ? CGI::parse(@origin.split('?').last) : {})
-    flow      = origin_params['flow'].to_a.first || params['flow']
+    flow      = request.env['omniauth.params'].try(:[], 'flow') || params['flow']
     @flow     = flow.present? && flow.to_sym || nil
     @provider = @omniauth && @omniauth[:provider] || session && session[:oauth] && session[:oauth].first.first
     @provider = @provider.downcase if @provider.is_a?(String)
