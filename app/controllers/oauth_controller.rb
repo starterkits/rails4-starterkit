@@ -92,8 +92,11 @@ class OauthController < ApplicationController
     when :connect
       authentications_route(failed: params[:message], provider: @provider)
     end
-    url ||= auth_failure_path
-    redirect_to url
+    if url
+      redirect_to url
+    else
+      render 'users/auth/failure'
+    end
   end
 
   protected
