@@ -16,7 +16,7 @@ ExampleApp::Application.routes.draw do
   devise_scope :user do
     get '/a/after' => 'users/registrations#after_auth', as: 'user_root'
   end
-  get '/a' => redirect('/a/login')
+  get '/a' => redirect('/a/signup')
 
   # User
   resources :users, path: '/u', only: :show
