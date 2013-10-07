@@ -31,7 +31,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # User should either be...
     # already signed in by Devise
     # or in process of signing up via OAuth provider
-    unless signed_in?
+    if signed_in?
+      authenticate_scope!
+    else
       build_resource({})
       if after_oauth?
         # User has "authed "via OAuth but not via Devise
@@ -41,7 +43,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         return redirect_to new_user_registration_path
       end
     end
-    if resource.valid?
+    if resource.valid? && resource.persisted?
       path = stored_location_for(current_user)
       path ||= user_home_path
       redirect_to path
