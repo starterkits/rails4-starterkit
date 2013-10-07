@@ -46,7 +46,7 @@
         = f.input :email, label: false, required: true, placeholder: 'your email', input_html: {class: 'reveal-trigger', data: {'reveal-scroll' => '.modal-body'}}
         = f.input :password, label: false, required: true, placeholder: 'password'
         = f.error :base
-        = f.button :submit, 'Sign up', class: 'btn-primary'
+        = f.button :submit, I18n.t('auth.signup'), class: 'btn-primary'
         .terms
           / By joining, you agree to the
           / = link_to 'Terms of Service', tos_page_path, target: '_blank'

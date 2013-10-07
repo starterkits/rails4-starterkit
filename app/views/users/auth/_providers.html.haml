@@ -2,14 +2,13 @@
 - layout      ||= 'application' # or 'modal'
 - css_class   ||= 'btn btn-primary'
 - providers   ||= auth_providers
-- prefix      ||= ''
 
 .auth.providers.large
   - providers.each do |provider|
     .wrap<>
       = link_to provider_auth_path(provider, flow: flow), data: {flow: flow, provider: provider}, class: "auth #{css_class}" do
         %i{class: "sico-#{provider}"}
-        = "#{prefix}#{auth_provider_name(provider)}"
+        = auth_provider_name(provider)
 
 - content_for :on_ready do
   new ExampleApp.Views.AuthProviders({layout: '#{layout}'})

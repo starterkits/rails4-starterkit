@@ -22,6 +22,10 @@
 en:
   hello: "Hello world"
 
+  auth:
+    signin: 'Sign in'
+    signup: 'Sign up'
+
   accounts:
     connected: "Success!"
 
