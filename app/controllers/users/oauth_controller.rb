@@ -3,7 +3,7 @@
 
 require 'addressable/uri'
 
-class OauthController < ApplicationController
+class Users::OauthController < ApplicationController
   class AuthError < Exception; end
 
   skip_authorization_check
@@ -70,11 +70,9 @@ class OauthController < ApplicationController
     # Auth credentials are new and the user is not logged in
     else
       session[:omniauth] = @omniauth
-      # If sign up requires certain info, redirect back to signup
-      # and prefill the regular form with oauth data.
-      redirect_to after_sign_up_path
-
-      # Best practice is to just keep it simple and log user in
+      # Do not log user in yet, redirect to after_auth so user
+      # can fill in any additional registration requirements like email
+      redirect_to after_auth_path
     end
 
   rescue => e
