@@ -23,6 +23,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  # GET /resource/after
+  # Redirect user here after login or signup action
+  # Used to require additional info from the user like email address, agree to new TOS, etc.
+  # If user requires
+  def after_auth
+    # User might not be signed in yet if signing up via an OAuth provider
+    unless signed_in?
+      build_resource({})
+      resource.authentications << Authentication.build_from_omniauth(session[:omniauth])
+    end
+
+    if resource.valid?
+      path = stored_location_for(current_user)
+      path ||= user_home_path
+      redirect_to path
+    else
+      respond_with(resource)
+    end
+  end
+
   # POST /resource
   def create
     super
