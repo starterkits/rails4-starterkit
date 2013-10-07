@@ -28,7 +28,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # Redirect user here after login or signup action
   # Used to require additional info from the user like email address, agree to new TOS, etc.
   def after_auth
-    auth = nil
     # User should either be...
     # already signed in by Devise
     # or in process of signing up via OAuth provider
@@ -40,15 +39,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
         # User has "authed "via OAuth but not via Devise
         # Show user a modified sign up form with prefilled OAuth data
         auth = Authentication.build_from_omniauth(session[:omniauth])
+        resource.authentications << auth
+        resource.reverse_merge_attributes_from_auth(auth)
       else
         return redirect_to new_user_registration_path
       end
     end
-    if resource.valid? && resource.persisted?
+    if resource.persisted? && resource.valid?
       path = stored_location_for(current_user)
       path ||= user_home_path
       redirect_to path
     else
+      auth ||= nil
       respond_with(resource, template: 'users/auth/after_auth', auth: auth)
     end
   end
