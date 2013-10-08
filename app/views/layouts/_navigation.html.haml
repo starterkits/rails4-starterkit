@@ -10,7 +10,7 @@
   .collapse.navbar-collapse
     %ul.nav.navbar-nav
       - if user_signed_in?
-        %li= link_to 'Logout', destroy_user_session_path, :method=>'delete'
+        %li= link_to 'Logout', destroy_user_session_path, :rel=>'nofollow'
       - else
         %li= link_to 'Login', new_user_session_path
       - if user_signed_in?
