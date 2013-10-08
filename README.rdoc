@@ -11,7 +11,7 @@ without significant configuration or rewriting code.
 After cloning...
 
 1. Generate new security tokens
-2. Search and replace `ExampleApp` with your app name
+2. Search and replace `StarterKit` with your app name
 3. Edit RegistrationController and migrations to customize user fields as needed
 
 ```bash

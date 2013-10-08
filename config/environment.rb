@@ -5,4 +5,4 @@ env = File.expand_path('../env.rb', __FILE__)
 load(env) if File.exists?(env)
 
 # Initialize the Rails application.
-ExampleApp::Application.initialize!
+StarterKit::Application.initialize!

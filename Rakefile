@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-ExampleApp::Application.load_tasks
+StarterKit::Application.load_tasks

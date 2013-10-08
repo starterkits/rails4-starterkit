@@ -3,14 +3,14 @@ module AuthProvidersHelper
   def auth_providers(type = :login)
     case type
     when :login
-      ExampleApp::AuthConfig.login_providers || ExampleApp::AuthConfig.providers.keys
+      StarterKit::AuthConfig.login_providers || StarterKit::AuthConfig.providers.keys
     else
-      ExampleApp::AuthConfig.providers.keys
+      StarterKit::AuthConfig.providers.keys
     end
   end
 
   def auth_provider_name(provider)
-    ExampleApp::AuthConfig.providers[provider]['name']
+    StarterKit::AuthConfig.providers[provider]['name']
   end
 
   def auth_provider_username_for_display(username, provider = nil)
@@ -23,6 +23,6 @@ module AuthProvidersHelper
   end
 
   def auth_provider_logout_url(provider)
-    ExampleApp::AuthConfig.providers[provider]['logout']
+    StarterKit::AuthConfig.providers[provider]['logout']
   end
 end

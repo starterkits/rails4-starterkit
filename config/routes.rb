@@ -1,5 +1,5 @@
 # Route prefixes use a single letter to allow for vanity urls of two or more characters
-ExampleApp::Application.routes.draw do
+StarterKit::Application.routes.draw do
   match '/error' => 'pages#error', via: [:get, :post], as: 'error_page'
 
   # OAuth
