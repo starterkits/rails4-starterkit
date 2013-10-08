@@ -43,6 +43,8 @@ gem 'cancan'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+# gem 'omniauth-persona'
+# gem 'omniauth-google-oauth2'
 # gem 'omniauth-linkedin'
 
 # Utils
