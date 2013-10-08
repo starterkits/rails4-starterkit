@@ -23,7 +23,7 @@ en:
   hello: "Hello world"
 
   auth:
-    signin: 'Sign in'
+    signin: 'Login'
     signup: 'Sign up'
 
   accounts:
