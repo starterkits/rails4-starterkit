@@ -72,7 +72,7 @@ class Users::OauthController < ApplicationController
       session[:omniauth] = @omniauth
       # Do not log user in yet, redirect to after_auth so user
       # can fill in any additional registration requirements like email
-      redirect_to user_root_path
+      redirect_to default_redirect_path
     end
 
   rescue => e
@@ -103,13 +103,17 @@ class Users::OauthController < ApplicationController
     (user_signed_in? ? user_authentications_path(current_user, *args) : nil)
   end
 
+  def default_redirect_path
+    user_root_path flow: @flow
+  end
+
   def set_vars
     @omniauth = request.env['omniauth.auth'] || {}
     @origin   = request.env['omniauth.origin'].to_s.presence || params[:origin]
     uri = Addressable::URI.parse(@origin)
     # Override origin url if user was on home, sign up, or login pages
     if [root_path, new_user_registration_path, new_user_session_path].include?(uri.path.presence)
-      @origin = user_root_path
+      @origin = default_redirect_path
     end
     flow      = request.env['omniauth.params'].try(:[], 'flow') || params['flow']
     @flow     = flow.present? && flow.to_sym || nil
