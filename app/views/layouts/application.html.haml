@@ -15,5 +15,6 @@
       = render 'layouts/messages'
       = yield
       %footer
-    = airbrake_javascript_notifier if defined? Airbrake
+    - if defined?(Airbrake) && Airbrake.configuration.js_api_key.present?
+      = airbrake_javascript_notifier
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
