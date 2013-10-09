@@ -9,9 +9,8 @@ end
 
 # TODO: confirm that full_host is no longer needed in dev
 # full_host = '' # set to url as needed
-# OmniAuth.config.full_host = full_host if full_host.present?
+OmniAuth.config.full_host = 'http://rails4-starterkit.herokuapp.com'
 OmniAuth.config.logger = Rails.logger
-OmniAuth.config.logger.level = Logger::INFO
 OmniAuth.config.path_prefix = '/o'
 
 StarterKit::Application.config.middleware.use OmniAuth::Builder do
