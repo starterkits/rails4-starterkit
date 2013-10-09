@@ -19,7 +19,7 @@ class Users::OauthController < ApplicationController
   # OAuth Callback
   def create
     # Uncomment to debug oauth response
-    return render partial: 'users/auth/debug_omniauth'
+    # return render partial: 'users/auth/debug_omniauth'
 
     @auth = Authentication.unscoped.find_by_provider_and_proid(@provider, @omniauth['uid'])
 
@@ -81,9 +81,6 @@ class Users::OauthController < ApplicationController
   end
 
   def failure
-    puts '!!!!!!! FAILURE'
-    raise
-
     report_omniauth_error(AuthError.new(params[:message]))
     url = case @flow
     when :login
