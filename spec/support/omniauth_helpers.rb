@@ -1,7 +1,7 @@
 module OmniauthHelpers
   OmniAuth.config.test_mode = true
 
-  PROVIDER_PROFILE_UIDS = ['qY7HURhcI2', '7911119', '14458227'].freeze
+  PROVIDER_PROFILE_UIDS = ['123', 'Abc123', '1234567890'].freeze
 
   def load_omniauth_mock(data = {})
     @omniauth_file ||= File.open(File.expand_path('../../fixtures/omniauth.yml', __FILE__)).read
@@ -24,7 +24,7 @@ module OmniauthHelpers
       location: 'San Francisco, CA USA',
       image_url: 'http://graph.facebook.com/534166665/picture?type=square',
       bio: 'I live in SF and like to turn ideas into reality.',
-      website: 'http://joejohnston.me',
+      website: 'http://www.10hacks.com',
       nickname: 'simple10',
       verified: true
     })
