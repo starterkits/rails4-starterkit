@@ -37,8 +37,6 @@ GEM
     airbrake (3.1.14)
       builder
       json
-    airbrake_user_attributes (0.1.6)
-      airbrake (~> 3.1.0)
     arel (4.0.0)
     atomic (1.1.14)
     awesome_print (1.2.0)
@@ -277,7 +275,7 @@ PLATFORMS
 
 DEPENDENCIES
   addressable
-  airbrake_user_attributes
+  airbrake
   awesome_print
   bootstrap-sass!
   byebug
