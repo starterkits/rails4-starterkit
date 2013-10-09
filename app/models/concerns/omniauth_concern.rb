@@ -7,12 +7,33 @@ module OmniauthConcern
     update_attributes(attrs)
   end
 
+  def oauth_data=(data)
+    if self.class.needs_oauth_normalizing?(data)
+      data, attrs = self.class.normalize_oauth(data)
+    end
+    @oauth_data = data
+    self.oauth_data_json = data.to_json
+  end
+
+  def oauth_data
+    @oauth_data ||= if self[:oauth_data_json].present?
+      JSON.parse(self[:oauth_data_json])
+    else
+      auth = self.class.unscoped.select('oauth_data_json').where(id: id).first
+      auth && auth.oauth_data_json.present? && JSON.parse(auth.oauth_data_json) || nil
+    end
+  end
+
   module ClassMethods
     def build_from_omniauth(oauth)
       data, attrs = normalize_oauth(oauth)
       auth = Authentication.new(attrs)
       auth.oauth_data = data
       auth
+    end
+
+    def needs_oauth_normalizing?(data)
+      data.try(:[], 'credentials') || data.try(:[], 'info') || data.try(:[], 'extra')
     end
 
     def normalize_oauth(oauth)

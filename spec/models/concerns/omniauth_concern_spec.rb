@@ -3,6 +3,8 @@ require 'spec_helper'
 describe OmniauthConcern do
   include OmniauthHelpers
 
+  let(:auth) { FactoryGirl.build(:authentication) }
+
   before :all do
     @data = user_data
     load_omniauth_mock(@data)
@@ -46,5 +48,12 @@ describe OmniauthConcern do
       @keys_to_test = [:uid, :name, :first_name, :last_name, :image_url, :bio]
     end
     it_should_behave_like "normalized oauth"
+  end
+
+  describe "#oauth_data=" do
+    it "should normalize data" do
+      auth.oauth_data = @omniauth_mocks['facebook']
+      auth.oauth_data[:email].should == @data.email
+    end
   end
 end

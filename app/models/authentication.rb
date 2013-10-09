@@ -14,19 +14,4 @@ class Authentication < ActiveRecord::Base
   def profile_url
     oauth_data.present? ? oauth_data['profile_url'] : nil
   end
-
-  def oauth_data=(data)
-    @oauth_data = data
-    self.oauth_data_json = data.to_json
-  end
-
-  def oauth_data
-    @oauth_data ||= if self[:oauth_data_json].present?
-      JSON.parse(self[:oauth_data_json])
-    else
-      auth = self.class.unscoped.select('oauth_data_json').where(id: id).first
-      auth && auth.oauth_data_json.present? && JSON.parse(auth.oauth_data_json) || nil
-    end
-  end
-
 end
