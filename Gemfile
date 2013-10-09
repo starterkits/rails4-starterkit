@@ -121,5 +121,6 @@ group :production do
   gem 'dalli'                   # memcached
   gem 'memcachier'              # heroku add-on for auto config of dalli
   gem 'unicorn'
+  gem 'rails_12factor'          # https://devcenter.heroku.com/articles/rails4
 end
 
