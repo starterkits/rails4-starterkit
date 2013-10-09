@@ -5,17 +5,17 @@ ruby '2.0.0'
 gem 'rails', '~> 4.0.0'
 
 # Monitoring
-gem 'rack-timeout', '~> 0.1.0beta3'
-gem 'newrelic_rpm'
+# gem 'rack-timeout', '~> 0.1.0beta3'
+# gem 'newrelic_rpm'
 # gem 'airbrake_user_attributes'  # use with self-hosted errbit; see config/initializers/airbrake.rb
-gem 'airbrake'                # use with airbrake.io or errbit
+# gem 'airbrake'                # use with airbrake.io or errbit
 # gem 'rack-google-analytics'
 
 
 
 # Data
 gem 'pg'
-gem 'jbuilder'
+# gem 'jbuilder'
 
 # Assets
 gem 'sass-rails'
@@ -45,7 +45,7 @@ gem 'devise'
 gem 'cancan'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'omniauth-twitter'
+# gem 'omniauth-twitter'
 # gem 'omniauth-persona'
 # gem 'omniauth-google-oauth2'
 # gem 'omniauth-linkedin'
