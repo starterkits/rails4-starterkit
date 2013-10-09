@@ -25,7 +25,7 @@ gem 'uglifier'
 
 # Javascript
 gem 'jquery-rails'
-gem 'turbolinks'
+# gem 'turbolinks'
 # gem 'jquery-turbolinks'
 
 # CoffeeScript
@@ -122,6 +122,6 @@ group :production do
   gem 'memcachier'              # heroku add-on for auto config of dalli
   #gem 'unicorn'
   gem 'thin'
-  #gem 'rails_12factor'          # https://devcenter.heroku.com/articles/rails4
+  gem 'rails_12factor'          # https://devcenter.heroku.com/articles/rails4
 end
 
