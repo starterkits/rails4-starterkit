@@ -15,6 +15,9 @@ OmniAuth.config.path_prefix = '/o'
 
 StarterKit::Application.config.middleware.use OmniAuth::Builder do
   StarterKit::AuthConfig.providers.each do |k, v|
+    puts '!!!!!!!!!'
+    puts k
+    puts v
     opts = (v.try(:[], 'oauth') || {}).symbolize_keys
     provider k, v['key'], v['secret'], opts
   end
