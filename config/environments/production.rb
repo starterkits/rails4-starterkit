@@ -54,9 +54,11 @@ StarterKit::Application.configure do
   # Use a different cache store in production.
   # If using Memcachier on Heroku, the memcachier gem will auto config servers
   # config.cache_store = :memory_store
-  config.cache_store = :mem_cache_store, '',
-    { namespace: 'starterkit', expires_in: 30.day, compress: true }
 
+  config.cache_store = :dalli_store
+  # config.cache_store = :mem_cache_store, '',
+  #   { namespace: 'starterkit', expires_in: 30.day, compress: true }
+  #
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
 
