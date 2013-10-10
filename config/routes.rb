@@ -25,5 +25,8 @@ StarterKit::Application.routes.draw do
   resources :users, path: '/u', only: :show
   get '/home' => 'users#show', as: 'user_home'
 
+  # Dummy pages for testing
+  get '/test' => 'pages#test'
+
   root 'pages#home'
 end
