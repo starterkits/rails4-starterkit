@@ -34,6 +34,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
+    airbrake (3.1.14)
+      builder
+      json
     arel (4.0.0)
     atomic (1.1.14)
     awesome_print (1.2.0)
@@ -130,6 +133,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.1)
     multipart-post (1.2.0)
+    newrelic_rpm (3.6.8.164)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     oauth (0.4.7)
@@ -173,6 +177,7 @@ GEM
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
+    rack-timeout (0.1.0beta3)
     rails (4.0.0)
       actionmailer (= 4.0.0)
       actionpack (= 4.0.0)
@@ -270,6 +275,7 @@ PLATFORMS
 
 DEPENDENCIES
   addressable
+  airbrake
   awesome_print
   bootstrap-sass!
   byebug
@@ -285,6 +291,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   memcachier
+  newrelic_rpm
   omniauth
   omniauth-facebook
   omniauth-twitter
@@ -294,6 +301,7 @@ DEPENDENCIES
   pry-rails
   pry-stack_explorer
   quiet_assets
+  rack-timeout (~> 0.1.0beta3)
   rails (~> 4.0.0)
   rails_12factor
   rb-fsevent
