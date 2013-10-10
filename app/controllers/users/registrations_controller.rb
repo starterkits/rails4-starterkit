@@ -33,7 +33,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       redirect_to path
     else
       # User needs to update some info before proceeding
-      respond_with(resource, template: 'users/auth/interrupt', auth: @auth)
+      respond_with(resource, template: 'users/registrations/new', auth: @auth)
     end
   end
 
