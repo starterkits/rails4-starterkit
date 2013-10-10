@@ -52,7 +52,7 @@
             %br
             Now choose a username and password and you're good to go.
         - else
-          = render 'uthentications/providers', flow: 'signup', icons: true, color: true, prefix: 'Sign up with '
+          = render 'authentications/providers', flow: 'signup', icons: true, color: true, prefix: 'Sign up with '
           %hr.or
 
       = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|

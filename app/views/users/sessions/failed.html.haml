@@ -3,13 +3,13 @@
 - if @failed == 'no_account' && @provider
 
   %p
-    You don't have an account connected to #{auth_provider_name(@provider)}.
+    You don't have an account connected to #{authentication_provider_name(@provider)}.
 
 - else
 
   %p
     Something went wrong
     - if @provider
-      with #{auth_provider_name(@provider)}
+      with #{authentication_provider_name(@provider)}
   %p
     Please try again.

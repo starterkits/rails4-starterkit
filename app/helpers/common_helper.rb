@@ -1,6 +1,6 @@
 # Common helpers included in ApplicationController and ApplicationHelper
 module CommonHelper
-  include AuthProvidersHelper
+  include AuthenticationsHelper::Providers
 
   def cached_user_for_prompt(user = nil)
     if user.present?
