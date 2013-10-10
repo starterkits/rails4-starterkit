@@ -50,6 +50,11 @@ gem 'omniauth-twitter'
 # gem 'omniauth-google-oauth2'
 # gem 'omniauth-linkedin'
 
+# Workers
+gem 'sidekiq'
+gem 'devise-async'
+gem 'sinatra', require: false
+
 # Utils
 gem 'addressable'
 gem 'settingslogic'

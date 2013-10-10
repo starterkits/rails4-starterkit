@@ -1,0 +1,8 @@
+# See also config/initializers/sidekiq.rb
+
+:concurrency:  2
+
+# :pidfile: ./tmp/pids/sidekiq.pid
+:verbose: false
+:queues:
+  - [mailer, 1]

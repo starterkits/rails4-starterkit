@@ -60,6 +60,14 @@ Debugging
 Use `byebug` instead of `debugger`.
 
 
+Sidekiq
+=======
+
+For demo on Heroku, StarterKit spawns a sidekiq worker in the web dyno.
+
+To use traditional workers in their own dyno, modify Procfile and config/unicorn.rb
+
+
 Auth Flows
 ==========
 

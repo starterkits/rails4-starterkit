@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :timeoutable, :lockable
+         :confirmable, :timeoutable, :lockable, :async
 
    has_many :authentications, dependent: :destroy, validate: false
 
