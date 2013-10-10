@@ -45,7 +45,7 @@ gem 'devise'
 gem 'cancan'
 gem 'omniauth'
 gem 'omniauth-facebook'
-# gem 'omniauth-twitter'
+gem 'omniauth-twitter'
 # gem 'omniauth-persona'
 # gem 'omniauth-google-oauth2'
 # gem 'omniauth-linkedin'
@@ -121,7 +121,7 @@ group :production do
   gem 'dalli'                   # memcached
   gem 'memcachier'              # heroku add-on for auto config of dalli
   #gem 'unicorn'
-  gem 'thin'
-  gem 'rails_12factor'          # https://devcenter.heroku.com/articles/rails4
+#  gem 'thin'
+#  gem 'rails_12factor'          # https://devcenter.heroku.com/articles/rails4
 end
 
