@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: starterkit_production
   pool: 5
-  username: starterkit
+  username: postgres
   password:
