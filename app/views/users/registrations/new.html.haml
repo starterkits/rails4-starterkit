@@ -1,3 +1,13 @@
+-# This view is the heart of the registration page...
+-# Multiple actions render this view
+
+-# States:
+-#    User has connected an auth provider but has not yet completed registration
+-#    User has clicked on the Sign up link
+-#    User submitted registration form but there was an error
+
+
+
 / = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
 /   = devise_error_messages!
 /   %div
@@ -15,6 +25,9 @@
 /   %div= f.submit "Sign up"
 / = render "users/shared/links"
 / 
+
+
+
 
 .signup
   - if @failed
@@ -39,7 +52,7 @@
             %br
             Now choose a username and password and you're good to go.
         - else
-          = render 'users/auth/providers', flow: 'signup', icons: true, color: true, prefix: 'Sign up with '
+          = render 'uthentications/providers', flow: 'signup', icons: true, color: true, prefix: 'Sign up with '
           %hr.or
 
       = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
@@ -57,5 +70,5 @@
     = render 'users/social/facepile'
 
   %div{class: (@modal ? 'modal-footer' : 'links')}
-    Already a member?
+    Already registered?
     = link_to "Login", new_session_path(resource_name)

@@ -19,7 +19,7 @@ class Users::OauthController < ApplicationController
   # OAuth Callback
   def create
     # Uncomment to debug oauth response
-    # return render partial: 'users/auth/debug_omniauth'
+    # return render partial: 'authentications/debug_omniauth'
 
     @auth = Authentication.unscoped.find_by_provider_and_proid(@provider, @omniauth['uid'])
 
@@ -93,7 +93,7 @@ class Users::OauthController < ApplicationController
     if url
       redirect_to url
     else
-      render 'users/auth/failure'
+      render 'authentications/failure'
     end
   end
 
