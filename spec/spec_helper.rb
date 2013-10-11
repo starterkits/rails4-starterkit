@@ -57,8 +57,6 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.include Devise::TestHelpers, type: :controller
-
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with :truncation
