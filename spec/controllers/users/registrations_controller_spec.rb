@@ -1,34 +1,23 @@
 require 'spec_helper'
-require 'addressable/uri'
 
 describe Users::RegistrationsController do
-  describe "#create" do
-    it "should redirect to after sign up url" do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      post :create, user: {email: 'test@example.com', password: 'testpass'}
-      path = controller.send(:after_sign_up_path_for, controller.resource)
-      URI(response.redirect_url).path.should == path
-    end
-  end
-
-  describe "#after_sign_up_path_for" do
+  describe "#after_sign_in_path_for" do
     it "should not include return_to param when return_to is user_root_path" do
       @request.env['devise.mapping'] = Devise.mappings[:user]
-      controller.stub!(:params).and_return return_to: user_root_path
+      controller.stub(params: {return_to: user_root_path})
       controller.send(:store_location!)
       controller.send(:build_resource)
-      path = controller.send(:after_sign_up_path_for, controller.resource)
+      path = controller.send(:after_sign_in_path_for, controller.resource)
       path.should == user_root_path
     end
 
     it "should include return_to param" do
       @request.env['devise.mapping'] = Devise.mappings[:user]
-      controller.stub!(:params).and_return return_to: test_path
+      controller.stub(params: {return_to: test_path})
       controller.send(:store_location!)
       controller.send(:build_resource)
-      path = controller.send(:after_sign_up_path_for, controller.resource)
-      p = Addressable::URI.parse(path)
-      p.query_values['path'].should == test_path
+      path = controller.send(:after_sign_in_path_for, controller.resource)
+      path.should == test_path
     end
   end
 end
