@@ -1,4 +1,12 @@
+# See config/initializers/auth.rb for usage of settings in this file
+
 defaults: &defaults
+  omniauth:
+    path_prefix: /o
+
+  devise:
+    path_prefix: /a
+
   # List of providers to show on login/signup
   # If empty, all of the providers will be included
   # Example: ['facebook', 'twitter']

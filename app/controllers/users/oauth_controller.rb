@@ -112,10 +112,10 @@ class Users::OauthController < ApplicationController
     @origin   = request.env['omniauth.origin'].to_s.presence || params[:origin]
     uri = Addressable::URI.parse(@origin)
     path = uri && uri.path.presence
+
     # Override origin url if home, sign up, or login pages
-    if [root_path, new_user_registration_path, new_user_session_path, nil].include?(path)
-      @origin = default_redirect_path
-    end
+    @origin = default_redirect_path unless valid_after_sign_in_path?(path)
+
     flow      = request.env['omniauth.params'].try(:[], 'flow') || params['flow']
     @flow     = flow.present? && flow.to_sym || nil
     @provider = @omniauth && @omniauth[:provider] || session && session[:oauth] && session[:oauth].first.first

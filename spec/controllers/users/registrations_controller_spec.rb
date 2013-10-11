@@ -1,28 +1,50 @@
 require 'spec_helper'
+require 'addressable/uri'
 
 describe Users::RegistrationsController do
   describe "#create" do
     it "should redirect to after sign up url" do
       @request.env["devise.mapping"] = Devise.mappings[:user]
-      post :create, user: {first_name: 'Test', email: 'test@example.com', password: 'testpass'}
+      post :create, user: {email: 'test@example.com', password: 'testpass'}
       path = controller.send(:after_sign_up_path_for, controller.resource)
       URI(response.redirect_url).path.should == path
+    end
+  end
+
+  describe "#after_sign_up_path_for" do
+    it "should not include return_to param when return_to is user_root_path" do
+      @request.env['devise.mapping'] = Devise.mappings[:user]
+      controller.stub!(:params).and_return return_to: user_root_path
+      controller.send(:store_location!)
+      controller.send(:build_resource)
+      path = controller.send(:after_sign_up_path_for, controller.resource)
+      path.should == user_root_path
+    end
+
+    it "should include return_to param" do
+      @request.env['devise.mapping'] = Devise.mappings[:user]
+      controller.stub!(:params).and_return return_to: test_path
+      controller.send(:store_location!)
+      controller.send(:build_resource)
+      path = controller.send(:after_sign_up_path_for, controller.resource)
+      p = Addressable::URI.parse(path)
+      p.query_values['path'].should == test_path
     end
   end
 end
 
 
-# 
+#
 # describe RegistrationsController do
 #   before do
 #     request.env["devise.mapping"] = Devise.mappings[:user]
 #   end
-# 
+#
 #   it 'should not require tos' do
 #     get :new
 #     response.should be_success
 #   end
-# 
+#
 #   describe "GET new" do
 #     context "from a facebook login" do
 #       before do
@@ -53,17 +75,17 @@ end
 #               "verified"=>true,
 #               "updated_time"=>"2011-01-06T01:21:05+0000"}}
 #         }
-# 
+#
 #         @user = Factory.create(:user)
 #       end
-# 
+#
 #       it "should succeed" do
 #         get :new
 #         response.should be_success
 #       end
 #     end
 #   end
-# 
+#
 #   describe :create do
 #     before(:each) do
 #       session[:omniauth] = {

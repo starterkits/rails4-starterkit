@@ -3,23 +3,25 @@ StarterKit::Application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web, at: '/admin/jobs'
 
+
   match '/error' => 'pages#error', via: [:get, :post], as: 'error_page'
 
   # OAuth
-  # Route prefix set in config/initializers/auth.rb
-  get '/o/:provider/callback' => 'users/oauth#create'
-  get '/o/failure' => 'users/oauth#failure'
-  get '/o/:provider' => 'users/oauth#passthru', as: 'provider_auth'
-  get '/o' => redirect('/a/login')
+  oauth_prefix = StarterKit::AuthConfig.omniauth.path_prefix
+  get "#{oauth_prefix}/:provider/callback" => 'users/oauth#create'
+  get "#{oauth_prefix}/failure" => 'users/oauth#failure'
+  get "#{oauth_prefix}/:provider" => 'users/oauth#passthru', as: 'provider_auth'
+  get oauth_prefix => redirect("#{oauth_prefix}/login")
 
   # Devise
-  devise_for :users, path: '/a',
+  devise_prefix = StarterKit::AuthConfig.devise.path_prefix
+  devise_for :users, path: devise_prefix,
     controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/reset_password'},
     path_names: {sign_up: 'signup', sign_in: 'login', sign_out: 'logout'}
   devise_scope :user do
-    get '/a/after' => 'users/registrations#after_auth', as: 'user_root'
+    get "#{devise_prefix}/after" => 'users/registrations#after_auth', as: 'user_root'
   end
-  get '/a' => redirect('/a/signup')
+  get devise_prefix => redirect('/a/signup')
 
   # User
   resources :users, path: '/u', only: :show

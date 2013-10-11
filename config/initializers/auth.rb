@@ -7,7 +7,7 @@ module StarterKit
 end
 
 OmniAuth.config.logger = Rails.logger
-OmniAuth.config.path_prefix = '/o'
+OmniAuth.config.path_prefix = StarterKit::AuthConfig.omniauth.path_prefix
 
 StarterKit::Application.config.middleware.use OmniAuth::Builder do
   StarterKit::AuthConfig.providers.each do |k, v|

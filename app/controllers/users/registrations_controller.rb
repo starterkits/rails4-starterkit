@@ -1,4 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  include DeviseReturnToConcern
+
   before_action :permit_params, only: :create
   after_action :cleanup_oauth, only: [:create, :update]
 
@@ -28,8 +30,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       redirect_to new_user_registration_path
     elsif resource.persisted? && resource.valid?
       # Everything is good, send user on his/her way
-      path = stored_location_for(current_user)
-      path ||= user_home_path
+      path = after_sign_in_path_for(current_user)
+      path = user_home_path unless valid_after_sign_in_path?(path)
       redirect_to path
     else
       # User needs to update some info before proceeding
@@ -97,11 +99,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-    path = after_sign_in_path_for(resource)
-    if path == user_root_path
-      user_root_path resource.id
-    else
-      user_root_path resource.id, path: path
-    end
+    user_root_path
   end
 end
