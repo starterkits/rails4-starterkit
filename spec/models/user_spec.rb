@@ -22,26 +22,42 @@ describe User do
     end
   end
 
-  describe "has_authentication?" do
-    it "should return true when new record and even with invalid authentication" do
-      u = User.new
-      authentication.provider = nil
-      u.authentications << authentication
-      u.has_authentication?.should be_true
+  describe "password_required?" do
+    context "with no password" do
+      it "should be false when new record even with invalid authentication" do
+        u = User.new
+        authentication.provider = nil
+        u.authentications << authentication
+        u.should_not be_password_required
+      end
+      it "should be true if persisted with invalid authentication" do
+        u = stub_model User, persisted?: true
+        u.should be_persisted
+        authentication.provider = nil
+        u.authentications << authentication
+        u.should be_password_required
+      end
+      it "should be false if persisted and with at least one valid authentication" do
+        u = stub_model User, persisted?: true
+        u.should be_persisted
+        authentication.provider = nil
+        u.authentications << [authentication, FactoryGirl.build(:authentication)]
+        u.should_not be_password_required
+      end
     end
-    it "should return false if persisted and with invalid authentication" do
-      u = stub_model User, persisted?: true
-      u.persisted?.should be_true
-      authentication.provider = nil
-      u.authentications << authentication
-      u.has_authentication?.should be_false
-    end
-    it "should return true if persisted and with at least one valid authentication" do
-      u = stub_model User, persisted?: true
-      u.persisted?.should be_true
-      authentication.provider = nil
-      u.authentications << [authentication, FactoryGirl.build(:authentication)]
-      u.has_authentication?.should be_true
+    context "with password" do
+      it "should always require password when password is set" do
+        user.authentications << authentication
+        user.password = 'abc'
+        user.password_confirmation = nil
+        user.should be_password_required
+      end
+      it "should always require password when confirmation is set" do
+        user.authentications << authentication
+        user.password = nil
+        user.password_confirmation = 'abc'
+        user.should be_password_required
+      end
     end
   end
 
