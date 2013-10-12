@@ -13,8 +13,13 @@ class User < ActiveRecord::Base
      super
    end
 
+   # Return true if new_record? and an authentication is present
+   # or record is persisted and at least one valid authentication exists.
+   #
+   # An invalid authentication is allowed for a new record since the record
+   # needs to first be saved before the authentication.user_id can be set.
    def has_authentication?
-     (new_record? && authentications.present?) || authentications.find {|a| a.valid? }
+     (new_record? && authentications.present?) || (authentications.find {|a| a.valid? }).present?
    end
 
    # Merge attributes from Authentication if User attribute is blank.
