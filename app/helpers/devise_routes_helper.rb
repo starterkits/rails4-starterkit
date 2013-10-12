@@ -1,6 +1,7 @@
 require 'addressable/uri'
 
 module DeviseRoutesHelper
+
   # Override login path to include return_to param
   def new_user_session_path
     add_return_to_path('new_user_session_path')
@@ -12,15 +13,15 @@ module DeviseRoutesHelper
   end
 
   def add_return_to_path(path_name)
+    urls = Rails.application.routes.url_helpers
     if valid_after_sign_in_path?
-      Rails.application.routes.url_helpers.method(path_name).call(return_to: request.fullpath)
+      urls.method(path_name).call(return_to: request.fullpath)
     else
-      Rails.application.routes.url_helpers.method(path_name).call
+      urls.method(path_name).call
     end
   end
 
   def valid_after_sign_in_path?(path = request.fullpath)
-    h = Rails.application.routes.url_helpers
     p = Addressable::URI.parse(path)
     prevent_urls = [
       "^#{root_path}$",
