@@ -132,6 +132,7 @@ class Users::OauthController < ApplicationController
   end
 
   # https://github.com/intridea/omniauth/issues/185
+  # TODO: remove this if no longer needed; write tests first
   def handle_unverified_request
     true
   end

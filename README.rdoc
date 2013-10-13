@@ -40,6 +40,7 @@ TODO
 * Install Devise Security Extension https://github.com/phatworx/devise_security_extension
 * Review config/initializers/devise.rb
 * Convert to lazy registration https://github.com/mwlang/lazy_registration_demos
+* Use decorators https://github.com/drapergem/draper
 * Make sure rspecs follow best practices: http://betterspecs.org/
 * Run should_clean -d spec/
 
@@ -85,7 +86,7 @@ Start at /a/signup
 
 1. RegistrationsController#after_auth
 2. If user.valid?, redirect to origin or user_root_path
-3. If !user.valid?, show interrupt page so user can add additional info
+3. If user.invalid?, show interrupt page so user can add additional info
   1. Post to RegistrationsController#create
 
 If user already had an account via the OAuth provider, he/she is simply logged in.

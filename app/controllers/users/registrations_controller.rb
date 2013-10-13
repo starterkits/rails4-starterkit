@@ -17,24 +17,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # Redirect user here after login or signup action
   # Used to require additional info from the user like email address, agree to new TOS, etc.
   def after_auth
-    # User should either be...
-    # already signed in by Devise
+    # User should be already signed in by Devise
     # or in process of signing up via OAuth provider
     if signed_in?
       authenticate_scope!
     else
       build_resource({})
     end
+
+    # Check if anything went wrong with OAuth
+    # User will already be signed in if using username/password sign up
     if !signed_in? && @auth.blank?
-      # Something went wrong with OmniAuth, redirect user back to sign up page
       redirect_to new_user_registration_path
+
+    # Check if resource is valid
+    # Resource will not yet be saved if user is signing up with OAuth
     elsif resource.persisted? && resource.valid?
-      # Everything is good, send user on his/her way
       path = after_sign_in_path_for(current_user)
       path = user_home_path unless valid_after_sign_in_path?(path)
       redirect_to path
+
+    # Redisplay registration form with OAuth data for user to confirm
     else
-      # User needs to update some info before proceeding
       respond_with(resource, template: 'users/registrations/new', auth: @auth)
     end
   end
