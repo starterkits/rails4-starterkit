@@ -15,7 +15,7 @@ describe DeviseReturnToConcern do
   let(:controller) { DummyController.new }
 
   describe "store_location!" do
-    it "should set session when return_to param is present" do
+    it "sets session when return_to param is present" do
       path = '/some/test/path'
       controller.params = { return_to: path }
       controller.store_location!
@@ -23,7 +23,7 @@ describe DeviseReturnToConcern do
       controller.session[:"#{controller.resource_name}_return_to_timestamp"].should >= Time.now.utc.to_i
       controller.stored_location_for(controller.resource_name).should == path
     end
-    it "should not change session when return_to is missing" do
+    it "does not change session when return_to is missing" do
       controller.store_location!
       controller.session[:"#{controller.resource_name}_return_to"].should be_nil
       controller.session[:"#{controller.resource_name}_return_to_timestamp"].should be_nil
@@ -32,13 +32,13 @@ describe DeviseReturnToConcern do
   end
 
   describe "after_sign_in_path_for" do
-    it "should return stored location" do
+    it "returns stored location" do
       path = '/some/test/path'
       controller.params = { return_to: path }
       controller.store_location!
       controller.after_sign_in_path_for(controller.resource_name).should == path
     end
-    it "should not return stored path if expired" do
+    it "does not return stored path if expired" do
       path = '/some/test/path'
       user_root_path = '/user/root'
       controller.stub(user_root_path: user_root_path)

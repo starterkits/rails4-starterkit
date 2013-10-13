@@ -40,6 +40,8 @@ TODO
 * Install Devise Security Extension https://github.com/phatworx/devise_security_extension
 * Review config/initializers/devise.rb
 * Convert to lazy registration https://github.com/mwlang/lazy_registration_demos
+* Make sure rspecs follow best practices: http://betterspecs.org/
+* Run should_clean -d spec/
 
 
 Compatibility

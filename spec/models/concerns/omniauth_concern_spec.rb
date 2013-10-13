@@ -13,8 +13,8 @@ describe OmniauthConcern do
     @check_website = true
   end
 
-  shared_examples_for "normalized oauth" do
-    it "should have expected data" do
+  shared_examples "normalized oauth" do
+    it "has expected data" do
       oauth_data = @omniauth_mocks[@provider]
       norm_data, auth_attrs = Authentication.normalize_oauth(oauth_data)
       @keys_to_test.each {|key|
@@ -51,7 +51,7 @@ describe OmniauthConcern do
   end
 
   describe "#oauth_data=" do
-    it "should normalize data" do
+    it "normalizes data" do
       auth.oauth_data = @omniauth_mocks['facebook']
       auth.oauth_data[:email].should == @data.email
     end

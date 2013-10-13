@@ -37,10 +37,10 @@ describe DeviseRoutesHelper do
     let(:signup) { urls.new_user_registration_path(return_to: page_path) }
     before(:each) { @request.stub(fullpath: page_path) }
 
-    it "should include return_to param" do
+    it "includes return_to param" do
       @dummy.new_user_session_path.should == login
     end
-    it "should include return_to param" do
+    it "includes return_to param" do
       @dummy.new_user_registration_path.should == signup
     end
   end
