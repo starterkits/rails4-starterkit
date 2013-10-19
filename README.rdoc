@@ -11,6 +11,8 @@ without significant configuration or rewriting code.
 After cloning...
 
 1. Generate new security tokens
+  1. `rake secret`
+  2. Replace token in `config/initializers/secret_token.rb`
 2. Search and replace `StarterKit` with your app name
 3. Edit RegistrationController and migrations to customize user fields as needed
 
