@@ -1,6 +1,12 @@
 module OmniauthConcern
   extend ActiveSupport::Concern
 
+  included do
+    # Omit oauth_data_json from default scope to save bits on the wire
+    default_scope { select((column_names - ['oauth_data_json']).map { |column_name| "#{table_name}.#{column_name}" }) }
+    scope :with_oauth, -> { select(:oauth_data_json) }
+  end
+
   def update_from_omniauth(oauth)
     data, attrs = self.class.normalize_oauth(oauth)
     self.oauth_data = data
@@ -16,10 +22,10 @@ module OmniauthConcern
   end
 
   def oauth_data
-    @oauth_data ||= if self[:oauth_data_json].present?
+    @oauth_data ||= if self.try(:oauth_data_json).present?
       JSON.parse(self[:oauth_data_json])
     else
-      auth = self.class.unscoped.select('oauth_data_json').where(id: id).first
+      auth = self.class.unscoped.with_oauth.where(id: id).first
       auth && auth.oauth_data_json.present? && JSON.parse(auth.oauth_data_json) || nil
     end
   end
