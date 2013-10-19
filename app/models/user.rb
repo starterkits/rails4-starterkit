@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
 
   has_many :authentications, dependent: :destroy, validate: false
 
+  def display_name
+    first_name.presence || email
+  end
+
   # Override Devise to allow for Authentication or password.
   #
   # An invalid authentication is allowed for a new record since the record
