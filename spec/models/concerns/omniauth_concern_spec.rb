@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe OmniauthConcern do
+describe Concerns::OmniauthConcern do
   include OmniauthHelpers
 
   let(:auth) { FactoryGirl.build(:authentication) }

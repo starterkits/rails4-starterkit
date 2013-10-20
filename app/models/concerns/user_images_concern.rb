@@ -1,4 +1,4 @@
-module UserImagesConcern
+module Concerns::UserImagesConcern
   extend ActiveSupport::Concern
 
   def gravatar_url

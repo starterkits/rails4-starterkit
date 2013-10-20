@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UserImagesConcern do
+describe Concerns::UserImagesConcern do
   let(:user) { FactoryGirl.build(:user) }
 
   describe "#gravatar_url" do

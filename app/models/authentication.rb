@@ -1,5 +1,5 @@
 class Authentication < ActiveRecord::Base
-  include OmniauthConcern
+  include Concerns::OmniauthConcern
 
   belongs_to :user
 
