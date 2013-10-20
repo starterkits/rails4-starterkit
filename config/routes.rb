@@ -1,11 +1,8 @@
 # Route prefixes use a single letter to allow for vanity urls of two or more characters
 StarterKit::Application.routes.draw do
-  # Workers
   require 'sidekiq/web'
   mount Sidekiq::Web, at: '/admin/jobs'
 
-  # Admin
-  ActiveAdmin.routes(self)
 
   match '/error' => 'pages#error', via: [:get, :post], as: 'error_page'
 

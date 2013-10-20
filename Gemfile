@@ -11,17 +11,17 @@ gem 'airbrake'                # use with airbrake.io or errbit
 # gem 'airbrake_user_attributes'  # use with self-hosted errbit; see config/initializers/airbrake.rb
 # gem 'rack-google-analytics'
 
+
+
 # Data
 gem 'pg'
-# gem 'jbuilder'              # json helper
-# gem 'kaminari'              # pagination
+# gem 'jbuilder'
 
 # Assets
 gem 'sass-rails'
 gem 'haml-rails'
 gem 'simple_form'
 gem 'uglifier'
-gem 'draper'
 
 # Javascript
 gem 'jquery-rails'
@@ -49,9 +49,6 @@ gem 'omniauth-twitter'
 # gem 'omniauth-persona'
 # gem 'omniauth-google-oauth2'
 # gem 'omniauth-linkedin'
-
-# Admin
-gem 'activeadmin', github: 'gregbell/active_admin'  # Use github version for Rails 4 support
 
 # Workers
 gem 'sidekiq'

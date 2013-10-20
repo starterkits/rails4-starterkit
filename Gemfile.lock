@@ -1,22 +1,4 @@
 GIT
-  remote: git://github.com/gregbell/active_admin.git
-  revision: ecfb8bb04d2d85f16d46f2e36e2f9098e4195f6b
-  specs:
-    activeadmin (0.6.1)
-      arbre (~> 1.0)
-      bourbon
-      coffee-rails
-      devise (~> 3.0)
-      formtastic (~> 2.3.0.rc2)
-      inherited_resources (~> 1.3)
-      jquery-rails
-      jquery-ui-rails
-      kaminari (~> 0.13)
-      rails (>= 3.2, < 4.1)
-      ransack (~> 1.0)
-      sass-rails
-
-GIT
   remote: git://github.com/thomas-mcdonald/bootstrap-sass.git
   revision: 0e88056ac5d58fb0bbd23d3fe929eac01712d964
   branch: 3
@@ -55,17 +37,12 @@ GEM
     airbrake (3.1.14)
       builder
       json
-    arbre (1.0.1)
-      activesupport (>= 3.0.0)
     arel (4.0.0)
     atomic (1.1.14)
     awesome_print (1.2.0)
     bcrypt-ruby (3.1.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bourbon (3.1.8)
-      sass (>= 3.2.0)
-      thor
     builder (3.1.4)
     byebug (2.3.0)
       columnize (~> 0.3.6)
@@ -105,10 +82,6 @@ GEM
     devise-async (0.8.0)
       devise (>= 2.2, < 3.2)
     diff-lcs (1.2.4)
-    draper (1.2.1)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      request_store (~> 1.0.3)
     erubis (2.7.0)
     execjs (2.0.2)
     factory_girl (4.2.0)
@@ -121,8 +94,6 @@ GEM
     ffaker (1.19.0)
     ffi (1.9.0)
     formatador (0.2.4)
-    formtastic (2.3.0.rc2)
-      actionpack (>= 3.0)
     guard (2.0.3)
       formatador (>= 0.2.4)
       listen (~> 2.0)
@@ -139,27 +110,16 @@ GEM
       activesupport (>= 3.1, < 4.1)
       haml (>= 3.1, < 4.1)
       railties (>= 3.1, < 4.1)
-    has_scope (0.6.0.rc)
-      actionpack (>= 3.2, < 5)
-      activesupport (>= 3.2, < 5)
     hashie (2.0.5)
     hike (1.2.3)
     httpauth (0.2.0)
     i18n (0.6.5)
-    inherited_resources (1.4.1)
-      has_scope (~> 0.6.0.rc)
-      responders (~> 1.0.0.rc)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (4.0.5)
-      railties (>= 3.1.0)
     json (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
-    kaminari (0.14.1)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     kgio (2.8.1)
     listen (2.0.3)
       celluloid (>= 0.15.2)
@@ -202,8 +162,6 @@ GEM
       omniauth-oauth (~> 1.0)
     orm_adapter (0.4.0)
     pg (0.17.0)
-    polyamorous (0.6.4)
-      activerecord (>= 3.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -245,10 +203,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.12.0)
     rake (10.1.0)
-    ransack (1.0.0)
-      actionpack (>= 3.0)
-      activerecord (>= 3.0)
-      polyamorous (~> 0.6.0)
     rb-fsevent (0.9.3)
     rb-inotify (0.9.2)
       ffi (>= 0.5.0)
@@ -257,9 +211,6 @@ GEM
     redis (3.0.5)
     redis-namespace (1.3.1)
       redis (~> 3.0.0)
-    request_store (1.0.5)
-    responders (1.0.0)
-      railties (>= 3.2, < 5)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -341,7 +292,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activeadmin!
   addressable
   airbrake
   awesome_print
@@ -354,7 +304,6 @@ DEPENDENCIES
   database_cleaner
   devise
   devise-async
-  draper
   factory_girl_rails
   ffaker
   guard-rspec

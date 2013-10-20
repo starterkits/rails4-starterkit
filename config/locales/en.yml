@@ -20,10 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  hello: "Hello world"
+
   auth:
     signin: 'Login'
     signup: 'Sign up'
-    not_authorized: 'Doh! You are not authorized.'
 
   accounts:
     connected: "Success!"
