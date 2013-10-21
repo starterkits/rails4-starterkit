@@ -117,9 +117,11 @@ group :test do
   gem 'ffaker'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
+  # gem 'timecop'               # Mock Time
 
   # Coverage
   gem 'simplecov', require: false
+  # gem 'coveralls', :require => false
 end
 
 group :production do
