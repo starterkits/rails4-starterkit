@@ -66,7 +66,7 @@ module Concerns::UserImagesConcern
     else ''
     end
     url = image_url_ssl(url) if ssl
-    url.gsub(/(_(bigger|normal|mini))?\.(png|gif|jpeg|jpg)/, "#{size}.$3")
+    url.gsub(/(_(bigger|normal|mini))?\.(png|gif|jpeg|jpg)/, "#{size}.\\3")
   end
 
   def sized_facebook_image_url(url, size: :thumb, ssl: true)
