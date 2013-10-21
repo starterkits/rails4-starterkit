@@ -1,3 +1,29 @@
+GIT
+  remote: git://github.com/10hacks/rails_admin.git
+  revision: 2728c802671b625fd74a1740c295c69eb6ed58c4
+  specs:
+    rails_admin (0.5.0)
+      builder (~> 3.1)
+      coffee-rails (~> 4.0)
+      font-awesome-rails (~> 3.0)
+      haml (~> 4.0)
+      jquery-rails (~> 3.0)
+      jquery-ui-rails (~> 4.0)
+      kaminari (~> 0.14)
+      nested_form (~> 0.3)
+      rack-pjax (~> 0.7)
+      rails (~> 4.0.0)
+      remotipart (~> 1.0)
+      safe_yaml (~> 0.9)
+      sass-rails (~> 4.0)
+
+GIT
+  remote: git://github.com/thomas-mcdonald/bootstrap-sass.git
+  revision: 6cc04bda62ed7ccf71d445fa82e706cb696b4fdb
+  specs:
+    bootstrap-sass (3.0.0.0)
+      sass (~> 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -35,8 +61,6 @@ GEM
     bcrypt-ruby (3.1.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (2.3.2.2)
-      sass (~> 3.2)
     builder (3.1.4)
     byebug (2.3.1)
       columnize (~> 0.3.6)
@@ -199,21 +223,6 @@ GEM
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
-    rails_admin (0.5.0)
-      bootstrap-sass (~> 2.3)
-      builder (~> 3.1)
-      coffee-rails (~> 4.0)
-      font-awesome-rails (~> 3.0)
-      haml (~> 4.0)
-      jquery-rails (~> 3.0)
-      jquery-ui-rails (~> 4.0)
-      kaminari (~> 0.14)
-      nested_form (~> 0.3)
-      rack-pjax (~> 0.7)
-      rails (~> 4.0.0)
-      remotipart (~> 1.0)
-      safe_yaml (~> 0.9)
-      sass-rails (~> 4.0)
     rails_serve_static_assets (0.0.1)
     rails_stdout_logging (0.0.3)
     railties (4.0.0)
@@ -317,6 +326,7 @@ DEPENDENCIES
   addressable
   airbrake
   awesome_print
+  bootstrap-sass!
   byebug
   cancan
   capybara-webkit
@@ -344,7 +354,7 @@ DEPENDENCIES
   rack-timeout (~> 0.1.0beta3)
   rails (~> 4.0.0)
   rails_12factor
-  rails_admin
+  rails_admin!
   rb-fsevent
   rspec-rails
   sass-rails
