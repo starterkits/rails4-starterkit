@@ -35,7 +35,7 @@ gem 'coffee-rails'
 # gem 'therubyracer', platforms: :ruby
 
 # Design
-gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', branch: '3'
+# gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
 # gem 'bourbon'
 # gem 'neat'
 # gem 'country_select'
@@ -49,6 +49,9 @@ gem 'omniauth-twitter'
 # gem 'omniauth-persona'
 # gem 'omniauth-google-oauth2'
 # gem 'omniauth-linkedin'
+
+# Admin
+gem 'rails_admin'
 
 # Workers
 gem 'sidekiq'

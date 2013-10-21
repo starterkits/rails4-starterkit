@@ -7,9 +7,21 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
 
   # CanCan, check authorization unless authorizing with devise
-  check_authorization unless: :devise_controller?
+  check_authorization unless: :skip_check_authorization?
+
+  :devise_controller?
 
   include CommonHelper
   include ErrorReportingConcern
 
+  rescue_from CanCan::AccessDenied do |exception|
+    path = user_signed_in? ? user_home_path : new_user_session_path
+    redirect_to path, alert: exception.message
+  end
+
+  protected
+
+  def skip_check_authorization?
+    devise_controller? || rails_admin_controller?
+  end
 end
