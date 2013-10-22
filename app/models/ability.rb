@@ -9,7 +9,7 @@ class Ability
   def initialize(user = User.new)
     can :manage, User, id: user.id
 
-    if user.is_admin?
+    if user.is_admin? && defined? RailsAdmin
       # RailsAdmin
       can :access, :rails_admin
       can :dashboard
