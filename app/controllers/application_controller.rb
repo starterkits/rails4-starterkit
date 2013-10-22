@@ -22,6 +22,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def skip_check_authorization?
-    devise_controller? || rails_admin_controller?
+    devise_controller? || is_a?(RailsAdmin::ApplicationController)
   end
 end
