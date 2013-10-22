@@ -65,7 +65,10 @@ module Concerns::UserImagesConcern
     when :large then '_bigger'  # 73x73
     else ''
     end
-    url = image_url_ssl(url) if ssl
+    if ssl
+      url = image_url_ssl(url)
+      url.gsub!(/([^\/]+)\.twimg\.com/, 'pbs.twimg.com')
+    end
     url.gsub(/(_(bigger|normal|mini))?\.(png|gif|jpeg|jpg)/, "#{size}.\\3")
   end
 
