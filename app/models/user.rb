@@ -16,9 +16,9 @@ class User < ActiveRecord::Base
   # An invalid authentication is allowed for a new record since the record
   # needs to first be saved before the authentication.user_id can be set.
   def password_required?
-    (new_record? && authentications.empty?) ||
-    (persisted? && authentications.find{|a| a.valid?}.nil?) ||
-    password.present? || password_confirmation.present?
+    (!persisted? && authentications.empty?) ||
+    (persisted? && encrypted_password.blank? && authentications.present? && !authentications.find{|a| a.valid?}) ||
+    !password.nil? || !password_confirmation.nil?
   end
 
   # Merge attributes from Authentication if User attribute is blank.
