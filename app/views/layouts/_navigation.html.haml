@@ -8,12 +8,17 @@
     = link_to "StarterKit", root_path, :class => 'navbar-brand'
 
   .collapse.navbar-collapse
-    %ul.nav.navbar-nav
+    %ul.nav.navbar-nav.navbar-right
       - if user_signed_in?
-        %li= link_to 'Logout', destroy_user_session_path, :rel=>'nofollow'
-      - else
+        %li.dropdown
+          %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+            = image_tag current_user.image_url(size: :tiny, ssl: request.ssl?)
+            %b.caret
+          %ul.dropdown-menu
+            - if current_user.is_admin?
+              %li= link_to 'Admin', rails_admin_path
+            %li= link_to 'Account', edit_user_registration_path
+            %li= link_to 'Logout', destroy_user_session_path, :rel=>'nofollow'
+      - unless user_signed_in?
         %li= link_to 'Login', new_user_session_path
-      - if user_signed_in?
-        %li= link_to 'Edit account', edit_user_registration_path
-      - else
         %li= link_to 'Sign up', new_user_registration_path
