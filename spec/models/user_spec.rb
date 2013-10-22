@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe User do
   let(:user) { FactoryGirl.build(:user) }
-  let(:stubbed_user) { stub_model User, persisted?: true }
   let(:authentication) { FactoryGirl.build(:authentication) }
 
   describe "#valid?" do
@@ -23,75 +22,114 @@ describe User do
     end
   end
 
-  describe "stubbed_user" do
-    it "is persisted" do
-      stubbed_user.should be_persisted
-    end
-  end
-
   describe "password_required?" do
-    context "with no password" do
-      it "is false when new record even with invalid authentication" do
-        u = User.new
-        authentication.provider = nil
-        u.authentications << authentication
-        u.should_not be_password_required
+    context "with authentication" do
+      context "and new record" do
+        let(:user) {
+          user = FactoryGirl.build(:user)
+          user.encrypted_password = user.password = user.password_confirmation = nil
+          user.authentications << authentication
+          user
+        }
+        it "is always false when new record" do
+          user.should be_new_record
+          user.should_not be_persisted
+          user.should_not be_password_required
+          # Invalid provider
+          user.authentications.first.provider = nil
+          user.should_not be_password_required
+          # Invalid + valid provider
+          user.authentications << FactoryGirl.build(:authentication)
+          user.should_not be_password_required
+          # Not updating password
+          user.password = user.password_confirmation = nil
+          user.should_not be_password_required
+          # Updating password
+          user.password = user.password_confirmation = 'abcabcabc'
+          user.should_not be_password_required
+        end
       end
-      it "is false when authentications are invalid if database has password" do
-        u = stubbed_user
-        u.encrypted_password = '123123'
-        u.password = u.password_confirmation = nil
-        authentication.provider = nil
-        u.authentications << authentication
-        u.should_not be_password_required
-      end
-      it "is false when persisted and with at least one valid authentication" do
-        u = stubbed_user
-        authentication.provider = nil
-        u.authentications << [authentication, FactoryGirl.build(:authentication)]
-        u.should_not be_password_required
-      end
-      it "is false when persisted and not changing password" do
-        u = stubbed_user
-        u.password = u.password_confirmation = nil
-        u.should_not be_password_required
-      end
-      it "is true when new record and no authentications" do
-        user.authentications.should be_empty
-        user.should_not be_persisted
-        user.should be_new_record
-        user.should be_password_required
-      end
-      it "is true when persisted with no password and invalid authentication" do
-        u = user
-        u.stub('persisted?' => true)
-        u.password = u.password_confirmation = nil
-        u.encrypted_password = ''
-        u.authentications << authentication
-        u.should be_valid
-        u.should be_persisted
-        u.should_not be_password_required
-        authentication.provider = nil
-        u.should be_password_required
+      context "and persisted" do
+        let(:user) {
+          user = stub_model User, persisted?: true
+          user.authentications << authentication
+          user
+        }
+        it "is persisted" do
+          user.should be_persisted
+        end
+        it "is false when has at least one valid authentication" do
+          user.encrypted_password = nil
+          authentication.provider = nil
+          user.authentications << [authentication, FactoryGirl.build(:authentication)]
+          user.should_not be_password_required
+        end
+        it "is false when has saved password" do
+          user.encrypted_password = '123123'
+          user.should_not be_password_required
+          user.authentications.first.provider = nil
+          user.should_not be_password_required
+        end
+        it "is true when no saved password and invalid authentication" do
+          user.encrypted_password = ''
+          user.should_not be_password_required
+          user.authentications.first.provider = nil
+          user.should be_password_required
+        end
+        it "is true when password is present" do
+          user.should_not be_password_required
+          user.password = 'abcabc'
+          user.should be_password_required
+          user.password = nil
+          user.password_confirmation = 'abcabc'
+          user.should be_password_required
+        end
       end
     end
-    context "with password" do
-      it "is true when password is set" do
-        user.password = 'abc'
-        user.password_confirmation = nil
-        user.should be_password_required
+    context "without authentication" do
+      context "and new record" do
+        let(:user) {
+          user = FactoryGirl.build(:user)
+          user.encrypted_password = user.password = user.password_confirmation = nil
+          user
+        }
+        it "is always true when new record" do
+          user.should be_new_record
+          user.should_not be_persisted
+          user.should be_password_required
+          user.password = user.password_confirmation = nil
+          user.should be_password_required
+          user.password = user.password_confirmation = ''
+          user.should be_password_required
+          user.password = '123123123'
+          user.password_confirmation = nil
+          user.should be_password_required
+          user.password = nil
+          user.password_confirmation = 'abcabcabc'
+          user.should be_password_required
+        end
       end
-      it "is true when password_confirmation is set" do
-        user.password = nil
-        user.password_confirmation = '123'
-        user.should be_password_required
-      end
-      it "is true when password and confirmation are set to valid password" do
-        pass = 'testtest'
-        user.password = pass
-        user.password_confirmation = pass
-        user.should be_valid
-        user.should be_password_required
+      context "and persisted" do
+        let(:user) {
+          user = stub_model User, persisted?: true
+          user.encrypted_password = '123123123'
+          user
+        }
+        it "is true when password is present" do
+          user.password = 'abc'
+          user.password_confirmation = nil
+          user.should be_password_required
+          user.password = nil
+          user.password_confirmation = '123'
+          user.should be_password_required
+        end
+        it "is true when saved password is not present" do
+          user.encrypted_password = ''
+          user.should be_password_required
+        end
+        it "is false when password is not present" do
+          user.should_not be_password_required
+        end
       end
     end
   end
