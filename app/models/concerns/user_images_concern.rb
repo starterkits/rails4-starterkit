@@ -34,7 +34,7 @@ module Concerns::UserImagesConcern
   end
 
   def image_url_ssl(url)
-    url.gsub(/^http:\/\//i, '^https://')
+    url.gsub(/^http:\/\//i, 'https://')
   end
 
   def md5_email
