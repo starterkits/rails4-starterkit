@@ -1,14 +1,16 @@
 module Concerns::UserImagesConcern
   extend ActiveSupport::Concern
 
-  # Default image sizes are the same as Twitter's.
-  # https://dev.twitter.com/docs/user-profile-images-and-banners
-  # Modify provider specific image methods as needed after changing IMAGE_SIZES.
-  IMAGE_SIZES = {
-    tiny:   24,
-    thumb:  48,
-    large:  73
-  }.freeze
+  included do
+    # Default image sizes are the same as Twitter's.
+    # https://dev.twitter.com/docs/user-profile-images-and-banners
+    # Modify provider specific image methods as needed after changing IMAGE_SIZES.
+    IMAGE_SIZES = {
+      tiny:   24,
+      thumb:  48,
+      large:  73
+    }.freeze
+  end
 
   # ssl: true|false
   # size: :tiny|:thumb|:large
@@ -30,7 +32,11 @@ module Concerns::UserImagesConcern
   end
 
   def image_size(size)
-    IMAGE_SIZES[size].presence || IMAGE_SIZES[:thumb]
+    image_sizes[size].presence || image_sizes[:thumb]
+  end
+
+  def image_sizes
+    IMAGE_SIZES
   end
 
   def image_url_ssl(url)
@@ -87,13 +93,13 @@ module Concerns::UserImagesConcern
     # url.gsub(/picture(\?type=[^&]*)?/, "picture?type=#{size}")
 
     # Facebook supports on the fly image resizing
-    width = height = IMAGE_SIZES[size] || 100
+    width = height = image_sizes[size] || 100
     url.gsub(/picture(\?type=[^&]*)?/, "picture?width=#{width}&height=#{height}")
   end
 
   def sized_linkedin_image_url(url, size: :thumb, ssl: true)
     url = image_url_ssl(url.gsub(/[^\.\/]+\.(licdn|linkedin)\.com/, 'www.linkedin.com')) if ssl
-    width = height = IMAGE_SIZES[size] || 100
+    width = height = image_sizes[size] || 100
     url.gsub(/\/shrink_\d+_\d+\//, "/shrink_#{width}_#{height}/")
   end
 end

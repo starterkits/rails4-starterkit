@@ -26,8 +26,8 @@ describe Concerns::UserImagesConcern do
       email = 'Test@Example.COM'
       user.email = email
       md5_email = Digest::MD5.hexdigest(email.strip.downcase)
-      user.gravatar_url(size: :thumb, ssl: true).should ==  "https://secure.gravatar.com/avatar/#{md5_email}?s=#{User::IMAGE_SIZES[:thumb]}"
-      user.gravatar_url(size: :thumb, ssl: false).should ==  "http://gravatar.com/avatar/#{md5_email}?s=#{User::IMAGE_SIZES[:thumb]}"
+      user.gravatar_url(size: :thumb, ssl: true).should ==  "https://secure.gravatar.com/avatar/#{md5_email}?s=#{user.image_sizes[:thumb]}"
+      user.gravatar_url(size: :thumb, ssl: false).should ==  "http://gravatar.com/avatar/#{md5_email}?s=#{user.image_sizes[:thumb]}"
     end
     it "updates when email changes" do
       email = 'text@example.com'
@@ -37,12 +37,12 @@ describe Concerns::UserImagesConcern do
       user.gravatar_url.should_not == old_gravatar
     end
     it "returns correct size" do
-      User::IMAGE_SIZES.each do |size, value|
+      user.image_sizes.each do |size, value|
         user.gravatar_url(size: size).should =~ /s=#{value}$/
       end
     end
     it "returns thumb if size is invalid" do
-      user.gravatar_url(size: :invalid_size).should =~ /s=#{User::IMAGE_SIZES[:thumb]}$/
+      user.gravatar_url(size: :invalid_size).should =~ /s=#{user.image_sizes[:thumb]}$/
     end
   end
 end
