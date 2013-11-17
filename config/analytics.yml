@@ -1,0 +1,12 @@
+defaults: &defaults
+  google:
+    id: <%= ENV['GOOGLE_ANALYTICS_ID'].presence || nil %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
