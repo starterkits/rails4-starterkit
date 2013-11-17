@@ -20,11 +20,21 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-
   auth:
-    signin: 'Login'
-    signup: 'Sign up'
+    login:
+      title: 'Please Log In, or %{signup_link}'
+      link: 'Log In'
+    signup:
+      title: 'Sign Up, or %{login_link}'
+      link: 'Sign Up'
+    forgot:
+      link: 'Forgot password?'
+    confirm:
+      link: "I need to confirm my account."
+    unlock:
+      link: "My account is locked."
+    links:
+      title: 'Account Help'
 
   accounts:
     connected: "Success!"

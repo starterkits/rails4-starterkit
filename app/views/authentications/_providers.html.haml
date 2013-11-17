@@ -1,14 +1,10 @@
 - flow        ||= 'login'
-- layout      ||= 'application' # or 'modal'
 - css_class   ||= 'btn btn-primary'
 - providers   ||= authentication_providers
 
-.auth.providers.large
+.auth__providers
   - providers.each do |provider|
-    .wrap<>
-      = link_to provider_auth_path(provider, flow: flow), data: {flow: flow, provider: provider}, class: "auth #{css_class}" do
+    .auth__providers__provider
+      = link_to provider_auth_path(provider, flow: flow), data: {flow: flow, provider: provider}, class: css_class do
         %i{class: "sico-#{provider}"}
         = authentication_provider_name(provider)
-
-- content_for :on_ready do
-  new StarterKit.Views.AuthProviders({layout: '#{layout}'})

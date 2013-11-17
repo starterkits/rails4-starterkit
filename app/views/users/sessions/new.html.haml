@@ -1,11 +1,27 @@
-%h2= I18n.t 'auth.signin'
+.auth__form
+  - signup_link = link_to I18n.t('auth.signup.link'), new_user_registration_path
+  %h3.title= I18n.t('auth.login.title', signup_link: signup_link).html_safe
 
-= render 'authentications/providers', flow: 'login', icons: true, color: true
+  = render 'authentications/providers', flow: 'login', icons: true, color: true
 
-= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  = f.input :email, placeholder: 'you@example.com', autofocus: true, required: true
-  = f.input :password, hint: false, required: true
-  - if devise_mapping.rememberable?
-    = f.input :remember_me, as: :hidden, input_html: {value: true}
-  = f.button :submit, I18n.t('auth.signin')
-= render "users/shared/links"
+  .auth__or
+    %hr/
+    %span or
+
+  = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    - if devise_mapping.rememberable?
+      = f.input :remember_me, as: :hidden, input_html: {value: true}
+    = f.input :email, placeholder: 'you@example.com', autofocus: true, required: true, input_html: { autocomplete: 'off' }
+
+    .collapse.fade
+      = f.input :password, required: true do |input|
+        - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+          = link_to I18n.t('auth.forgot.link'), new_password_path(resource_name), class: 'pull-right small'
+
+        = f.input_field :password, required: true, hint: false
+      = f.button :submit, I18n.t('auth.login.link'), class: 'btn-primary'
+
+  = render 'users/shared/links', disable_signup: true, disable_forgot: true
+
+- content_for :on_ready do
+  $('input[name="user[email]"]').on('click keydown', function(){$(this).closest('form').find('.collapse').addClass('in')});
