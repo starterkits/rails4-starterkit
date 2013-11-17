@@ -11,7 +11,7 @@
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     - if devise_mapping.rememberable?
       = f.input :remember_me, as: :hidden, input_html: {value: true}
-    = f.input :email, placeholder: 'you@example.com', autofocus: true, required: true, input_html: { autocomplete: 'off' }
+    = f.input :email, placeholder: 'you@example.com', autofocus: true, required: true
 
     .collapse.fade
       = f.input :password, required: true do |input|
