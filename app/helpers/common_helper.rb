@@ -2,6 +2,7 @@
 module CommonHelper
   include AuthenticationsHelper::Providers
   include DeviseRoutesHelper
+  include GuidHelper
 
   def cached_user_for_prompt(user = nil)
     if user.present?
