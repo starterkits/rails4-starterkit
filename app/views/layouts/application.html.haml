@@ -4,9 +4,9 @@
     %meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
     %title= content_for?(:title) ? yield(:title) : 'StarterKit'
     %meta{:content => content_for?(:description) ? yield(:description) : 'StarterKit', name: 'description'}/
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     /[if lt IE 9]
-      = javascript_include_tag 'ie',  'data-turbolinks-track' => true
+      = javascript_include_tag 'ie', 'data-turbolinks-track' => true
     = javascript_include_tag 'head', 'data-turbolinks-track' => true
     = headjs_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
