@@ -35,7 +35,7 @@ gem 'coffee-rails'
 # gem 'therubyracer', platforms: :ruby
 
 # Design
-gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
+gem 'bootstrap-sass'
 # gem 'bourbon'
 # gem 'neat'
 # gem 'country_select'
