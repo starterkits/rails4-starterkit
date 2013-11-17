@@ -22,6 +22,8 @@ gem 'sass-rails'
 gem 'haml-rails'
 gem 'simple_form'
 gem 'uglifier'
+gem 'headjs-rails'
+
 
 # Javascript
 gem 'jquery-rails'
