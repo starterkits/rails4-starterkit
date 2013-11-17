@@ -102,7 +102,7 @@ Devise.setup do |config|
 
   # Setup a pepper to generate the encrypted password.
   # TODO: change this before first push to production
-  config.pepper = 'a9772aabbec457450b99072bd977cf829a9ca6d15ead287c6761e284a675df32faf626be56400108de1a65b94d006e6d6e12f26b422658921ae2fe7310a7386f'
+  config.pepper = ENV['SECRET_PEPPER'] || 'a9772aabbec457450b99072bd977cf829a9ca6d15ead287c6761e284a675df32faf626be56400108de1a65b94d006e6d6e12f26b422658921ae2fe7310a7386f'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
