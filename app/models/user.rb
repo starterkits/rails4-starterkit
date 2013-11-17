@@ -34,4 +34,9 @@ class User < ActiveRecord::Base
       self[k] = v if self.respond_to?("#{k}=") && self[k].blank?
     end
   end
+
+  # Do not require email confirmation to login or perform actions
+  def confirmation_required?
+    false
+  end
 end
