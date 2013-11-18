@@ -21,8 +21,6 @@
 
 en:
   auth:
-    email:
-      placeholder: 'you@example.com'
     login:
       title: 'Please Log In, or %{signup_link}'
       link: 'Log In'
@@ -74,6 +72,9 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
 
+    placeholders:
+      user:
+        email: 'you@example.com'
     labels:
       user:
         edit:
@@ -92,4 +93,5 @@ en:
     #   defaults:
     #     username: 'User name to sign in.'
     #     password: 'No special characters, please.'
+
 

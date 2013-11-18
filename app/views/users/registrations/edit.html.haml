@@ -9,7 +9,7 @@
 
   = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
 
-    = f.input :email, placeholder: I18n.t('auth.email.placeholder'), autofocus: true
+    = f.input :email, autofocus: true
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
       %div
         Currently waiting confirmation for: #{resource.unconfirmed_email}

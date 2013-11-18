@@ -3,7 +3,7 @@
 
   = simple_form_for resource, as: resource_name, url: password_path(resource_name) do |f|
     = devise_error_messages!
-    = f.input :email, placeholder: I18n.t('auth.email.placeholder'), autofocus: true, required: true
+    = f.input :email, autofocus: true, required: true
     = f.button :submit, I18n.t('auth.forgot.submit'), class: 'btn-primary'
 
   = render "users/shared/links"

@@ -67,7 +67,7 @@
         = I18n.t('auth.signup.email_taken', login_link: login_link).html_safe
 
     = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
-      = f.input :email, placeholder: I18n.t('auth.email.placeholder'), autofocus: true, required: true
+      = f.input :email, autofocus: true, required: true
       %div{class: resource.errors.empty? ? 'collapse fade' : ''}
         = f.input :password, required: true, autocomplete: 'off'
         = f.button :submit, I18n.t('auth.signup.link'), class: 'btn-primary'
