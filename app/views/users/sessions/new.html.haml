@@ -1,3 +1,5 @@
+- resource.email = params[:email] unless resource.email.present?
+
 .auth__form
   - signup_link = link_to I18n.t('auth.signup.link'), new_user_registration_path
   %h3.title= I18n.t('auth.login.title', signup_link: signup_link).html_safe
@@ -8,16 +10,15 @@
     %hr/
     %span or
 
-  = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  = simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
     - if devise_mapping.rememberable?
       = f.input :remember_me, as: :hidden, input_html: {value: true}
     = f.input :email, placeholder: 'you@example.com', autofocus: true, required: true
 
-    .collapse.fade
+    %div{class: resource.errors.empty? && params[:email].blank? ? 'collapse fade' : ''}
       = f.input :password, required: true do |input|
         - if devise_mapping.recoverable?
           = link_to I18n.t('auth.forgot.link'), new_password_path(resource_name), class: 'pull-right small'
-
         = f.input_field :password, required: true, hint: false
       = f.button :submit, I18n.t('auth.login.link'), class: 'btn-primary'
 
