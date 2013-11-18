@@ -15,7 +15,7 @@
 
     .collapse.fade
       = f.input :password, required: true do |input|
-        - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+        - if devise_mapping.recoverable?
           = link_to I18n.t('auth.forgot.link'), new_password_path(resource_name), class: 'pull-right small'
 
         = f.input_field :password, required: true, hint: false
