@@ -21,6 +21,8 @@
 
 en:
   auth:
+    email:
+      placeholder: 'you@example.com'
     login:
       title: 'Please Log In, or %{signup_link}'
       link: 'Log In'

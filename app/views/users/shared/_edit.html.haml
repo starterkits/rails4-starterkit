@@ -2,7 +2,7 @@
 
 = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
   = devise_error_messages!
-  = f.input :email, label: false, required: true, placeholder: 'your email', input_html: {class: 'reveal-trigger', data: {'reveal-scroll' => '.modal-body'}}
+  = f.input :email, label: false, required: true, placeholder: I18n.t('auth.email.placeholder'), input_html: {class: 'reveal-trigger', data: {'reveal-scroll' => '.modal-body'}}
   - if devise_mapping.confirmable? && resource.pending_reconfirmation?
     %div
       Currently waiting confirmation for: #{resource.unconfirmed_email}
