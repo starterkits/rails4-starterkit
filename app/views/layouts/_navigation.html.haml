@@ -1,11 +1,11 @@
 %nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
   .navbar-header
     %button.navbar-toggle{type: 'button', data: {toggle: 'collapse', target: '.navbar-collapse'}}
-      %span.sr-only Toggle Nav
+      %span.sr-only
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    = link_to "StarterKit", root_path, :class => 'navbar-brand'
+    = link_to I18n.t('brand.name'), root_path, :class => 'navbar-brand'
 
   .collapse.navbar-collapse
     %ul.nav.navbar-nav.navbar-right
@@ -16,9 +16,9 @@
             %b.caret
           %ul.dropdown-menu
             - if current_user.is_admin?
-              %li= link_to 'Admin', rails_admin_path
-            %li= link_to 'Account', edit_user_registration_path
-            %li= link_to 'Logout', destroy_user_session_path, :rel=>'nofollow'
+              %li= link_to I18n.t('admin.link'), rails_admin_path
+            %li= link_to I18n.t('account.edit.link'), edit_user_registration_path
+            %li= link_to I18n.t('auth.logout.link'), destroy_user_session_path, :rel=>'nofollow'
       - unless user_signed_in?
-        %li= link_to 'Login', new_user_session_path
-        %li= link_to 'Sign up', new_user_registration_path
+        %li= link_to I18n.t('auth.login.link'), new_user_session_path
+        %li= link_to I18n.t('auth.signup.link'), new_user_registration_path

@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  brand:
+    name: 'StarterKit'
+
   auth:
     login:
       title: 'Please Log In, or %{signup_link}'
@@ -29,6 +32,8 @@ en:
       link: 'Sign Up'
       help: 'Already registered? %{login_link}'
       email_taken: 'An account with your email already exists. %{login_link}'
+    logout:
+      link: 'Logout'
     forgot:
       link: 'I forgot my password'
       prompt: 'Forgot password?'
@@ -43,7 +48,7 @@ en:
 
   account:
     edit:
-      title: 'Account'
+      link: 'Account'
       submit: 'Update Acccount'
     destroy:
       link: 'Delete my account'
@@ -55,10 +60,22 @@ en:
   accounts:
     connected: "Success!"
     edit:
-      title: 'Social'
+      link: 'Social'
+
+  admin:
+    link: 'Admin'
 
   errors:
     unknown: 'Oops! Something went wrong. Please try again.'
+
+  # activerecord:
+  #   errors:
+  #     models:
+  #       user:
+  #         attributes:
+  #           email:
+  #             blank: "can't be blank"
+
 
   simple_form:
     "yes": 'Yes'
