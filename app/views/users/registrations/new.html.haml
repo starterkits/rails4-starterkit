@@ -69,7 +69,7 @@
     = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
       = f.input :email, placeholder: I18n.t('auth.email.placeholder'), autofocus: true, required: true
       %div{class: resource.errors.empty? ? 'collapse fade' : ''}
-        = f.input :password, required: true
+        = f.input :password, required: true, autocomplete: 'off'
         = f.button :submit, I18n.t('auth.signup.link'), class: 'btn-primary'
       .terms
         / By joining, you agree to the
