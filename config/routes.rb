@@ -25,7 +25,9 @@ StarterKit::Application.routes.draw do
   get devise_prefix => redirect('/a/signup')
 
   # User
-  resources :users, path: '/u', only: :show
+  resources :users, path: 'u', only: :show do
+    resources :authentications, path: 'accounts'
+  end
   get '/home' => 'users#show', as: 'user_home'
 
   # Dummy pages for testing
