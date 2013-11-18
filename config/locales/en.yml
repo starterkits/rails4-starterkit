@@ -39,12 +39,21 @@ en:
       link: 'I need to confirm my account'
       submit: 'Resend Instructions'
     unlock:
-      link: "My account is locked."
+      link: 'My account is locked'
     links:
       title: 'Account Help'
 
+  account:
+    edit:
+      title: 'Account'
+      submit: 'Update Acccount'
+    destroy:
+      link: 'Cancel my account'
+
   accounts:
     connected: "Success!"
+    edit:
+      title: 'Social'
 
   errors:
     unknown: 'Oops! Something went wrong. Please try again.'
