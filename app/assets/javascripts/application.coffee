@@ -15,3 +15,4 @@
 #= require bootstrap
 #= require jquery.turbolinks
 #= require turbolinks
+#= require rails_confirm_dialog
