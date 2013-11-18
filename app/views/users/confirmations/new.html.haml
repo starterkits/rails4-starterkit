@@ -1,9 +1,9 @@
-%h2 Resend confirmation instructions
-= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
-  = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div= f.submit "Resend confirmation instructions"
-= render "users/shared/links"
+.auth__form
+  %h2= I18n.t 'auth.confirm.link'
+
+  = simple_form_for resource, as: resource_name, url: confirmation_path(resource_name) do |f|
+    = devise_error_messages!
+    = f.input :email, placeholder: I18n.t('auth.email.placeholder'), autofocus: true, required: true
+    = f.button :submit, I18n.t('auth.confirm.submit'), class: 'btn-primary'
+
+  = render "users/shared/links"

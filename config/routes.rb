@@ -17,7 +17,7 @@ StarterKit::Application.routes.draw do
   # Devise
   devise_prefix = StarterKit::AuthConfig.devise.path_prefix
   devise_for :users, path: devise_prefix,
-    controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/reset_password'},
+    controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/password', confirmations: 'users/confirmations'},
     path_names: {sign_up: 'signup', sign_in: 'login', sign_out: 'logout'}
   devise_scope :user do
     get "#{devise_prefix}/after" => 'users/registrations#after_auth', as: 'user_root'

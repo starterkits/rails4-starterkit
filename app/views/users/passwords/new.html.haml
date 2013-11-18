@@ -1,9 +1,9 @@
-%h2 Forgot your password?
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
-  = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div= f.submit "Send me reset password instructions"
-= render "users/shared/links"
+.auth__form
+  %h2= I18n.t 'auth.forgot.link'
+
+  = simple_form_for resource, as: resource_name, url: password_path(resource_name) do |f|
+    = devise_error_messages!
+    = f.input :email, placeholder: I18n.t('auth.email.placeholder'), autofocus: true, required: true
+    = f.button :submit, I18n.t('auth.forgot.submit'), class: 'btn-primary'
+
+  = render "users/shared/links"
