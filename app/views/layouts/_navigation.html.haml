@@ -12,7 +12,7 @@
       - if user_signed_in?
         %li.dropdown
           %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
-            = image_tag current_user.image_url(size: :tiny, ssl: request.ssl?)
+            = render 'users/avatar', size: :tiny
             %b.caret
           %ul.dropdown-menu
             - if current_user.is_admin?
