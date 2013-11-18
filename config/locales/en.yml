@@ -48,7 +48,11 @@ en:
       title: 'Account'
       submit: 'Update Acccount'
     destroy:
-      link: 'Cancel my account'
+      link: 'Delete my account'
+      prompt: 'Delete your account?'
+      warning: 'Your account will be permanently deleted. This cannot be undone.'
+      submit: 'Yes, delete my account'
+      cancel: 'Cancel'
 
   accounts:
     connected: "Success!"

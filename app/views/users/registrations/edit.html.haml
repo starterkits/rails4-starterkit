@@ -1,3 +1,5 @@
+- destroy_modal_id = 'destroy-user-modal'
+
 .auth__form
   %ul.nav.nav-tabs
     %li.active
@@ -20,4 +22,6 @@
   .auth__links
     %label= I18n.t 'auth.links.title'
     %ul
-      %li= link_to I18n.t('account.destroy.link'), registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
+      %li= link_to I18n.t('account.destroy.link'), registration_path(resource_name), data: { confirm: I18n.t('account.destroy.prompt'), confirm_modal: "##{destroy_modal_id}" }, method: :delete
+
+= render 'users/registrations/destroy_modal', id: destroy_modal_id
