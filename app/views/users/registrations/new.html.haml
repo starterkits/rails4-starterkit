@@ -24,50 +24,63 @@
 /     = f.password_field :password_confirmation
 /   %div= f.submit "Sign up"
 / = render "users/shared/links"
-/ 
+/
 
+- if resource.email
+  - login_link = link_to I18n.t('auth.login.link'), add_to_url(new_user_session_path, email: resource.email)
+- else
+  - login_link = link_to I18n.t('auth.login.link'), new_user_session_path
 
-
-
-.signup
+.auth__form
   - if @failed
     = render 'users/registrations/failed', provider: @provider
 
-  - if @modal
-    .modal-header
-      %button.close{data: {dismiss: 'modal'}}x
-      = render 'users/registrations/header'
+  - after_oauth = false
+  - if after_oauth && session[:omniauth].present? && session[:omniauth][:info]
+    .card.auth
+      .avatar
+        - if session[:omniauth][:info][:image].present?
+          = user_image_tag session[:omniauth][:info][:image]
+      %h2
+        Hi,
+        = session[:omniauth][:info][:first_name] || session[:omniauth][:info][:name]
+
   - else
+    %h3.title= I18n.t('auth.signup.title', login_link: login_link).html_safe
 
-  %div.reveal-container{class: (@modal ? "modal-body" : '')}
-    .well
-      .social
-        -# todo: move this to after_auth
-        - if @after_oauth
-          %p
-            We filled in some of your info from
-            = succeed '.' do
-              = provider_name(@provider)
-            %br
-            Now choose a username and password and you're good to go.
-        - else
-          = render 'authentications/providers', flow: 'signup', icons: true, color: true, prefix: 'Sign up with '
-          %hr.or
+    -# todo: move this to after_auth
+    - if @after_oauth
+      %p
+        We filled in some of your info from
+        = succeed '.' do
+          = provider_name(@provider)
+        %br
+        Now choose a username and password and you're good to go.
+    - else
+      = render 'authentications/providers', flow: 'signup', icons: true, color: true
+      .auth__or
+        %hr/
+        %span or
 
-      = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
-        = f.input :email, label: false, required: true, placeholder: 'your email', input_html: {class: 'reveal-trigger', data: {'reveal-scroll' => '.modal-body'}}
-        = f.input :password, label: false, required: true, placeholder: 'password'
-        = f.error :base
-        = f.button :submit, I18n.t('auth.signup'), class: 'btn-primary'
-        .terms
-          / By joining, you agree to the
-          / = link_to 'Terms of Service', tos_page_path, target: '_blank'
-          / and
-          / = link_to 'Privacy Policy', privacy_page_path, target: '_blank'
+    - if resource_has_error? resource, :email, :taken
+      .alert.alert-warning
+        = I18n.t('auth.signup.email_taken', login_link: login_link).html_safe
 
+    = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
+      = f.input :email, placeholder: 'you@example.com', autofocus: true, required: true
+      %div{class: resource.errors.empty? ? 'collapse fade' : ''}
+        = f.input :password, required: true
+        = f.button :submit, I18n.t('auth.signup.link'), class: 'btn-primary'
+      .terms
+        / By joining, you agree to the
+        / = link_to 'Terms of Service', tos_page_path, target: '_blank'
+        / and
+        / = link_to 'Privacy Policy', privacy_page_path, target: '_blank'
 
-    = render 'users/social/facepile'
+      .auth__links
+        = I18n.t('auth.signup.help', login_link: login_link).html_safe
 
-  %div{class: (@modal ? 'modal-footer' : 'links')}
-    Already registered?
-    = link_to "Login", new_session_path(resource_name)
+  = render 'users/social/facepile'
+
+- content_for :on_ready do
+  $('input[name="user[email]"]').on('click keydown', function(){$(this).closest('form').find('.collapse').addClass('in')});

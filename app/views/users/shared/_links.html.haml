@@ -3,7 +3,7 @@
 - disable_forgot ||= false
 
 .auth__links
-  %label.help-block= I18n.t 'auth.links.title'
+  %label= I18n.t 'auth.links.title'
   %ul
     - if !disable_login and controller_name != 'sessions'
       %li= link_to I18n.t('auth.login.link'), new_session_path(resource_name)
