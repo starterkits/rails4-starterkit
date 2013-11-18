@@ -30,7 +30,8 @@ en:
       help: 'Already registered? %{login_link}'
       email_taken: 'An account with your email already exists. %{login_link}'
     forgot:
-      link: 'Forgot password?'
+      link: 'I forgot my password.'
+      prompt: 'Forgot password?'
     confirm:
       link: "I need to confirm my account."
     unlock:

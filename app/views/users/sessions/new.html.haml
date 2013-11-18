@@ -18,11 +18,11 @@
     %div{class: resource.errors.empty? && params[:email].blank? ? 'collapse fade' : ''}
       = f.input :password, required: true do |input|
         - if devise_mapping.recoverable?
-          = link_to I18n.t('auth.forgot.link'), new_password_path(resource_name), class: 'pull-right small'
+          = link_to I18n.t('auth.forgot.prompt'), new_password_path(resource_name), class: 'pull-right small'
         = f.input_field :password, required: true, hint: false
       = f.button :submit, I18n.t('auth.login.link'), class: 'btn-primary'
 
-  = render 'users/shared/links', disable_signup: true, disable_forgot: true
+  = render 'users/shared/links', disable_signup: true
 
 - content_for :on_ready do
   $('input[name="user[email]"]').on('click keydown', function(){$(this).closest('form').find('.collapse').addClass('in')});
