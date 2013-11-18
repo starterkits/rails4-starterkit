@@ -3,9 +3,9 @@
 .auth__form
   %ul.nav.nav-tabs
     %li.active
-      = link_to I18n.t('account.edit.title'), edit_user_registration_path
+      = link_to I18n.t('account.edit.link'), edit_user_registration_path
     %li
-      = link_to I18n.t('accounts.edit.title'), user_authentications_path(current_user)
+      = link_to I18n.t('accounts.edit.link'), user_authentications_path(current_user)
 
   = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
 
