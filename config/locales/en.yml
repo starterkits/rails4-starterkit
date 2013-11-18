@@ -49,7 +49,6 @@ en:
   account:
     edit:
       link: 'Account'
-      submit: 'Update Acccount'
     destroy:
       link: 'Delete my account'
       prompt: 'Delete your account?'
@@ -77,9 +76,17 @@ en:
   #             blank: "can't be blank"
 
 
+  helpers:
+    submit:
+      user:
+        # Submit button used by simple_form in users/registrations#edit
+        update: 'Update Account'
+
   simple_form:
-    "yes": 'Yes'
-    "no": 'No'
+    # Collections: selects, radios
+    'yes': 'Yes'
+    'no': 'No'
+
     required:
       text: 'required'
       mark: '*'
@@ -92,10 +99,6 @@ en:
     placeholders:
       user:
         email: 'you@example.com'
-    labels:
-      user:
-        edit:
-          submit: 'Save'
 
     # Labels and hints examples
     # labels:
