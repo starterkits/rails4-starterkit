@@ -9,8 +9,6 @@ class ApplicationController < ActionController::Base
   # CanCan, check authorization unless authorizing with devise
   check_authorization unless: :skip_check_authorization?
 
-  :devise_controller?
-
   include CommonHelper
   include ErrorReportingConcern
 
