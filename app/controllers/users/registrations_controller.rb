@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   include DeviseReturnToConcern
 
+  before_action :set_vars
   before_action :permit_params, only: :create
   after_action :cleanup_oauth, only: [:create, :update]
 
@@ -104,5 +105,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
     user_root_path
+  end
+
+  def set_vars
+    @failed = params[:failed]
+    @provider = params[:provider]
   end
 end
