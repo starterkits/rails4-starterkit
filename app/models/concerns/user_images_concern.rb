@@ -5,11 +5,13 @@ module Concerns::UserImagesConcern
     # Default image sizes are the same as Twitter's.
     # https://dev.twitter.com/docs/user-profile-images-and-banners
     # Modify provider specific image methods as needed after changing IMAGE_SIZES.
-    IMAGE_SIZES = {
-      tiny:   24,
-      thumb:  48,
-      large:  73
-    }.freeze
+    unless defined? IMAGE_SIZES
+      IMAGE_SIZES = {
+        tiny:   24,
+        thumb:  48,
+        large:  73
+      }.freeze
+    end
   end
 
   # ssl: true|false
