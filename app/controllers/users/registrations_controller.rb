@@ -11,6 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
+    check_for_existing_account
     super
   end
 
@@ -40,12 +41,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # Redisplay registration form with OAuth data for user to confirm
     else
+      check_for_existing_account
       respond_with(resource, template: 'users/registrations/new')
     end
   end
 
   # POST /resource
   def create
+    check_for_existing_account
     super
     @auth.save! if @auth.present? && resource.persisted?
   rescue ActiveRecord::ActiveRecordError => e
@@ -90,14 +93,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def build_resource(*args)
     super
-    @auth = nil
     if session[:omniauth].present?
-      @auth = Authentication.build_from_omniauth(session[:omniauth])
+      @auth ||= Authentication.build_from_omniauth(session[:omniauth])
       resource.authentications << @auth
       @auth.populate_names
       resource.reverse_merge_attributes_from_auth(@auth)
     end
     resource
+  end
+
+  # Override Devise method to disable current_password requirement
+  def update_resource(resource, params)
+    if resource.password_required?
+      super
+    else
+      if params[:password].blank?
+        params.delete(:password)
+        params.delete(:password_confirmation)
+      end
+      result = resource.update_attributes(params)
+      clean_up_passwords
+      result
+    end
   end
 
   # Clear out omniauth session to prevent session bloat
@@ -109,8 +126,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
     user_root_path
   end
 
+  def check_for_existing_account
+    @existing_account = false
+    email = (resource.try(:email) or params[:user].try(:[], :email))
+    if email.blank? and session[:omniauth].present?
+      @auth = Authentication.build_from_omniauth(session[:omniauth])
+      email = @auth.oauth_data[:email]
+    end
+    @existing_account = User.find_by_email(email.strip.downcase) if email
+  end
+
   def set_vars
     @failed = params[:failed]
     @provider = params[:provider]
+    @auth = nil
   end
 end

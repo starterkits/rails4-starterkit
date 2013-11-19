@@ -27,6 +27,7 @@ en:
     login:
       title: 'Please Log In, or %{signup_link}'
       link: 'Log In'
+      link_with: 'Log In with %{provider}'
     signup:
       title: 'Sign Up'
       link: 'Sign Up'

@@ -30,15 +30,22 @@
     %p
       Not you?
       = link_to 'Reset', destroy_user_session_path, rel: :nofollow, class: 'btn btn-default btn-xs'
-    %p
-      We filled in some of your details from
-      = succeed '.' do
-        = authentication_provider_name(@auth.provider)
-      Please confirm and sign up.
 
-  - if resource_has_error? resource, :email, :taken
+    - unless @existing_account
+      %p
+        We filled in some of your details from
+        = succeed '.' do
+          = authentication_provider_name(@auth.provider)
+        Please confirm and sign up.
+
+  - if @existing_account
+    -if provider = @existing_account.authentications.first.try(:provider)
+      - url = provider_auth_path(provider, flow: 'login')
+      - login_with_link = link_to I18n.t('auth.login.link_with', provider: authentication_provider_name(provider)), url
+    - else
+      - login_with_link = login_link
     .alert.alert-warning
-      = I18n.t('auth.signup.email_taken', login_link: login_link).html_safe
+      = I18n.t('auth.signup.email_taken', login_link: login_with_link).html_safe
 
   = render 'users/registrations/form', resource: resource, hide_password: @auth.present?
 
