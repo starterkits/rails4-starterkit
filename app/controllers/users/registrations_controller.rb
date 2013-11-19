@@ -39,7 +39,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # Redisplay registration form with OAuth data for user to confirm
     else
-      respond_with(resource, template: 'users/registrations/new', auth: @auth)
+      respond_with(resource, template: 'users/registrations/new')
     end
   end
 
