@@ -40,30 +40,16 @@
     .alert.alert-warning
       = I18n.t('auth.signup.email_taken', login_link: login_link).html_safe
 
-  = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
-    = f.input :email, autofocus: true, required: true
+  = render 'users/registrations/form', resource: resource, hide_password: @auth.present?
 
-    - if resource.try(:first_name).present? or resource.try(:first_name).present?
-      = f.input :first_name
+  .terms
+    / By joining, you agree to the
+    / = link_to 'Terms of Service', tos_page_path, target: '_blank'
+    / and
+    / = link_to 'Privacy Policy', privacy_page_path, target: '_blank'
 
-    - if resource.try(:last_name).present?
-      = f.input :last_name
-
-    - if @auth.blank?
-      %div{class: resource.errors.empty? ? 'collapse fade' : ''}
-        = f.input :password, required: true, autocomplete: 'off'
-        = f.button :submit, I18n.t('auth.signup.link'), class: 'btn-primary'
-    - else
-      = f.button :submit, I18n.t('auth.signup.link'), class: 'btn-primary'
-
-    .terms
-      / By joining, you agree to the
-      / = link_to 'Terms of Service', tos_page_path, target: '_blank'
-      / and
-      / = link_to 'Privacy Policy', privacy_page_path, target: '_blank'
-
-    .auth__links
-      = I18n.t('auth.signup.help', login_link: login_link).html_safe
+  .auth__links
+    = I18n.t('auth.signup.help', login_link: login_link).html_safe
 
   = render 'users/social/facepile'
 
