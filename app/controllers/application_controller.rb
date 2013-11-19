@@ -11,15 +11,17 @@ class ApplicationController < ActionController::Base
 
   include CommonHelper
   include ErrorReportingConcern
-
-  rescue_from CanCan::AccessDenied do |exception|
-    path = user_signed_in? ? user_home_path : new_user_session_path
-    redirect_to path, alert: exception.message
-  end
+  include AuthorizationErrorsConcern
 
   protected
 
   def skip_check_authorization?
     devise_controller? || is_a?(RailsAdmin::ApplicationController)
+  end
+
+  # Reset response so redirect or render can be called again.
+  # This is an undocumented hack but it works.
+  def reset_response
+    self.instance_variable_set(:@_response_body, nil)
   end
 end
