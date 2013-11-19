@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   include DeviseReturnToConcern
 
   before_action :set_vars
-  before_action :permit_params, only: :create
+  before_action :permit_params, only: [:create, :update]
   after_action :cleanup_oauth, only: [:create, :update]
 
   # Additional resource fields to permit
@@ -85,6 +85,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def permit_params
     devise_parameter_sanitizer.for(:sign_up) << SANITIZED_PARAMS
+    devise_parameter_sanitizer.for(:account_update) << SANITIZED_PARAMS
   end
 
   def build_resource(*args)
