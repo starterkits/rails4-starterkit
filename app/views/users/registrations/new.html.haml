@@ -47,7 +47,7 @@
     .alert.alert-warning
       = I18n.t('auth.signup.email_taken', login_link: login_with_link).html_safe
 
-  = render 'users/registrations/form', resource: resource, hide_password: @auth.present?
+  = render 'users/registrations/form', hide_password: @auth.present?
 
   .terms
     / By joining, you agree to the

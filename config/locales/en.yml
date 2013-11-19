@@ -82,6 +82,7 @@ en:
       user:
         # Submit button used by simple_form in users/registrations#edit
         update: 'Update Account'
+        create: 'Sign Up'
 
   simple_form:
     # Collections: selects, radios
@@ -100,6 +101,7 @@ en:
     placeholders:
       user:
         email: 'you@example.com'
+        password: 'password'
 
     # Labels and hints examples
     # labels:

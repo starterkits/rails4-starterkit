@@ -7,17 +7,12 @@
     %li
       = link_to I18n.t('accounts.edit.link'), user_authentications_path(current_user)
 
-  = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
 
-    = f.input :email, autofocus: true
-    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      %div
-        Currently waiting confirmation for: #{resource.unconfirmed_email}
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    %div
+      Currently waiting confirmation for: #{resource.unconfirmed_email}
 
-    = f.input :password, label: 'New Password', autocomplete: 'off', hint: 'Leave blank unless changing password'
-
-    = f.input :current_password, autocomplete: 'off'
-    = f.button :submit, class: 'btn-primary'
+  = render 'users/registrations/form', show_all: true
 
   .auth__links
     %label= I18n.t 'auth.links.title'
