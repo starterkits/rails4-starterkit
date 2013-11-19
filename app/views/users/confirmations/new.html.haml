@@ -1,9 +1,8 @@
 .auth__form
   %h2= I18n.t 'auth.confirm.link'
 
-  = simple_form_for resource, as: resource_name, url: confirmation_path(resource_name) do |f|
-    = devise_error_messages!
-    = f.input :email, autofocus: true, required: true
+  = simple_form_for resource, as: resource_name, url: confirmation_path(resource_name), method: :post do |f|
+    = f.input :email, autofocus: true, required: true, disabled: (user_signed_in? and resource.email.present?)
     = f.button :submit, I18n.t('auth.confirm.submit'), class: 'btn-primary'
 
   = render "users/shared/links"
