@@ -38,12 +38,18 @@ en:
     forgot:
       link: 'I forgot my password'
       prompt: 'Forgot password?'
+      submit: 'Send forgot password instructions'
+    reset:
+      link: 'Change your password'
       submit: 'Reset Password'
+      invalid_title: 'Unable to reset password'
+      invalid_message: 'Your account token expired. To protect your security, please resend password instructions and try again.'
     confirm:
       link: 'I need to confirm my account'
-      submit: 'Resend Instructions'
+      submit: 'Resend confirmation instructions'
     unlock:
       link: 'My account is locked'
+      submit: 'Resend unlock instructions'
     links:
       title: 'Account Help'
 
@@ -106,7 +112,7 @@ en:
     labels:
       user:
         edit:
-          password: 'Change password'
+          password: 'New password'
 
     hints:
       user:

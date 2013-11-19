@@ -1,7 +1,7 @@
 .auth__form
   %h2= I18n.t 'auth.forgot.link'
 
-  = simple_form_for resource, as: resource_name, url: password_path(resource_name) do |f|
+  = simple_form_for resource, as: resource_name, url: password_path(resource_name), method: :post do |f|
     = f.input :email, autofocus: true, required: true
     = f.button :submit, I18n.t('auth.forgot.submit'), class: 'btn-primary'
 
