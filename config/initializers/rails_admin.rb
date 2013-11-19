@@ -4,8 +4,10 @@
 if defined? RailsAdmin
   RailsAdmin.config do |config|
 
-
     ################  Global configuration  ################
+
+    # Use CanCan to authorize user
+    config.authorize_with :cancan
 
     # Set the admin name here (optional second array element will appear in red). For example:
     config.main_app_name = ['StarterKit', 'Admin']

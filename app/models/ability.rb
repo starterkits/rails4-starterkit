@@ -12,6 +12,8 @@ class Ability
 
     if user.is_admin? && defined? RailsAdmin
       # RailsAdmin
+      # https://github.com/sferik/rails_admin/wiki/CanCan
+
       can :access, :rails_admin
       can :dashboard
 

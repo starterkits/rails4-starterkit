@@ -74,6 +74,9 @@ en:
   errors:
     unknown: 'Oops! Something went wrong. Please try again.'
 
+  unauthorized:
+    default: 'Sorry, you are not authorized to access the requested page.'
+
   activerecord:
     errors:
       models:
