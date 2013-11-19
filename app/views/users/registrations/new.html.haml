@@ -16,7 +16,7 @@
 
 .auth__form
   - unless @auth
-    %h3.title= I18n.t('auth.signup.title', login_link: login_link).html_safe
+    %h3.title= I18n.t('auth.signup.title').html_safe
     = render 'authentications/providers', flow: 'signup', icons: true, color: true
     .auth__or
       %hr/
