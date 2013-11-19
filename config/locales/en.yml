@@ -103,6 +103,16 @@ en:
         email: 'you@example.com'
         password: 'password'
 
+    labels:
+      user:
+        edit:
+          password: 'Change password'
+
+    hints:
+      user:
+        edit:
+          password: 'Leave blank unless updating password'
+
     # Labels and hints examples
     # labels:
     #   defaults:

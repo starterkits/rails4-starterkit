@@ -14,12 +14,8 @@
         = f.input :password, required: true, autocomplete: 'off'
 
   - else # updating resource
-    .panel.panel-default
-      .panel-heading
-        %label Change Password
-      .panel-body
-        = f.input :password, label: false, autocomplete: 'off', hint: 'Leave blank unless changing password'
-        - if resource.password_required?
-          = f.input :current_password, autocomplete: 'off'
+    = f.input :password, autocomplete: 'off'
+    - if resource.password_required?
+      = f.input :current_password, autocomplete: 'off'
 
   = f.button :submit, class: 'btn-primary'
