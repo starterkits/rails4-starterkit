@@ -28,6 +28,9 @@
       Hi,
       = @auth.display_name
     %p
+      Not you?
+      = link_to 'Reset', destroy_user_session_path, rel: :nofollow, class: 'btn btn-default btn-xs'
+    %p
       We filled in some of your details from
       = succeed '.' do
         = authentication_provider_name(@auth.provider)
