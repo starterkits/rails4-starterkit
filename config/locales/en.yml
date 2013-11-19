@@ -68,13 +68,13 @@ en:
   errors:
     unknown: 'Oops! Something went wrong. Please try again.'
 
-  # activerecord:
-  #   errors:
-  #     models:
-  #       user:
-  #         attributes:
-  #           email:
-  #             blank: "can't be blank"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: 'is used by another account'
 
 
   helpers:
