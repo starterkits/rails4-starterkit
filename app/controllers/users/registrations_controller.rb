@@ -112,7 +112,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         params.delete(:password_confirmation)
       end
       result = resource.update_attributes(params)
-      clean_up_passwords
+      clean_up_passwords resource
       result
     end
   end
