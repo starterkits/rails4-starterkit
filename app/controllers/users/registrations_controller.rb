@@ -93,6 +93,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if session[:omniauth].present?
       @auth = Authentication.build_from_omniauth(session[:omniauth])
       resource.authentications << @auth
+      @auth.populate_names
       resource.reverse_merge_attributes_from_auth(@auth)
     end
     resource
