@@ -26,7 +26,7 @@ module Concerns::UserImagesConcern
   end
 
   def gravatar_url(ssl: true, size: :thumb)
-    return nil unless email.present?
+    return nil unless self.try(:email).present?
     url = ssl ? 'https://secure.' : 'http://'
     "#{url}gravatar.com/avatar/#{md5_email}?s=#{image_size(size)}"
   end
