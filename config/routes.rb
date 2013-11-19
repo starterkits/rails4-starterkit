@@ -1,7 +1,11 @@
 # Route prefixes use a single letter to allow for vanity urls of two or more characters
 StarterKit::Application.routes.draw do
-  require 'sidekiq/web'
-  mount Sidekiq::Web, at: '/admin/sidekiq/jobs', as: :sidekiq
+  if defined? Sidekiq
+    require 'sidekiq/web'
+    authenticate :user, lambda {|u| u.is_admin? } do
+      mount Sidekiq::Web, at: '/admin/sidekiq/jobs', as: :sidekiq
+    end
+  end
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin' if defined? RailsAdmin
 
