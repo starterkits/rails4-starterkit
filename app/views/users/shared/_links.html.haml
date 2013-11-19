@@ -5,13 +5,21 @@
 .auth__links
   %label= I18n.t 'auth.links.title'
   %ul
-    - if !disable_login and controller_name != 'sessions'
-      %li= link_to I18n.t('auth.login.link'), new_session_path(resource_name)
-    - if !disable_signup and devise_mapping.registerable? and controller_name != 'registrations'
-      %li= link_to I18n.t('auth.signup.link'), new_registration_path(resource_name)
-    - if !disable_forgot and devise_mapping.recoverable? and controller_name != 'passwords' and controller_name != 'registrations'
-      %li= link_to I18n.t('auth.forgot.link'), new_password_path(resource_name)
-    - if devise_mapping.confirmable? and controller_name != 'confirmations'
-      %li= link_to I18n.t('auth.confirm.link'), new_confirmation_path(resource_name)
-    - if devise_mapping.lockable? and resource_class.unlock_strategy_enabled?(:email) and controller_name != 'unlocks'
-      %li= link_to I18n.t('auth.unlock.link'), new_unlock_path(resource_name)
+    - unless user_signed_in?
+      - if !disable_login and controller_name != 'sessions'
+        %li= link_to I18n.t('auth.login.link'), new_session_path(resource_name)
+      - if !disable_signup and devise_mapping.registerable? and controller_name != 'registrations'
+        %li= link_to I18n.t('auth.signup.link'), new_registration_path(resource_name)
+      - if !disable_forgot and devise_mapping.recoverable? and controller_name != 'passwords' and controller_name != 'registrations'
+        %li= link_to I18n.t('auth.forgot.link'), new_password_path(resource_name)
+      - if devise_mapping.confirmable? and controller_name != 'confirmations'
+        %li= link_to I18n.t('auth.confirm.link'), new_confirmation_path(resource_name)
+      - if devise_mapping.lockable? and resource_class.unlock_strategy_enabled?(:email) and controller_name != 'unlocks'
+        %li= link_to I18n.t('auth.unlock.link'), new_unlock_path(resource_name)
+
+    - if user_signed_in?
+      - if devise_mapping.confirmable? and controller_name != 'confirmations' and not resource.confirmed?
+        %li= link_to I18n.t('auth.confirm.link'), new_confirmation_path(resource_name)
+      - destroy_modal_id = 'destroy-user-modal'
+      %li= link_to I18n.t('account.destroy.link'), registration_path(resource_name), data: { confirm: I18n.t('account.destroy.prompt'), confirm_modal: "##{destroy_modal_id}" }, method: :delete
+      = render 'users/registrations/destroy_modal', id: destroy_modal_id
