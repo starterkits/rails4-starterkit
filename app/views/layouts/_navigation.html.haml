@@ -20,5 +20,5 @@
             %li= link_to I18n.t('account.edit.link'), edit_user_registration_path
             %li= link_to I18n.t('auth.logout.link'), destroy_user_session_path, rel: :nofollow
       - unless user_signed_in?
-        %li= link_to I18n.t('auth.login.link'), new_user_session_path
         %li= link_to I18n.t('auth.signup.link'), new_user_registration_path
+        %li= link_to I18n.t('auth.login.link'), new_user_session_path
