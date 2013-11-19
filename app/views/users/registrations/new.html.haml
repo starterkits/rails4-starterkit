@@ -6,79 +6,61 @@
 -#    User has clicked on the Sign up link
 -#    User submitted registration form but there was an error
 
-
-
-/ = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-/   = devise_error_messages!
-/   %div
-/     = f.label :email
-/     %br/
-/     = f.email_field :email, :autofocus => true
-/   %div
-/     = f.label :password
-/     %br/
-/     = f.password_field :password
-/   %div
-/     = f.label :password_confirmation
-/     %br/
-/     = f.password_field :password_confirmation
-/   %div= f.submit "Sign up"
-/ = render "users/shared/links"
-/
-
 - if resource.email
   - login_link = link_to I18n.t('auth.login.link'), add_to_url(new_user_session_path, email: resource.email)
 - else
   - login_link = link_to I18n.t('auth.login.link'), new_user_session_path
 
+- if @failed
+  = render 'users/registrations/failed', provider: @provider
+
 .auth__form
-  - if @failed
-    = render 'users/registrations/failed', provider: @provider
-
-  - after_oauth = false
-  - if after_oauth && session[:omniauth].present? && session[:omniauth][:info]
-    .card.auth
-      .avatar
-        - if session[:omniauth][:info][:image].present?
-          = user_image_tag session[:omniauth][:info][:image]
-      %h2
-        Hi,
-        = session[:omniauth][:info][:first_name] || session[:omniauth][:info][:name]
-
-  - else
+  - unless @auth
     %h3.title= I18n.t('auth.signup.title', login_link: login_link).html_safe
+    = render 'authentications/providers', flow: 'signup', icons: true, color: true
+    .auth__or
+      %hr/
+      %span or
 
-    -# todo: move this to after_auth
-    - if @after_oauth
-      %p
-        We filled in some of your info from
-        = succeed '.' do
-          = provider_name(@provider)
-        %br
-        Now choose a username and password and you're good to go.
-    - else
-      = render 'authentications/providers', flow: 'signup', icons: true, color: true
-      .auth__or
-        %hr/
-        %span or
+  - else # @auth
+    %h2
+      = render 'users/avatar', size: :thumb, user: @auth
+      Hi,
+      = @auth.display_name
+    %p
+      We filled in some of your details from
+      = succeed '.' do
+        = authentication_provider_name(@auth.provider)
+      Please confirm and sign up.
 
-    - if resource_has_error? resource, :email, :taken
-      .alert.alert-warning
-        = I18n.t('auth.signup.email_taken', login_link: login_link).html_safe
+  - if resource_has_error? resource, :email, :taken
+    .alert.alert-warning
+      = I18n.t('auth.signup.email_taken', login_link: login_link).html_safe
 
-    = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
-      = f.input :email, autofocus: true, required: true
+  = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
+    = f.input :email, autofocus: true, required: true
+
+    - if resource.try(:first_name).present? or resource.try(:first_name).present?
+      = f.input :first_name
+
+    - if resource.try(:last_name).present?
+      = f.input :last_name
+
+    - if @auth.blank?
       %div{class: resource.errors.empty? ? 'collapse fade' : ''}
         = f.input :password, required: true, autocomplete: 'off'
         = f.button :submit, I18n.t('auth.signup.link'), class: 'btn-primary'
-      .terms
-        / By joining, you agree to the
-        / = link_to 'Terms of Service', tos_page_path, target: '_blank'
-        / and
-        / = link_to 'Privacy Policy', privacy_page_path, target: '_blank'
+    - else
+      = f.button :submit, I18n.t('auth.signup.link'), class: 'btn-primary'
 
-      .auth__links
-        = I18n.t('auth.signup.help', login_link: login_link).html_safe
+    .terms
+      / By joining, you agree to the
+      / = link_to 'Terms of Service', tos_page_path, target: '_blank'
+      / and
+      / = link_to 'Privacy Policy', privacy_page_path, target: '_blank'
+
+    .auth__links
+      = I18n.t('auth.signup.help', login_link: login_link).html_safe
 
   = render 'users/social/facepile'
 
