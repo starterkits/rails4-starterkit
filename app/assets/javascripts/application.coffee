@@ -16,3 +16,8 @@
 #= require jquery.turbolinks
 #= require turbolinks
 #= require rails_confirm_dialog
+
+# Add error class to .avatar images if they fail to load
+# See avatar.scss and _avatar.html.haml
+#= require imagesloaded
+#= require avatar.errors
