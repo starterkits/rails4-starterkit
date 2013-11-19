@@ -66,7 +66,8 @@ module Concerns::OmniauthConcern
         bio:                  oauth.info.try(:[], 'description').presence ||
                               oauth.extra.try(:[], 'raw_info').try(:[], 'bio').presence ||
                               oauth.info.try(:[], 'headline')
-      }
+      }.with_indifferent_access
+
       data[:urls] = Array(oauth.info.try(:[], 'urls')).select do |name,url|
         data[:profile_url] = url if name.downcase == oauth.provider.downcase || name == 'public_profile'
         name.underscore != oauth.provider && name.downcase != oauth.provider
@@ -78,7 +79,7 @@ module Concerns::OmniauthConcern
       @@attribute_symbols ||= self.attribute_names.map{|a| a.to_sym}.freeze
       data[:proid] = data[:uid]
       data[:expires_at] = Time.at(data[:expires_at]) if data[:expires_at].present?
-      data.select{|k, v| @@attribute_symbols.include?(k)}
+      data.select{|k, v| @@attribute_symbols.include? k.to_sym}
     end
   end
 end
