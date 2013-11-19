@@ -13,7 +13,7 @@ module CommonHelper
   #   # Returns true if resource failed validates_presence_of for email field.
   def resource_has_error?(resource, field, error_key)
     error_key = error_key.to_s
-    return false unless errors = resource.errors.get(field)
+    return false unless errors = resource.errors[field]
     errors.each do |msg|
       key = msg.try(:translation_metadata).try(:[], :key)
       return true if key && key.to_s.index(error_key)
