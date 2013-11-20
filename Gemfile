@@ -24,7 +24,6 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'headjs-rails'
 
-
 # Javascript
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -41,6 +40,9 @@ gem 'bootstrap-sass'
 # gem 'bourbon'
 # gem 'neat'
 # gem 'country_select'
+
+# Email
+gem 'premailer-rails'
 
 # Authentication
 gem 'devise'
