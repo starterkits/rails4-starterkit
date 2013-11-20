@@ -9,7 +9,10 @@ StarterKit::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin' if defined? RailsAdmin
 
+  # Static pages
   match '/error' => 'pages#error', via: [:get, :post], as: 'error_page'
+  get '/terms' => 'pages#terms', as: 'terms'
+  get '/privacy' => 'pages#privacy', as: 'privacy'
 
   # OAuth
   oauth_prefix = StarterKit::AuthConfig.omniauth.path_prefix
