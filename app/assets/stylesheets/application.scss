@@ -1,11 +1,10 @@
-/*
-* Prefer imports over require
-* http://pivotallabs.com/structure-your-sass-files-with-import/
-*/
+//
+// Prefer imports over require
+// http://pivotallabs.com/structure-your-sass-files-with-import/
+//
 
 //= require_self
 //= require icons_social
-
 
 @import "variables";
 @import "bootstrap";
