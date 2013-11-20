@@ -1,0 +1,14 @@
+- user ||= User.new
+- size ||= :thumb
+- target ||= '_self'
+- username ||= 'view'
+- profile_url = user_path(user) unless defined? profile_url
+
+.card__user{class: "card__user-#{size}"}
+  = render 'users/avatar', user: user, size: size
+  %h4= user.name
+  .card__user__links
+    - if profile_url
+      = link_to username, profile_url, target: target
+
+  = yield
