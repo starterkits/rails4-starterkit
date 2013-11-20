@@ -4,9 +4,11 @@ class PagesController < ApplicationController
 
   # Preview html email template
   def email
-    template = (params[:template] || 'hero').to_sym
-    template = :hero unless [:email, :hero, :simple].include? template
-    render layout: "emails/#{template}", nothing: true
+    tpl = (params[:layout] || 'hero').to_sym
+    tpl = :hero unless [:email, :hero, :simple].include? tpl
+    file = 'users/mailer/welcome'
+    @user = User.first || User.new
+    render file, layout: "emails/#{tpl}"
     if params[:premail] == 'true'
       puts "\n!!! USING PREMAILER !!!\n\n"
       pre = Premailer.new(response_body[0],  warn_level: Premailer::Warnings::SAFE)

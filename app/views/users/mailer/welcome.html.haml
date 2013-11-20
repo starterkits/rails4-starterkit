@@ -1,0 +1,22 @@
+- @image_url = 'http://placehold.it/580x300'
+- @unsubscribe_url = user_home_url
+
+- content_for :title do
+  Welcome #{@user.display_name}!
+
+- content_for :lead do
+  Thanks for signing up to
+  = succeed '.' do
+    = link_to I18n.t('brand.name'), root_url
+
+- content_for :callout do
+  We're calling you out to pay attention to what we're saying here.
+
+- content_for :action_button do
+  = link_to 'Get Active', root_url
+
+
+%h3
+  TODO
+  %small Replace this content.
+%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

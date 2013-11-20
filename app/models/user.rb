@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :authentications, dependent: :destroy, validate: false
 
   def display_name
-    first_name.presence || email
+    first_name.presence || email.split('@')[0]
   end
 
   # Override Devise to allow for Authentication or password.

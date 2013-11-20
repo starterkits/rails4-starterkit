@@ -41,7 +41,7 @@
                               - if content_for? :lead
                                 %p.lead= yield :lead
                               - if @image_url
-                                %img{height: "300", src: @image_url, width: "580"}/
+                                %img{src: @image_url, width: "580", height: "300"}/
                             %td.expander
                   - if content_for? :callout
                     %table.row.callout
@@ -58,9 +58,9 @@
                         %table.twelve.columns
                           %tr
                             %td
-                              = yield :content
+                              = yield
                             %td.expander
-                  - if content_for? :action_link
+                  - if content_for? :action_button
                     %table.row
                       %tr
                         %td.wrapper.last
@@ -70,7 +70,7 @@
                                 %table.button
                                   %tr
                                     %td
-                                      = yield :action_link
+                                      = yield :action_button
                               %td.expander
                   %table.row.footer
                     %tr
