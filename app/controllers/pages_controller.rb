@@ -11,7 +11,7 @@ class PagesController < ApplicationController
 
   # Preview html email template
   def email
-    render layout: 'email', nothing: true
+    render layout: 'emails/hero', nothing: true
   end
 
   def error

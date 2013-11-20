@@ -9,6 +9,9 @@ defaults: &defaults
     # Timeout request after 20 seconds
     timeout: 20
 
+  mail:
+    layout: 'emails/hero'
+
   # Default ENV vars if not already set.
   env:
     # From address to use when sending email

@@ -1,0 +1,25 @@
+-# https://gist.github.com/tinabeans/6996367
+!!! Strict
+%html
+  %head
+    %meta{content: "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title Single-Column Responsive Email Template
+    :css
+      @media only screen and (min-device-width: 541px) {
+        .content {
+          width: 540px !important;
+        }
+      }
+  %body
+    /[if (gte mso 9)|(IE)]
+      <table width="540" align="center" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+      <td>
+    %table.content{align: "center", border: "0", cellpadding: "0", cellspacing: "0", style: "width: 100%; max-width: 540px;"}
+      %tr
+        %td
+          [PUT EMAIL CONTENT HERE]
+    /[if (gte mso 9)|(IE)]
+      </td>
+      </tr>
+      </table>
