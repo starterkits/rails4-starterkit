@@ -56,6 +56,19 @@ en:
       submit: 'Resend unlock instructions'
     links:
       title: 'Account Help'
+    edit:
+      link: 'Social'
+    destroy:
+      link: 'Disconnect'
+      prompt: 'Disconnect this social account?'
+      tooltip: 'Disconnect social account and remove related data'
+      warning: ''
+      notice: 'Your social account will be disconnected form your StarterKit account. You can reconnect the social account at any time.'
+      submit: 'Yes, disconnect the account'
+      cancel: 'Cancel'
+    reconnect:
+      link: 'Update'
+      tooltip: 'Update your social data'
 
   account:
     edit:

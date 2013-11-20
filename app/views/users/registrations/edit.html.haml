@@ -1,11 +1,5 @@
-
 .auth__form
-  %ul.nav.nav-tabs
-    %li.active
-      = link_to I18n.t('account.edit.link'), edit_user_registration_path
-    %li
-      = link_to I18n.t('accounts.edit.link'), user_authentications_path(current_user)
-
+  = render 'layouts/account_tabs'
 
   - if devise_mapping.confirmable? and not resource.confirmed?
     .alert.alert-warning.alert-dismissable

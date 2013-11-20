@@ -1,0 +1,5 @@
+%ul.nav.nav-tabs
+  %li{class: request.original_fullpath == edit_user_registration_path ? 'active' : ''}
+    = link_to I18n.t('account.edit.link'), edit_user_registration_path
+  %li{class: request.original_fullpath == user_authentications_path(current_user) ? 'active' : ''}
+    = link_to I18n.t('auth.edit.link'), user_authentications_path(current_user)

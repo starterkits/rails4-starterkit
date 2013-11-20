@@ -1,1 +1,31 @@
-TODO: list authentications and allow user to disconnect accounts.
+.auth__form
+  = render 'layouts/account_tabs'
+
+  - if @failed
+    = render 'auth/failed', provider: @provider
+
+  - disconnect_modal_id = 'disconnect-oauth-modal'
+
+  .auth.providers.container-fluid
+    - Authentication.providers(:featured).each do |provider|
+      .row-fluid
+        %h2
+          .provider.connected{class: provider}
+          = Authentication.provider_name(provider)
+        %ul.authentications
+          - if @authentications[provider].present?
+            - @authentications[provider].each do |authentication|
+              = render 'authentications/authentication', authentication: authentication, disconnect_modal: "##{disconnect_modal_id}"
+
+          - if @authentications[provider].blank? || Authentication.allow_multiple_for?(provider)
+            %li
+              - another = @authentications[provider].present? ? 'Another ' : ''
+              = link_to provider_auth_path(provider), class: 'btn oauth check', data: {flow: 'connect'} do
+                .provider.connected{class: provider}
+                Connect #{another}#{Authentication.provider_name(provider)}
+              - if @authentications[provider].present? && provider == 'twitter'
+                .help-inline
+                  You may need to first
+                  = link_to 'sign out of Twitter', Authentication.logout_url(:twitter), target: '_blank'
+
+= render 'layouts/destroy_modal', id: disconnect_modal_id, i18n_prefix: 'auth.destroy'

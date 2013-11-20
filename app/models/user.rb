@@ -5,7 +5,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :timeoutable, :lockable, :async
 
-  has_many :authentications, dependent: :destroy, validate: false
+  has_many :authentications, dependent: :destroy, validate: false do
+    def with_oauth
+      unscoped { super }
+    end
+    def grouped_with_oauth
+      unscoped {group_by{|a| a.provider }}
+    end
+  end
 
   after_create :send_welcome_emails
 

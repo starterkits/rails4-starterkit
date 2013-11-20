@@ -14,7 +14,8 @@ class Authentication < ActiveRecord::Base
 
   def display_name
     return nil unless oauth_data
-    oauth_data['first_name'].presence || oauth_data['name'].presence || oauth_data['nickname'].presence || oauth_data['username'].presence || nil
+    oauth_data['first_name'].presence || oauth_data['name'].presence ||
+      oauth_data['nickname'].presence || username || oauth_data['username'].presence || nil
   end
 
   # Attempt to fill in oauth_data name fields for availabile data
