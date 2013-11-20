@@ -1,0 +1,19 @@
+- id ||= 'destroy-modal'
+- i18n_prefix = i18n_prefix.present? ? "#{i18n_prefix}." : ''
+
+.modal.fade{id: id, tabindex: -1, role: 'dialog', 'aria-labelledby' => "#{id}-title", 'aria-hidden' => true}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{data: {dismiss: 'modal'}, 'aria-hidden' => true} &times;
+        %h4{id: "#{id}-title"}= I18n.t "#{i18n_prefix}prompt"
+      .modal-body
+        - warning = I18n.t "#{i18n_prefix}warning"
+        - if warning.present?
+          .alert.alert-danger
+            %i.glyphicon.glyphicon-warning-sign.text-danger
+            = warning
+        %p= I18n.t "#{i18n_prefix}notice"
+      .modal-footer
+        %button.btn.btn-danger.ok= I18n.t "#{i18n_prefix}submit"
+        %button.btn.btn-default{data: {dismiss: 'modal'}}= I18n.t "#{i18n_prefix}cancel"

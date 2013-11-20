@@ -64,6 +64,7 @@ en:
       link: 'Delete my account'
       prompt: 'Delete your account?'
       warning: 'Your account will be permanently deleted. This cannot be undone.'
+      notice: ''
       submit: 'Yes, delete my account'
       cancel: 'Cancel'
 
