@@ -13,6 +13,7 @@ defaults: &defaults
   env:
     # From address to use when sending email
     MAIL_FROM: 'from@example.com'
+    MAIL_HOST:  'localhost:3000'
 
     AUTH_FACEBOOK_KEY: '201539556694091'
     AUTH_FACEBOOK_SECRET: '80ae1dc93961b7f9a79265af0eeca698'
