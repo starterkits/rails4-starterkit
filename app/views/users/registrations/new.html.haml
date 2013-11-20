@@ -16,7 +16,11 @@
 
 .auth__form
   - unless @auth
-    %h3.title= I18n.t('auth.signup.title').html_safe
+    %h3.title
+      = I18n.t('auth.signup.title').html_safe
+      .help-block
+        = I18n.t('auth.signup.help', login_link: login_link).html_safe
+
     = render 'authentications/providers', flow: 'signup', icons: true, color: true
     .auth__or
       %hr/
@@ -49,14 +53,12 @@
 
   = render 'users/registrations/form', hide_password: @auth.present?
 
-  .terms
-    / By joining, you agree to the
-    / = link_to 'Terms of Service', tos_page_path, target: '_blank'
-    / and
-    / = link_to 'Privacy Policy', privacy_page_path, target: '_blank'
-
   .auth__links
-    = I18n.t('auth.signup.help', login_link: login_link).html_safe
+    By signing up, you agree to the
+    = link_to 'Terms', terms_path
+    and
+    = succeed '.' do
+      = link_to 'Privacy', privacy_path
 
   = render 'users/social/facepile'
 

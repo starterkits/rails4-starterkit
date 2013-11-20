@@ -10,6 +10,11 @@
   .title {
     text-align: center;
     margin-bottom: 2em;
+    .help-block {
+      font-size: $font-size-base;
+      font-weight: normal;
+      margin: 20px 0 -10px;
+    }
   }
 
   abbr[title=required] {
