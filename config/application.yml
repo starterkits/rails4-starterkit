@@ -1,0 +1,46 @@
+# Application settings available as StarterKit::Settings
+
+defaults: &defaults
+  session:
+    key: '_starterkit_session'
+    expire_after: <%= 30.days %>
+
+  rack:
+    # Timeout request after 20 seconds
+    timeout: 20
+
+  # Default ENV vars if not already set.
+  env:
+    # From address to use when sending email
+    MAIL_FROM: 'from@example.com'
+
+    AUTH_FACEBOOK_KEY: '201539556694091'
+    AUTH_FACEBOOK_SECRET: '80ae1dc93961b7f9a79265af0eeca698'
+    AUTH_TWITTER_KEY: 'hbcu8JvAB1FftWw7c3oog'
+    AUTH_TWITTER_SECRET: 'uTspycZ4T7QAeA9QLGBb1zoLrR6K7ChBPdYt8F7nZc'
+
+    # Devise password encryption keys.
+    # Channging the keys will invalidate user passwords,
+    # forcing users to use the forgot password feature.
+    # TODO: make new keys with `rake secret`
+    DEVISE_SECRET_KEY: '7da7ce94b67dcb951aba685032aa7ddc17ae2551a7a11b60369eff65f1c3cc0a5525c93900b6315daf1558b973d7f5c0b6e80addd61225d6a23694a5fb8ff83e'
+    DEVISE_PEPPER: 'f23254b349cb3712c8c31dbdc4bb40555b0cd2ca9de98a15821ba5c2cb7d232b352e7f992bb8345dc53a2b4091f6b9dd1531bdaf1f1ae516d698e9f870d4e69c'
+
+    # Signed cookie encryption key.
+    # TODO: make new key with `rake secret`
+    SECRET_KEY_BASE: '16e628ec083d6127ca30716ac69c578ba47a900702f0d498c149b87d06eeebd1bc0be22929e16e2180cb137e9be8bc7f77dd3b9c13fbb306330bb6450cfbc051'
+
+    # Redis server used by Sidekiq, cache, etc.
+    REDIS_URL: <%= ENV['REDISTOGO_URL'] || 'redis://localhost:6379/0' %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  env:

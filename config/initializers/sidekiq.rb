@@ -3,8 +3,7 @@
 # Current sizes of 1 and 2 are for RedisToGo Nano with a limit of 10 connections
 
 if defined? Sidekiq
-  redis_url = ENV['REDISTOGO_URL'] || ENV['REDIS_URL']
-  redis_url ||=  'redis://localhost:6379/0'
+  redis_url = ENV['REDIS_URL']
 
   Sidekiq.configure_server do |config|
     config.redis = {

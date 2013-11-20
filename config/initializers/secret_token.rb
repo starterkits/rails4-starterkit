@@ -9,5 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-StarterKit::Application.config.secret_key_base = ENV['SECRET_TOKEN'].presence ||
-  'c4ae9ffbd76300d35947c3cd6dbab75947df833dd54511dfb0b83b5ce63335cbbeab6255d3b3775867f8d0e3b37728a14b18233c1bcb7ce2c6d8678666cc3cf0'
+StarterKit::Application.config.secret_key_base = ENV['SECRET_KEY_BASE']
