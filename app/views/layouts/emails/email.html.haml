@@ -1,0 +1,125 @@
+-# http://zurb.com/ink/templates.php
+!!! Strict
+%html{xmlns: "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{content: "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %meta{content: "width=device-width", name: "viewport"}/
+    :css
+      #{Rails.application.assets.find_asset('emails/inline').to_s.html_safe}
+    %style{type: 'text/css', 'data-premailer' => 'ignore'}
+      #{Rails.application.assets.find_asset('emails/include').to_s.html_safe}
+  %body
+    %table.body
+      %tr
+        %td.center{align: "center", valign: "top"}
+          %center
+            %table.row.header
+              %tr
+                %td.center{align: "center"}
+                  %center
+                    %table.container
+                      %tr
+                        %td.wrapper.last
+                          %table.twelve.columns
+                            %tr
+                              %td.six.sub-columns
+                                %img{src: "http://placehold.it/200x50"}/
+                              %td.six.sub-columns.last{align: "right", style: "text-align:right; vertical-align:middle;"}
+                                %span.template-label
+                              %td.expander
+            %br/
+            %table.container
+              %tr
+                %td
+                  %table.row
+                    %tr
+                      %td.wrapper.last
+                        %table.twelve.columns
+                          %tr
+                            %td
+                              %h1= yield :title
+                              - if content_for? :lead
+                                %p.lead= yield :lead
+                              - if @image_url
+                                %img{height: "300", src: @image_url, width: "580"}/
+                            %td.expander
+                  - if content_for? :callout
+                    %table.row.callout
+                      %tr
+                        %td.wrapper.last
+                          %table.twelve.columns
+                            %tr
+                              %td.panel
+                                %p= yield :callout
+                              %td.expander
+                  %table.row
+                    %tr
+                      %td.wrapper.last
+                        %table.twelve.columns
+                          %tr
+                            %td
+                              = yield :content
+                            %td.expander
+                  - if content_for? :action_link
+                    %table.row
+                      %tr
+                        %td.wrapper.last
+                          %table.three.columns
+                            %tr
+                              %td
+                                %table.button
+                                  %tr
+                                    %td
+                                      = yield :action_link
+                              %td.expander
+                  %table.row.footer
+                    %tr
+                      %td.wrapper
+                        %table.six.columns
+                          %tr
+                            %td.left-text-pad
+                              - if StarterKit::Settings.social.facebook
+                                %table.tiny-button.facebook
+                                  %tr
+                                    %td
+                                      %a{href: StarterKit::Settings.social.facebook} Facebook
+                                %br/
+                              - if StarterKit::Settings.social.twitter
+                                %table.tiny-button.twitter
+                                  %tr
+                                    %td
+                                      %a{href: StarterKit::Settings.social.twitter} Twitter
+                                %br/
+                              - if StarterKit::Settings.social.google_plus
+                                %table.tiny-button.google-plus
+                                  %tr
+                                    %td
+                                      %a{href: StarterKit::Settings.social.google_plus} Google +
+                            %td.expander
+                      %td.wrapper.last
+                        %table.six.columns
+                          %tr
+                            %td.last.right-text-pad
+                              %p
+                                Phone:
+                                = StarterKit::Settings.contact.phone
+                              %p
+                                Email:
+                                %a{href: "mailto:#{StarterKit::Settings.contact.email}"}= StarterKit::Settings.contact.email
+                            %td.expander
+                  %table.row
+                    %tr
+                      %td.wrapper.last
+                        %table.twelve.columns
+                          %tr
+                            %td{align: "center"}
+                              %center
+                                %p{style: "text-align:center;"}
+                                  %a{href: terms_url} Terms
+                                  |
+                                  %a{href: privacy_url} Privacy
+                                  - if @unsubscribe_url
+                                    |
+                                    %a{href: @unsubscribe_url}
+                                      %unsubscribe Unsubscribe
+                            %td.expander

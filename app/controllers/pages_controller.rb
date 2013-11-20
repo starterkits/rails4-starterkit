@@ -4,7 +4,16 @@ class PagesController < ApplicationController
 
   # Preview html email template
   def email
-    render layout: 'emails/hero', nothing: true
+    template = (params[:template] || 'hero').to_sym
+    template = :hero unless [:email, :hero, :simple].include? template
+    render layout: "emails/#{template}", nothing: true
+    if params[:premail] == 'true'
+      puts "\n!!! USING PREMAILER !!!\n\n"
+      pre = Premailer.new(response_body[0],  warn_level: Premailer::Warnings::SAFE)
+      reset_response
+      # pre.warnings
+      render text: pre.to_inline_css, layout: false
+    end
   end
 
   def error

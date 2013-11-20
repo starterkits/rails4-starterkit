@@ -5,7 +5,9 @@
     %meta{content: "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
     %meta{content: "width=device-width", name: "viewport"}/
     :css
-      #{Rails.application.assets.find_asset('email').to_s.html_safe}
+      #{Rails.application.assets.find_asset('emails/inline').to_s.html_safe}
+    %style{type: 'text/css', 'data-premailer' => 'ignore'}
+      #{Rails.application.assets.find_asset('emails/include').to_s.html_safe}
   %body
     %table.body
       %tr
@@ -36,8 +38,8 @@
                         %table.twelve.columns
                           %tr
                             %td
-                              %h1 Hi, Elijah Baily
-                              %p.lead Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
+                              %h1 Zurb Ink Hero Template
+                              %p.lead Keep this template for reference.
                               %img{height: "300", src: "http://placehold.it/580x300", width: "580"}/
                             %td.expander
                   %table.row.callout

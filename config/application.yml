@@ -1,6 +1,16 @@
 # Application settings available as StarterKit::Settings
 
 defaults: &defaults
+  social:
+    facebook: 'https://www.facebook.com/simple10'
+    twitter: 'https://twitter.com/joejohnston'
+    google_plus: 'https://plus.google.com/+JoeJohnstonSF'
+    linkedin: 'http://www.linkedin.com/in/startupjoe'
+
+  contact:
+    email: 'joe@10hacks.com'
+    phone: '415-555-1234'
+
   session:
     key: '_starterkit_session'
     expire_after: <%= 30.days %>
@@ -10,7 +20,7 @@ defaults: &defaults
     timeout: 20
 
   mail:
-    layout: 'emails/hero'
+    layout: 'emails/email'
 
   # Default ENV vars if not already set.
   env:

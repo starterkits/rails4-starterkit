@@ -1,0 +1,216 @@
+// Styles in this file will be not be inlined.
+
+a:hover { 
+  color: #2795b6 !important;
+}
+
+a:active { 
+  color: #2795b6 !important;
+}
+
+a:visited { 
+  color: #2ba6cb !important;
+}
+
+
+table.button:hover td,
+table.button:visited td,
+table.button:active td {
+  background: #2795b6 !important;
+}
+
+table.button:hover td a,
+table.button:visited td a,
+table.button:active td a {
+  color: #fff !important;
+}
+
+table.button:hover td,
+table.tiny-button:hover td,
+table.small-button:hover td,
+table.medium-button:hover td,
+table.large-button:hover td {
+  background: #2795b6 !important;
+}
+
+table.button:hover td a,
+table.button:active td a,
+table.button td a:visited,
+table.tiny-button:hover td a,
+table.tiny-button:active td a,
+table.tiny-button td a:visited,
+table.small-button:hover td a,
+table.small-button:active td a,
+table.small-button td a:visited,
+table.medium-button:hover td a,
+table.medium-button:active td a,
+table.medium-button td a:visited,
+table.large-button:hover td a,
+table.large-button:active td a,
+table.large-button td a:visited {
+  color: #ffffff !important; 
+}
+
+
+table.secondary:hover td {
+  background: #d0d0d0 !important;
+  color: #555;
+}
+
+table.secondary:hover td a,
+table.secondary td a:visited,
+table.secondary:active td a {
+  color: #555 !important;
+}
+
+
+table.success:hover td {
+  background: #457a1a !important;
+}
+
+
+table.alert:hover td {
+  background: #970b0e !important;
+}
+
+.button:hover table td,
+.tiny-button:hover table td,
+.small-button:hover table td,
+.medium-button:hover table td,
+.large-button:hover table td {
+  background: #2795b6 !important;
+}
+
+
+.button:hover,
+.button:active,
+.button:visited,
+.tiny-button,
+.tiny-button:hover,
+.tiny-button:active,
+.tiny-button:visited,
+.small-button,
+.small-button:hover,
+.small-button:active,
+.small-button:visited,
+.medium-button,
+.medium-button:hover,
+.medium-button:active,
+.medium-button:visited,
+.large-button,
+.large-button:hover,
+.large-button:active,
+.large-button:visited {
+  color: #ffffff !important; 
+  font-family: Helvetica, Arial, sans-serif; 
+  text-decoration: none;
+}
+
+.secondary:hover table td {
+  background: #d0d0d0 !important;
+}
+
+
+.success:hover table td {
+  background: #457a1a !important;
+}
+
+
+.alert:hover table td {
+  background: #970b0e !important;
+}
+
+
+table.facebook:hover td {
+  background: #2d4473 !important;
+}
+
+table.twitter:hover td {
+  background: #0087bb !important;
+}
+
+table.google-plus:hover td {
+  background: #CC0000 !important;
+}
+
+
+@media only screen and (max-width: 600px) {
+  table[class="body"] img {
+    width: auto !important;
+    height: auto !important;
+  }
+
+  table[class="body"] center {
+    min-width: 0 !important;
+  }
+
+  table[class="body"] .container {
+    width: 95% !important;
+  }
+
+  table[class="body"] .row {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  table[class="body"] .wrapper {
+    display: block !important;
+    padding-right: 0 !important;
+  }
+
+  table[class="body"] .columns,
+  table[class="body"] .column {
+    table-layout: fixed !important;
+    float: none !important;
+    width: 100% !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    display: block !important;
+  }
+
+  table[class="body"] .wrapper.first .columns,
+  table[class="body"] .wrapper.first .column {
+    display: table !important;
+  }
+
+  table[class="body"] table.columns td,
+  table[class="body"] table.column td {
+    width: 100% !important;
+  }
+
+  table[class="body"] td.offset-by-one,
+  table[class="body"] td.offset-by-two,
+  table[class="body"] td.offset-by-three,
+  table[class="body"] td.offset-by-four,
+  table[class="body"] td.offset-by-five,
+  table[class="body"] td.offset-by-six,
+  table[class="body"] td.offset-by-seven,
+  table[class="body"] td.offset-by-eight,
+  table[class="body"] td.offset-by-nine,
+  table[class="body"] td.offset-by-ten,
+  table[class="body"] td.offset-by-eleven {
+    padding-left: 0 !important;
+  }
+
+  table[class="body"] .expander {
+    width: 9999px !important;
+  }
+
+  table[class="body"] .right-text-pad {
+    padding-left: 10px !important;
+  }
+
+  table[class="body"] .left-text-pad {
+    padding-right: 10px !important;
+  }
+
+  table[class="body"] .hide-for-small,
+  table[class="body"] .show-for-desktop {
+    display: none !important;
+  }
+
+  table[class="body"] .show-for-small,
+  table[class="body"] .hide-for-desktop {
+    display: inherit !important;
+  }
+}

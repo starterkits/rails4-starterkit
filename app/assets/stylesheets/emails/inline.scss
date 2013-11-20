@@ -1,51 +1,49 @@
 // Zurb Ink Hero Template
 // http://zurb.com/ink/templates.php
 
+@import "variables";
 
-/**************************************************
-* Client-specific Styles & Reset
-***************************************************/
 
-#outlook a {
+#outlook a { 
+  padding:0; 
+} 
+
+body{ 
+  width:100% !important; 
+  -webkit-text-size-adjust:100%; 
+  -ms-text-size-adjust:100%; 
+  margin:0; 
   padding:0;
 }
 
-body{
-  width:100% !important;
-  -webkit-text-size-adjust:100%;
-  -ms-text-size-adjust:100%;
-  margin:0;
-  padding:0;
-}
-
-.ExternalClass {
+.ExternalClass { 
   width:100%;
+} 
+
+.ExternalClass, 
+.ExternalClass p, 
+.ExternalClass span, 
+.ExternalClass font, 
+.ExternalClass td, 
+.ExternalClass div { 
+  line-height: 100%; 
+} 
+
+#backgroundTable { 
+  margin:0; 
+  padding:0; 
+  width:100% !important; 
+  line-height: 100% !important; 
 }
 
-.ExternalClass,
-.ExternalClass p,
-.ExternalClass span,
-.ExternalClass font,
-.ExternalClass td,
-.ExternalClass div {
-  line-height: 100%;
-}
-
-#backgroundTable {
-  margin:0;
-  padding:0;
-  width:100% !important;
-  line-height: 100% !important;
-}
-
-img {
-  outline:none;
-  text-decoration:none;
+img { 
+  outline:none; 
+  text-decoration:none; 
   -ms-interpolation-mode: bicubic;
   width: auto;
-  max-width: 100%;
-  float: left;
-  clear: both;
+  max-width: 100%; 
+  float: left; 
+  clear: both; 
   display: block;
 }
 
@@ -54,7 +52,7 @@ center {
   min-width: 580px;
 }
 
-a img {
+a img { 
   border: none;
 }
 
@@ -67,12 +65,12 @@ table {
   border-collapse: collapse;
 }
 
-td {
+td { 
   word-break: break-word;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   hyphens: auto;
-  border-collapse: collapse !important;
+  border-collapse: collapse !important; 
 }
 
 table, tr, td {
@@ -82,15 +80,13 @@ table, tr, td {
 }
 
 hr {
-  color: #d9d9d9;
-  background-color: #d9d9d9;
-  height: 1px;
+  color: #d9d9d9; 
+  background-color: #d9d9d9; 
+  height: 1px; 
   border: none;
 }
 
-/**************************************************
-* Responsive Grid
-***************************************************/
+/* Responsive Grid */
 
 table.body {
   height: 100%;
@@ -103,8 +99,8 @@ table.container {
   text-align: inherit;
 }
 
-table.row {
-  padding: 0px;
+table.row { 
+  padding: 0px; 
   width: 100%;
   position: relative;
 }
@@ -125,7 +121,7 @@ table.column {
 
 table.columns td,
 table.column td {
-  padding: 0px 0px 10px;
+  padding: 0px 0px 10px; 
 }
 
 table.columns td.sub-columns,
@@ -262,10 +258,7 @@ table.columns .right-text-pad {
   width:52px;
 }
 
-
-/**************************************************
-* Alignment & Visibility Classes
-***************************************************/
+/* Alignment & Visibility Classes */
 
 table.center, td.center {
   text-align: center;
@@ -296,20 +289,16 @@ img.center {
   display: none;
 }
 
+/* Typography */
 
-
-/**************************************************
-* Typography
-***************************************************/
-
-body, h1, h2, h3, h4, h5, h6, p {
+body, h1, h2, h3, h4, h5, h6, p { 
   color: #222222;
-  display: block;
-  font-family: "Helvetica", "Arial", sans-serif;
-  font-weight: normal;
-  padding:0;
+  display: block; 
+  font-family: "Helvetica", "Arial", sans-serif; 
+  font-weight: normal; 
+  padding:0; 
   margin: 0;
-  text-align: left;
+  text-align: left; 
   line-height: 1.3;
 }
 
@@ -325,7 +314,7 @@ h5 {font-size: 24px;}
 h6 {font-size: 20px;}
 body, p {font-size: 14px;line-height:19px;}
 
-p {
+p { 
   padding-bottom: 10px;
 }
 
@@ -334,53 +323,38 @@ small {
 }
 
 a {
-  color: #2ba6cb;
+  color: #2ba6cb; 
   text-decoration: none;
 }
 
-a:hover {
-  color: #2795b6 !important;
-}
-
-a:active {
-  color: #2795b6 !important;
-}
-
-a:visited {
-  color: #2ba6cb !important;
-}
-
-h1 a,
-h2 a,
-h3 a,
-h4 a,
-h5 a,
+h1 a, 
+h2 a, 
+h3 a, 
+h4 a, 
+h5 a, 
 h6 a {
   color: #2ba6cb !important;
 }
 
-h1 a:active,
-h2 a:active,
-h3 a:active,
-h4 a:active,
-h5 a:active,
-h6 a:active {
-  color: #2ba6cb !important;
-}
+h1 a:active, 
+h2 a:active,  
+h3 a:active, 
+h4 a:active, 
+h5 a:active, 
+h6 a:active { 
+  color: #2ba6cb !important; 
+} 
 
-h1 a:visited,
-h2 a:visited,
-h3 a:visited,
-h4 a:visited,
-h5 a:visited,
-h6 a:visited {
-  color: #2ba6cb !important;
-}
+h1 a:visited, 
+h2 a:visited,  
+h3 a:visited, 
+h4 a:visited, 
+h5 a:visited, 
+h6 a:visited { 
+  color: #2ba6cb !important; 
+} 
 
-
-/**************************************************
-* Panels
-***************************************************/
+/* Panels */
 
 td.panel {
   background: #f2f2f2;
@@ -388,10 +362,7 @@ td.panel {
   padding: 10px !important;
 }
 
-
-/**************************************************
-* Buttons
-***************************************************/
+/* Buttons */
 
 table.button,
 table.tiny-button,
@@ -461,43 +432,6 @@ table.large-button td a {
   font-size: 24px;
 }
 
-table.button:hover td,
-table.button:visited td,
-table.button:active td {
-  background: #2795b6 !important;
-}
-
-table.button:hover td a,
-table.button:visited td a,
-table.button:active td a {
-  color: #fff !important;
-}
-
-table.button:hover td,
-table.tiny-button:hover td,
-table.small-button:hover td,
-table.medium-button:hover td,
-table.large-button:hover td {
-  background: #2795b6 !important;
-}
-
-table.button:hover td a,
-table.button:active td a,
-table.button td a:visited,
-table.tiny-button:hover td a,
-table.tiny-button:active td a,
-table.tiny-button td a:visited,
-table.small-button:hover td a,
-table.small-button:active td a,
-table.small-button td a:visited,
-table.medium-button:hover td a,
-table.medium-button:active td a,
-table.medium-button td a:visited,
-table.large-button:hover td a,
-table.large-button:active td a,
-table.large-button td a:visited {
-  color: #ffffff !important;
-}
 
 table.secondary td {
   background: #e9e9e9;
@@ -509,33 +443,14 @@ table.secondary td a {
   color: #555;
 }
 
-table.secondary:hover td {
-  background: #d0d0d0 !important;
-  color: #555;
-}
-
-table.secondary:hover td a,
-table.secondary td a:visited,
-table.secondary:active td a {
-  color: #555 !important;
-}
-
 table.success td {
   background: #5da423;
   border-color: #457a1a;
 }
 
-table.success:hover td {
-  background: #457a1a !important;
-}
-
 table.alert td {
   background: #c60f13;
   border-color: #970b0e;
-}
-
-table.alert:hover td {
-  background: #970b0e !important;
 }
 
 table.radius td {
@@ -597,36 +512,15 @@ table.round td {
   font-size: 24px;
 }
 
-.button:hover table td,
-.tiny-button:hover table td,
-.small-button:hover table td,
-.medium-button:hover table td,
-.large-button:hover table td {
-  background: #2795b6 !important;
-}
 
 .button,
-.button:hover,
-.button:active,
-.button:visited,
 .tiny-button,
-.tiny-button:hover,
-.tiny-button:active,
-.tiny-button:visited,
 .small-button,
-.small-button:hover,
-.small-button:active,
-.small-button:visited,
 .medium-button,
-.medium-button:hover,
-.medium-button:active,
-.medium-button:visited,
 .large-button,
-.large-button:hover,
-.large-button:active,
-.large-button:visited {
-  color: #ffffff !important;
-  font-family: Helvetica, Arial, sans-serif;
+ {
+  color: #ffffff !important; 
+  font-family: Helvetica, Arial, sans-serif; 
   text-decoration: none;
 }
 
@@ -635,17 +529,9 @@ table.round td {
   border-color: #d0d0d0;
 }
 
-.secondary:hover table td {
-  background: #d0d0d0 !important;
-}
-
 .success table td {
   background: #5da423;
   border-color: #457a1a;
-}
-
-.success:hover table td {
-  background: #457a1a !important;
 }
 
 .alert table td {
@@ -653,9 +539,6 @@ table.round td {
   border-color: #970b0e;
 }
 
-.alert:hover table td {
-  background: #970b0e !important;
-}
 
 .radius table td {
   -webkit-border-radius: 3px;
@@ -669,114 +552,15 @@ table.round td {
   border-radius: 500px;
 }
 
-
-/**************************************************
-* Outlook First
-***************************************************/
+/* Outlook First */
 
 body.outlook p {
   display: inline !important;
 }
 
-
-/**************************************************
-* Media Queries
-***************************************************/
-
-@media only screen and (max-width: 600px) {
-
-  table[class="body"] img {
-    width: auto !important;
-    height: auto !important;
-  }
-
-  table[class="body"] center {
-    min-width: 0 !important;
-  }
-
-  table[class="body"] .container {
-    width: 95% !important;
-  }
-
-  table[class="body"] .row {
-    width: 100% !important;
-    display: block !important;
-  }
-
-  table[class="body"] .wrapper {
-    display: block !important;
-    padding-right: 0 !important;
-  }
-
-  table[class="body"] .columns,
-  table[class="body"] .column {
-    table-layout: fixed !important;
-    float: none !important;
-    width: 100% !important;
-    padding-right: 0px !important;
-    padding-left: 0px !important;
-    display: block !important;
-  }
-
-  table[class="body"] .wrapper.first .columns,
-  table[class="body"] .wrapper.first .column {
-    display: table !important;
-  }
-
-  table[class="body"] table.columns td,
-  table[class="body"] table.column td {
-    width: 100% !important;
-  }
-
-  table[class="body"] td.offset-by-one,
-  table[class="body"] td.offset-by-two,
-  table[class="body"] td.offset-by-three,
-  table[class="body"] td.offset-by-four,
-  table[class="body"] td.offset-by-five,
-  table[class="body"] td.offset-by-six,
-  table[class="body"] td.offset-by-seven,
-  table[class="body"] td.offset-by-eight,
-  table[class="body"] td.offset-by-nine,
-  table[class="body"] td.offset-by-ten,
-  table[class="body"] td.offset-by-eleven {
-    padding-left: 0 !important;
-  }
-
-  table[class="body"] .expander {
-    width: 9999px !important;
-  }
-
-  table[class="body"] .right-text-pad {
-    padding-left: 10px !important;
-  }
-
-  table[class="body"] .left-text-pad {
-    padding-right: 10px !important;
-  }
-
-  table[class="body"] .hide-for-small,
-  table[class="body"] .show-for-desktop {
-    display: none !important;
-  }
-
-  table[class="body"] .show-for-small,
-  table[class="body"] .hide-for-desktop {
-    display: inherit !important;
-  }
-}
-
-
-/**************************************************
-Footer
-***************************************************/
-
 table.facebook td {
   background: #3b5998;
   border-color: #2d4473;
-}
-
-table.facebook:hover td {
-  background: #2d4473 !important;
 }
 
 table.twitter td {
@@ -784,17 +568,9 @@ table.twitter td {
   border-color: #0087bb;
 }
 
-table.twitter:hover td {
-  background: #0087bb !important;
-}
-
 table.google-plus td {
   background-color: #DB4A39;
   border-color: #CC0000;
-}
-
-table.google-plus:hover td {
-  background: #CC0000 !important;
 }
 
 .template-label {
@@ -831,14 +607,4 @@ table.columns .left-text-pad {
 
 table.columns .right-text-pad {
   padding-right: 10px;
-}
-
-@media only screen and (max-width: 600px) {
-  table[class="body"] .right-text-pad {
-    padding-left: 10px !important;
-  }
-
-  table[class="body"] .left-text-pad {
-    padding-right: 10px !important;
-  }
 }
