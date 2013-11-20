@@ -1,6 +1,6 @@
 .auth__form {
   @extend .row;
-  max-width: 320px;
+  max-width: 420px;
   margin: 0 auto;
 
   .nav-tabs {
@@ -14,10 +14,6 @@
 
   abbr[title=required] {
     display: none;
-  }
-
-  .btn i {
-    margin-right: 5px;
   }
 
   ul {
@@ -67,6 +63,10 @@
 .auth__links {
   @extend .help-block;
   margin: 30px 0;
+}
+
+.auth__group {
+  margin-bottom: 40px;
 }
 
 .auth__providers {

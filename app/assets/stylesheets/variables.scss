@@ -8,6 +8,13 @@
 // Example:
 // $font-size-base: 20px;
 
+// Tighten up grid padding.
+$grid-gutter-width: 20px;
+
+// Don't collapse until screen is 480px or smaller.
+// This effects when the topnav collapses.
+$grid-float-breakpoint: 480px;
+
 // Import bootstrap variables to make all variables available from this file.
 // Useful for situations where only this file is imported.
 @import "bootstrap/variables";
