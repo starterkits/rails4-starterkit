@@ -35,13 +35,13 @@
       %p
         We filled in some of your details from
         = succeed '.' do
-          = authentication_provider_name(@auth.provider)
+          = @auth.provider_name
         Please confirm and sign up.
 
   - if @existing_account
     -if provider = @existing_account.authentications.first.try(:provider)
       - url = provider_auth_path(provider, flow: 'login')
-      - login_with_link = link_to I18n.t('auth.login.link_with', provider: authentication_provider_name(provider)), url
+      - login_with_link = link_to I18n.t('auth.login.link_with', provider: Authentication.provider_name(provider)), url
     - else
       - login_with_link = login_link
     .alert.alert-warning
