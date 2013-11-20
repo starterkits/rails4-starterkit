@@ -1,6 +1,6 @@
 # Application settings available as StarterKit::Settings
 
-defaults: &defaults
+common: &common
   social:
     facebook: 'https://www.facebook.com/simple10'
     twitter: 'https://twitter.com/joejohnston'
@@ -23,6 +23,7 @@ defaults: &defaults
     layout: 'emails/email'
     from: 'from@example.com'
 
+defaults: &defaults
   # Default ENV vars if not already set.
   env:
     # From address to use when sending email
@@ -48,13 +49,16 @@ defaults: &defaults
     REDIS_URL: <%= ENV['REDISTOGO_URL'] || 'redis://localhost:6379/0' %>
 
 development:
+  <<: *common
   <<: *defaults
 
 test:
+  <<: *common
   <<: *defaults
 
 staging:
+  <<: *common
   <<: *defaults
 
 production:
-  env:
+  <<: *common
