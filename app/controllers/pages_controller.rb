@@ -5,7 +5,13 @@ class PagesController < ApplicationController
   def home
   end
 
+  # Dummy page for testing flows
   def test
+  end
+
+  # Preview html email template
+  def email
+    render layout: 'email', nothing: true
   end
 
   def error

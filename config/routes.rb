@@ -35,8 +35,9 @@ StarterKit::Application.routes.draw do
   end
   get '/home' => 'users#show', as: 'user_home'
 
-  # Dummy pages for testing
-  get '/test' => 'pages#test'
+  # Dummy preview pages for testing.
+  get '/p/test' => 'pages#test', as: 'test'
+  get '/p/email' => 'pages#email'
 
   root 'pages#home'
 end
