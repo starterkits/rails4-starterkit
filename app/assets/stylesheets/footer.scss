@@ -1,0 +1,23 @@
+// Page footer
+
+.page__footer {
+  margin-top: 100px;
+  padding: 20px 10px;
+  border-top: 1px solid $gray-lighter;
+  text-align: center;
+
+  ul {
+    @extend .list-unstyled;
+    margin: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  a {
+    color: $navbar-default-link-color;
+    &:hover {
+      color: $link-color;
+    }
+  }
+}

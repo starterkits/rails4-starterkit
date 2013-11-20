@@ -10,13 +10,17 @@
     = javascript_include_tag 'head', 'data-turbolinks-track' => true
     = headjs_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-    = yield(:head)
+    = yield :head
     = render 'layouts/airbrake'
   %body{class: "#{controller_name} #{action_name}"}
     = render 'layouts/navigation'
     .container
       = render 'layouts/messages'
       = yield
-      %footer
+      %footer.page__footer
+        - if content_for? :footer
+          = yield :footer
+        - else
+          = render 'layouts/footer'
     = render 'layouts/analytics'
     = render 'layouts/javascripts'
