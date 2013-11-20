@@ -29,13 +29,7 @@ module StarterKit
     config.assets.initialize_on_precompile = false
 
     config.to_prepare do
-      Devise::Mailer.layout 'email'
+      Devise::Mailer.layout StarterKit::Settings.mail.layout
     end
-  end
-
-  class Settings < Settingslogic
-    source "#{Rails.root}/config/application.yml"
-    namespace Rails.env
-    load!
   end
 end
