@@ -56,6 +56,7 @@ class Users::OauthController < ApplicationController
     # Used after prompting user to reimport data from a provider
     # Typical action is to return user to origin; probably connect accounts page
     elsif @auth
+      flash[:notice] = I18n.t 'accounts.updated'
       redirect_to @origin
 
     # Connecting New Account

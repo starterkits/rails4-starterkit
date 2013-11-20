@@ -82,7 +82,8 @@ en:
       cancel: 'Cancel'
 
   accounts:
-    connected: "Success!"
+    connected: 'Success! Your social account is now connected.'
+    updated: 'Success! Your social account is up-to-date.'
     edit:
       link: 'Social'
 
