@@ -6,5 +6,5 @@
   - providers.each do |provider|
     .auth__providers__provider
       = link_to provider_auth_path(provider, flow: flow), data: {flow: flow, provider: provider}, class: css_class do
-        %i{class: "sico-#{provider}"}
+        %i.sico-fixed{class: "sico-#{provider}"}
         = Authentication.provider_name(provider)

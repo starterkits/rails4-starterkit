@@ -9,6 +9,13 @@
 * Support for IE6/7 is not enabled by default. See doc/icons/lte-ie7.js
 */
 
+// Set fixed width
+.sico-fixed {
+  width: 0.8em;
+  display: inline-block;
+  text-align: center;
+}
+
 @font-face {
   font-family: 'Social-Icons';
   src: asset-url('Social-Icons.eot');
