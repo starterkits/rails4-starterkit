@@ -63,16 +63,43 @@
     @extend .list-unstyled;
   }
 }
+
 .auth__providers {
   @extend .row;
 }
+
 .auth__providers__provider {
   @extend .col-xs-6;
   @extend .col-sm-6;
+  margin-bottom: 10px;
   a {
     width: 100%;
   }
   i {
     margin-right: 5px;
+  }
+}
+
+.btn {
+  &[data-provider=twitter] {
+    background: #00ACED;
+    border-color: #0099D3;
+    &:hover {
+      background: #21c2ff;
+    }
+  }
+  &[data-provider=facebook] {
+    background: #3B5998;
+    border-color: #2F487C;
+    &:hover {
+      background: #4c70ba;
+    }
+  }
+  &[data-provider=linkedin] {
+    background: #069;
+    border-color: #00547E;
+    &:hover {
+      background: #0088cc;
+    }
   }
 }
