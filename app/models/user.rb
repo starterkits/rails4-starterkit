@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   has_many :authentications, dependent: :destroy, validate: false
 
+  after_create :send_welcome_emails
+
   def display_name
     first_name.presence || email.split('@')[0]
   end
@@ -38,5 +40,10 @@ class User < ActiveRecord::Base
   # Do not require email confirmation to login or perform actions
   def confirmation_required?
     false
+  end
+
+  def send_welcome_emails
+    UserMailer.delay.welcome_email(@id)
+    # UserMailer.delay_for(5.days).find_more_friends_email(@id)
   end
 end

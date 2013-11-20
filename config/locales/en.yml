@@ -23,6 +23,10 @@ en:
   brand:
     name: 'StarterKit'
 
+  emails:
+    welcome:
+      subject: 'Welcome to StarterKit'
+
   auth:
     login:
       title: 'Please Log In, or %{signup_link}'
@@ -85,7 +89,6 @@ en:
             email:
               taken: 'is used by another account'
 
-
   helpers:
     submit:
       user:
@@ -135,5 +138,3 @@ en:
     #   defaults:
     #     username: 'User name to sign in.'
     #     password: 'No special characters, please.'
-
-

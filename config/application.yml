@@ -21,11 +21,11 @@ defaults: &defaults
 
   mail:
     layout: 'emails/email'
+    from: 'from@example.com'
 
   # Default ENV vars if not already set.
   env:
     # From address to use when sending email
-    MAIL_FROM: 'from@example.com'
     MAIL_HOST:  'localhost:3000'
 
     AUTH_FACEBOOK_KEY: '201539556694091'
