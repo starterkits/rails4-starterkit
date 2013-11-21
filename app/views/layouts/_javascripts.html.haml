@@ -4,8 +4,9 @@
 - if content_for? :javascript
   = yield :javascript
 
--# On load javascript
+-# Document ready javascript
 - if content_for? :on_ready
   :javascript
-    head(function(){
-      #{yield :on_ready}})
+    head.ready(function(){
+      #{yield :on_ready}
+    })
