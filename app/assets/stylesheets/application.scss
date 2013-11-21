@@ -4,10 +4,11 @@
 //
 
 //= require_self
-//= require icons_social
 
+// Core
 @import "variables";
 @import "bootstrap";
+@import "icons_social";
 @import "auth";
 @import "avatar";
 @import "cards";
@@ -19,7 +20,10 @@
 @import 'nprogress-bootstrap';
 
 
+
+//
 // Minor Tweaks
+//
 
 // Padding to clear fixed nav
 body {
