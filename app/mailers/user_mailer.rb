@@ -1,5 +1,6 @@
 class UserMailer < ActionMailer::Base
   default from: StarterKit::Settings.mail.from
+  layout 'emails/email'
 
   def welcome_email(user)
     return false unless load_user(user).present?
