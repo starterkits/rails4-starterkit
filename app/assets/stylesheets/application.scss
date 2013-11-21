@@ -17,3 +17,10 @@ body {
   // Padding to clear fixed nav
   padding-top: 70px;
 }
+
+.alert {
+  // Make sure alerts are nicely formatted
+  a {
+    white-space: nowrap;
+  }
+}
