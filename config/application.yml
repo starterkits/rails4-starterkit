@@ -62,3 +62,6 @@ staging:
 
 production:
   <<: *common
+  env:
+    # Set dummy key so rake assets:precompile succeeds
+    DEVISE_SECRET_KEY: ''
