@@ -15,6 +15,8 @@
 #= require bootstrap
 #= require jquery.turbolinks
 #= require turbolinks
+#= require nprogress
+#= require nprogress-turbolinks
 #= require rails_confirm_dialog
 
 # Add error class to .avatar images if they fail to load

@@ -13,6 +13,9 @@
 @import "cards";
 @import "footer";
 
+// Plugins
+@import 'nprogress';
+@import 'nprogress-bootstrap';
 body {
   // Padding to clear fixed nav
   padding-top: 70px;
@@ -23,4 +26,10 @@ body {
   a {
     white-space: nowrap;
   }
+}
+
+// Postion loading spinner at bottom right
+#nprogress .spinner {
+  bottom: 15px;
+  top: auto;
 }
