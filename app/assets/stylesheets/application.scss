@@ -12,17 +12,22 @@
 @import "avatar";
 @import "cards";
 @import "footer";
+@import "hacks";
 
 // Plugins
 @import 'nprogress';
 @import 'nprogress-bootstrap';
+
+
+// Minor Tweaks
+
+// Padding to clear fixed nav
 body {
-  // Padding to clear fixed nav
   padding-top: 70px;
 }
 
+// Make sure alerts are nicely formatted
 .alert {
-  // Make sure alerts are nicely formatted
   a {
     white-space: nowrap;
   }

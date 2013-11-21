@@ -1,0 +1,5 @@
+// Temp workaround for Bootstrap 3.0.0 modal issue
+// https://github.com/twbs/bootstrap/issues/9855
+.modal-open, .modal-open .navbar-fixed-top {
+  margin-right: auto !important;
+}
