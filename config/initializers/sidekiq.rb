@@ -21,6 +21,6 @@ if defined? Sidekiq
   end
 
   class Sidekiq::Extensions::DelayedMailer
-    sidekiq_options queue: :mailer, timeout: 20, retry: 3
+    sidekiq_options queue: :mailer, retry: 3
   end
 end
