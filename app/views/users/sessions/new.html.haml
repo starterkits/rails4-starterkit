@@ -15,7 +15,7 @@
       = f.input :remember_me, as: :hidden, input_html: {value: true}
     = f.input :email, autofocus: true, required: true
 
-    %div{class: resource.errors.empty? && params[:email].blank? ? 'collapse fade' : ''}
+    %div{class: resource.email.blank? ? 'collapse fade' : ''}
       = f.input :password, required: true do |input|
         - if devise_mapping.recoverable?
           = link_to I18n.t('auth.forgot.prompt'), new_password_path(resource_name), class: 'pull-right small'
