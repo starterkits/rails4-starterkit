@@ -19,4 +19,8 @@ if defined? Sidekiq
       size: 1
     }
   end
+
+  class Sidekiq::Extensions::DelayedMailer
+    sidekiq_options queue: :mailer, timeout: 20, retry: 3
+  end
 end
