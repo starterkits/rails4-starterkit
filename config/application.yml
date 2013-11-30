@@ -24,7 +24,9 @@ common: &common
     from: 'from@example.com'
 
 defaults: &defaults
-  # Default ENV vars if not already set.
+  # Default ENV vars.
+  # Set to development values for convenience and override in production by setting ENV on the server.
+  # As a best practice, do not put production values in this file for security reasons.
   env:
     # From address to use when sending email
     MAIL_HOST:  'localhost:3000'
