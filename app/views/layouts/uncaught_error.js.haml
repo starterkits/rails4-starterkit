@@ -1,0 +1,6 @@
+:plain
+  var $wrap = $('.errors__container').empty()
+  $wrap.append('#{escape_javascript(render 'layouts/messages')}')
+  if ($wrap.length && typeof $.scrollTo == 'function') {
+    $.scrollTo($wrap.offset().top - parseInt($('body').css('padding-top')), 300)
+  }

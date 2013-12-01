@@ -15,7 +15,8 @@
   %body{class: "#{controller_name} #{action_name}"}
     = render 'layouts/navigation'
     .container
-      = render 'layouts/messages'
+      .errors__container
+        = render 'layouts/messages'
       = yield
       %footer.page__footer
         - if content_for? :footer

@@ -24,4 +24,15 @@ class ApplicationController < ActionController::Base
   def reset_response
     self.instance_variable_set(:@_response_body, nil)
   end
+
+  # Respond to uncaught exceptions with friendly error message during ajax requets
+  rescue_from Exception do |e|
+    if request.format == :js
+      report_error(e)
+      flash.now[:error] = Rails.env.development? ? e.message : I18n.t('errors.unknown')
+      render 'layouts/uncaught_error.js'
+    else
+      raise
+    end
+  end
 end
