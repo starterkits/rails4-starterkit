@@ -42,5 +42,7 @@ StarterKit::Application.routes.draw do
   get '/p/test' => 'pages#test', as: 'test'
   get '/p/email' => 'pages#email'
 
+  get 'robots.:format' => 'robots#index'
+
   root 'pages#home'
 end
