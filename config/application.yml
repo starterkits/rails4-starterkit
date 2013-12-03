@@ -29,7 +29,8 @@ defaults: &defaults
   # As a best practice, do not put production values in this file for security reasons.
   env:
     # From address to use when sending email
-    MAIL_HOST:  'localhost:3000'
+    MAIL_HOST: 'localhost:3000'
+
     # Host used to determine direct requests vs CDN.
     # See RobotsController.
     CANONICAL_HOST: 'rails4-starterkit.herokuapp.com'
