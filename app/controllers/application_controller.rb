@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
   # CanCan, check authorization unless authorizing with devise
   check_authorization unless: :skip_check_authorization?
 
+  # Special handling for ajax requests.
+  # Must appear before other rescue_from statements.
+  rescue_from Exception, with: :handle_uncaught_exception
+
   include CommonHelper
   include ErrorReportingConcern
   include AuthorizationErrorsConcern
@@ -31,10 +35,10 @@ class ApplicationController < ActionController::Base
   end
 
   # Respond to uncaught exceptions with friendly error message during ajax requets
-  rescue_from Exception do |e|
+  def handle_uncaught_exception(exception)
     if request.format == :js
-      report_error(e)
-      flash.now[:error] = Rails.env.development? ? e.message : I18n.t('errors.unknown')
+      report_error(exception)
+      flash.now[:error] = Rails.env.development? ? exception.message : I18n.t('errors.unknown')
       render 'layouts/uncaught_error.js'
     else
       raise
