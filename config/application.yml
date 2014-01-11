@@ -54,6 +54,10 @@ defaults: &defaults
     # Redis server used by Sidekiq, cache, etc.
     REDIS_URL: <%= ENV['REDISTOGO_URL'] || 'redis://localhost:6379/0' %>
 
+    # Airbrake/Errbit configuration
+    AIRBRAKE_API_KEY: ''
+    AIRBRAKE_HOST: ''
+
 development:
   <<: *common
   <<: *defaults
