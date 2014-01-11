@@ -1,37 +1,89 @@
 README
 ======
 
-This project is ready cloning and use, but is not yet a proper skeleton and
-does not yet have full test coverage. It's a work in progress with pieces being
-pulled in from other projects and updated to Rails 4.
-
 The goal of this skeleton project is to provide rock solid security and performance
-without significant configuration or rewriting code.
+without significant configuration or rewriting code. It is currently used in
+several production apps.
 
-After cloning...
 
-1. Generate new security tokens
-  1. `rake secret`
-  2. Replace token in `config/initializers/secret_token.rb`
-  3. `rake secret` (again)
-  3. Replace config.pepper in `config/initializers/devise.rb`
-2. Search and replace `StarterKit` with your app name
-3. Edit RegistrationController and migrations to customize user fields as needed
+
+## Setup
+
+Install StarkerKit:
 
 ```bash
-# OSX
+git clone https://github.com/10hacks/rails4-starterkit.git
+cd rails4-starterkit
+bundle install
+
+# For OSX
 gem install rb-fsevent
-gem install zeus
-gem install guard
+
+# For Linux
+gem install rb-inotify
 ```
+
+Update local development security tokens:
+
+1. Replace security tokens in `config/application.yml`
+  1. For each of DEVISE_SECRET_KEY, DEVISE_PEPPER, and SECRET_KEY_BASE generate a new key:
+    1. `rake secret`
+
+Production server security tokens should be set as ENV vars.
+
+Rename your app:
+
+1. Search and replace `StarterKit` with your app name
+
+Add additional account fields as needed:
+
+1. Edit RegistrationController and migrations to customize User fields
+
 
 ```bash
 zeus start
 bundle exec guard
 ```
 
-Demo
-====
+## Github
+
+If you're using Github you probably want to add an upstream remote to 
+keep in sync with StarterKit changes.
+
+```bash
+git remote add upstream https://github.com/10hacks/rails4-starterkit.git
+
+# Fetch latest upstream changes
+git fetch upstream
+```
+
+## Heroku
+
+```bash
+heroku create [app name]
+git push heroku master
+```
+
+
+## Install Errbit
+
+StarterKit is setup to use Airbrake or Errbit for error tracking and reporting.
+
+See [https://github.com/errbit/errbit](https://github.com/errbit/errbit) for installation.
+
+A common approach for production is to run StarterKit and Errbit as separate Heroku apps.
+
+
+## Update Gems
+
+StarterKit Gemfile does not specify gem versions in order to make upgrading easier.
+
+```bash
+bundle update
+```
+
+
+## Demo
 
 Twitter demo app credentials uses a callback url of http://0.0.0.0:3000/auth/twitter/callback
 
