@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   def email
     tpl = (params[:layout] || 'hero').to_sym
     tpl = :hero unless [:email, :hero, :simple].include? tpl
-    file = 'users/mailer/welcome'
+    file = 'user_mailer/welcome_email'
     @user = User.first || User.new
     render file, layout: "emails/#{tpl}"
     if params[:premail] == 'true'
