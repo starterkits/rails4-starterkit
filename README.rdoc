@@ -21,6 +21,11 @@ gem install rb-fsevent
 
 # For Linux
 gem install rb-inotify
+
+# Make sure postgresql and redis are running locally, then
+rake db:setup
+
+
 ```
 
 Update local development security tokens:
@@ -45,9 +50,18 @@ zeus start
 bundle exec guard
 ```
 
+## Configuring
+
+All app specific configuration is located in `config/application.yml`.
+
+Keys in the `defaults.env` section are automatically overridden by any ENV vars
+with the same name. Set defaults in the `application.yml` file to development
+values and then set ENV vars on production and staging servers.
+
+
 ## Github
 
-If you're using Github you probably want to add an upstream remote to 
+If you're using Github you probably want to add an upstream remote to
 keep in sync with StarterKit changes.
 
 ```bash
@@ -61,7 +75,27 @@ git fetch upstream
 
 ```bash
 heroku create [app name]
+
+# Copy and paste
+heroku addons:add heroku-postgresql
+heroku addons:add memcachier
+heroku addons:add newrelic
+heroku addons:add pgbackups
+heroku addons:add redistogo
+heroku addons:add sendgrid
+heroku config:add DEVISE_SECRET_KEY="$(bundle exec rake secret)"
+heroku config:add DEVISE_PEPPER="$(bundle exec rake secret)"
+heroku config:add SECRET_KEY_BASE="$(bundle exec rake secret)"
+
+# Needs customization
+heroku config:add MAIL_HOST=[YOUR APP URL]
+
 git push heroku master
+
+heroku run rake db:migrate
+heroku open
+
+# Be sure to configure social login keys to get Facebook/Twitter/etc. login to work.
 ```
 
 
@@ -72,6 +106,18 @@ StarterKit is setup to use Airbrake or Errbit for error tracking and reporting.
 See [https://github.com/errbit/errbit](https://github.com/errbit/errbit) for installation.
 
 A common approach for production is to run StarterKit and Errbit as separate Heroku apps.
+
+After setting up Airbrake or Errbit, update your server ENV vars.
+
+```bash
+# In rails4-starterkit dir
+
+heroku config:add AIRBRAKE_API_KEY=[YOUR KEY]
+heroku config:add AIRBRAKE_HOST=[YOUR-ERRBIT-APP.herokuapp.com]
+
+# Send test
+rake airbrake:test
+```
 
 
 ## Update Gems
