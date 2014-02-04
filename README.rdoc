@@ -5,6 +5,9 @@ The goal of this skeleton project is to provide rock solid security and performa
 without significant configuration or rewriting code. It is currently used in
 several production apps.
 
+## Features
+
+* [BEM CSS](http://bem.info/method/) – makes it easier to search and replace and maintain larger CSS projects
 
 
 ## Setup
@@ -45,9 +48,20 @@ Add additional account fields as needed:
 1. Edit RegistrationController and migrations to customize User fields
 
 
+Spring is enabled by default. To use Zeus, comment out spring gems in Gemfile and
+uncomment zeus.
+
 ```bash
-zeus start
+# Spring
+rails server
 bundle exec guard
+bin/rspec spec/
+
+# Zeus
+zeus start
+zeus server
+bundle exec guard
+zeus test spec/
 ```
 
 ## Configuring
