@@ -1,6 +1,12 @@
 # https://github.com/guard/guard#readme
 
-guard :rspec, cmd: 'zeus rspec spec/'  do
+cmd = if defined? Zeus
+  'zeus rspec spec/'
+else
+  'spring rspec -f doc'
+end
+
+guard :rspec, cmd: cmd do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }

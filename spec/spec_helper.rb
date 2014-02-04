@@ -1,14 +1,17 @@
 # Start SimpleCov if zeus is not running
 unless File.exist? '.zeus.sock'
-  require 'simplecov'
-  SimpleCov.start 'rails'
+  begin
+    require 'simplecov'
+    SimpleCov.start 'rails'
+  rescue LoadError
+  end
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] = 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-# require 'rspec/autorun' # disabled for zeus
+require 'rspec/autorun' unless defined? Zeus
 require 'database_cleaner'
 require 'capybara/rspec'
 #require 'capybara/firebug'
@@ -16,10 +19,6 @@ require 'capybara/rspec'
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-
-if defined? SimpleCov
-  SimpleCovHelpers.load_files_for_coverage
-end
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.

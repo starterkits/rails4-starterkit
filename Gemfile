@@ -87,7 +87,10 @@ group :development do
 end
 
 group :development, :test do
-  gem 'zeus'                    # required in gemfile for guard
+  # Use spring or zeus
+  gem 'spring'                  # keep application running in the background
+  gem 'spring-commands-rspec'
+  # gem 'zeus'                  # required in gemfile for guard
 
   # Debugging
   gem 'awesome_print'
@@ -121,6 +124,8 @@ group :development, :test do
 end
 
 group :test do
+  gem 'minitest'                # include minitest to prevent require 'minitest/autorun' warnings
+
   # Helpers
   gem 'ffaker'
   gem 'shoulda-matchers'
