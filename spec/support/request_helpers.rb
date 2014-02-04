@@ -43,7 +43,7 @@ module RequestHelpers
 
   def as_admin(user=nil, &block)
     user ||= FactoryGirl.create(:user, is_admin: true)
-    user.update_attributes(is_admin: true) unless user.is_admin?
+    user.update(is_admin: true) unless user.is_admin?
     as_user(user, &block)
   end
 

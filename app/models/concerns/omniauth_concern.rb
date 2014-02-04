@@ -10,7 +10,7 @@ module Concerns::OmniauthConcern
   def update_from_omniauth(oauth)
     data, attrs = self.class.normalize_oauth(oauth)
     self.oauth_data = data
-    update_attributes(attrs)
+    update(attrs)
   end
 
   def oauth_data=(data)
