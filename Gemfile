@@ -1,8 +1,8 @@
 # Use ruby 2.0.0-p247 or higher for byebug compatibility
 
 source 'https://rubygems.org'
-ruby '2.0.0'
 gem 'rails', '~> 4.0.0'
+ruby '2.1.0'
 
 # Monitoring
 gem 'rack-timeout', '~> 0.1.0beta3'
