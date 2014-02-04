@@ -6,22 +6,25 @@ if defined? RailsAdmin
 
     ################  Global configuration  ################
 
-    # Use CanCan to authorize user
+    ## == Devise ==
+    config.authenticate_with do
+      warden.authenticate! scope: :user
+    end
+    config.current_user_method(&:current_user)
+
+    ## == Cancan ==
     config.authorize_with :cancan
 
-    # Set the admin name here (optional second array element will appear in red). For example:
-    config.main_app_name = ['StarterKit', 'Admin']
-    # or for a more dynamic name:
-    # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
+    ## == PaperTrail ==
+    # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
-    # RailsAdmin may need a way to know who the current user is]
-    config.current_user_method { current_user } # auto-generated
+    # Set the admin name here (optional second array element will appear in red). For example:
+    #config.main_app_name = ['StarterKit', 'Admin']
+    # or for a more dynamic name:
+    config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
 
     # If you want to track changes on your models:
     # config.audit_with :history, 'User'
-
-    # Or with a PaperTrail: (you need to install it first)
-    # config.audit_with :paper_trail, 'User'
 
     # Display empty fields in show views:
     # config.compact_show_view = false
@@ -169,6 +172,23 @@ if defined? RailsAdmin
     #     # you can override a cross-section field configuration in any section with the same syntax `configure :field_name do ... end`
     #     # using `field` instead of `configure` will exclude all other fields and force the ordering
     # end
+
+    # https://github.com/sferik/rails_admin/wiki/Actions
+    config.actions do
+      dashboard                     # mandatory
+      index                         # mandatory
+      new
+      export
+      bulk_delete
+      show
+      edit
+      delete
+      show_in_app
+
+      ## With an audit adapter, you can add:
+      # history_index
+      # history_show
+    end
 
   end
 end
