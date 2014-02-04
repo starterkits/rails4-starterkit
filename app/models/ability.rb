@@ -12,7 +12,7 @@ class Ability
 
     if user.is_admin? && defined? RailsAdmin
       # Allow everything
-      an :manage, :all
+      can :manage, :all
 
       # RailsAdmin
       # https://github.com/sferik/rails_admin/wiki/CanCan
