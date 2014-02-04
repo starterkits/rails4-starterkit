@@ -8,4 +8,4 @@ StarterKit::Settings.env.each do |k, v|
 end
 
 # Initialize the Rails application.
-StarterKit::Application.initialize!
+Rails.application.initialize!

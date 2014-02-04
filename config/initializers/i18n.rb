@@ -8,4 +8,4 @@ I18n.backend.class.send(:include, I18n::Backend::Metadata)
 # Cache I18n lookups
 I18n::backend.class.send(:include, I18n::Backend::Cache)
 I18n.cache_store = ActiveSupport::Cache.lookup_store(:memory_store)
-# I18n.cache_store = ActiveSupport::Cache.lookup_store(StarterKit::Application.config.cache_store)
+# I18n.cache_store = ActiveSupport::Cache.lookup_store(Rails.application.config.cache_store)

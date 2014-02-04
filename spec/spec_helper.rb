@@ -1,5 +1,5 @@
 # Start SimpleCov if zeus is not running
-unless File.exists? '.zeus.sock'
+unless File.exist? '.zeus.sock'
   require 'simplecov'
   SimpleCov.start 'rails'
 end

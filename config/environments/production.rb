@@ -1,4 +1,4 @@
-StarterKit::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -49,7 +49,9 @@ StarterKit::Application.configure do
   # config.log_tags = [ :subdomain, :uuid ]
 
   # Use a different logger for distributed setups.
-  # config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+  # Use STDOUT for Heroku: https://devcenter.heroku.com/articles/logging#writing-to-your-log
+  config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+  # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production.
   # If using Memcachier on Heroku, the memcachier gem will auto config servers
