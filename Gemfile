@@ -56,7 +56,7 @@ gem 'omniauth-twitter'
 # gem 'omniauth-linkedin'
 
 # Admin
-gem 'rails_admin', github: 'sferik/rails_admin'
+gem 'rails_admin'
 
 # Workers
 gem 'sidekiq'
