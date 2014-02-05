@@ -138,6 +138,21 @@ describe User do
     it "has many dependent authentications" do
       user.should have_many(:authentications).dependent(:destroy)
     end
+    describe "#grouped_with_oauth" do
+      it "groups by provider and includes oauth_data_cache" do
+        user.save
+        FactoryGirl.create(:authentication, user: user, provider: 'facebook')
+        FactoryGirl.create(:authentication, user: user, provider: 'twitter')
+        FactoryGirl.create(:authentication, user: user, provider: 'linkedin')
+        FactoryGirl.create(:authentication, user: user, provider: 'facebook')
+        FactoryGirl.create(:authentication, user: user, provider: 'twitter')
+        auths = user.authentications.grouped_with_oauth
+        auths.keys.length.should == 3
+        auths['facebook'].length.should == 2
+        auths['twitter'].length.should == 2
+        auths['linkedin'].length.should == 1
+      end
+    end
   end
 
   describe "#reverse_merge_attributes_from_auth" do

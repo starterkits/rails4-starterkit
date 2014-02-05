@@ -56,4 +56,23 @@ describe Concerns::OmniauthConcern do
       auth.oauth_data[:email].should == @data.email
     end
   end
+
+  describe "#oauth_data_cache" do
+    it "saves when authentication saves" do
+      auth.oauth_data_cache.data_json.should be_blank
+      auth.oauth_data = @omniauth_mocks['facebook']
+      auth.oauth_data_cache.data_json.should be_present
+      auth.save
+      auth.oauth_data_cache.reload.should be_persisted
+      JSON.parse(auth.oauth_data_cache.data_json)['provider'].should == 'facebook'
+      auth.oauth_data_cache.authentication_id.should == auth.id
+    end
+    it "saves when oauth_data updates" do
+      auth.save! if auth.new_record?
+      auth.oauth_data_cache.should be_instance_of(OauthDataCache)
+      auth.oauth_data_cache.should be_new_record
+      auth.oauth_data = @omniauth_mocks['facebook']
+      auth.oauth_data_cache.should be_persisted
+    end
+  end
 end

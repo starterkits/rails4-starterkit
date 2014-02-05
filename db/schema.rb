@@ -11,20 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131021224642) do
+ActiveRecord::Schema.define(version: 20140204233952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
-    t.string   "provider",        null: false
-    t.string   "proid",           null: false
+    t.string   "provider",      null: false
+    t.string   "proid",         null: false
     t.string   "token"
     t.string   "refresh_token"
     t.string   "secret"
     t.datetime "expires_at"
-    t.text     "oauth_data_json"
     t.string   "username"
     t.string   "image_url"
     t.datetime "created_at"
@@ -32,6 +31,13 @@ ActiveRecord::Schema.define(version: 20131021224642) do
   end
 
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
+
+  create_table "oauth_data_caches", force: true do |t|
+    t.integer  "authentication_id"
+    t.text     "data_json"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "rails_admin_histories", force: true do |t|
     t.text     "message"

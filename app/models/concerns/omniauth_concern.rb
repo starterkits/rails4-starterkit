@@ -2,9 +2,7 @@ module Concerns::OmniauthConcern
   extend ActiveSupport::Concern
 
   included do
-    # Omit oauth_data_json from default scope to save bits on the wire
-    default_scope { select((column_names - ['oauth_data_json']).map { |column_name| "#{table_name}.#{column_name}" }) }
-    scope :with_oauth, -> { select(:oauth_data_json) }
+    after_save :save_oauth_data
   end
 
   def update_from_omniauth(oauth)
@@ -18,15 +16,22 @@ module Concerns::OmniauthConcern
       data, attrs = self.class.normalize_oauth(data)
     end
     @oauth_data = data
-    self.oauth_data_json = data.to_json
+    oauth_data_cache.data_json = data.to_json
+    save_oauth_data
   end
 
   def oauth_data
-    @oauth_data ||= if self.try(:oauth_data_json).present?
-      JSON.parse(self[:oauth_data_json])
-    else
-      auth = self.class.unscoped.with_oauth.where(id: id).first
-      auth && auth.oauth_data_json.present? && JSON.parse(auth.oauth_data_json) || nil
+    @oauth_data ||= JSON.parse oauth_data_cache.data_json
+  end
+
+  def oauth_data_cache
+    @oauth_data_cache ||= build_oauth_data_cache
+  end
+
+  def save_oauth_data
+    if persisted? and oauth_data_cache.data_json.present? and
+        (oauth_data_cache.new_record? or oauth_data_cache.changed?)
+      oauth_data_cache.save!
     end
   end
 

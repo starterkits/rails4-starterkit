@@ -6,11 +6,8 @@ class User < ActiveRecord::Base
          :confirmable, :timeoutable, :lockable, :async
 
   has_many :authentications, dependent: :destroy, validate: false do
-    def with_oauth
-      unscoped { super }
-    end
     def grouped_with_oauth
-      unscoped {group_by{|a| a.provider }}
+      includes(:oauth_data_cache).group_by {|a| a.provider }
     end
   end
 
