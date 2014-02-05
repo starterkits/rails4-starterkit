@@ -81,6 +81,7 @@ group :development do
 
   # Guard
   gem 'terminal-notifier-guard' # osx only
+  gem 'terminal-notifier'       # osx only
   gem 'guard-rspec'
   # gem 'guard-livereload'
   # gem 'rack-livereload'
