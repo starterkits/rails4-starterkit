@@ -5,15 +5,4 @@ FactoryGirl.define do
     last_name   { Faker::Name.last_name }
     password    { Faker::DizzleIpsum.words(4).join('!').first(20) }
   end
-
-  factory :authentication do
-    association :user
-    provider { %w[twitter facebook linkedin].sample }
-    proid { SecureRandom.hex }
-    token {
-      t = SecureRandom.hex
-      t[8] = '-'
-      t
-    }
-  end
 end
