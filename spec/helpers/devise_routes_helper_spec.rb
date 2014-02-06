@@ -64,4 +64,15 @@ describe DeviseRoutesHelper do
   describe "random page with query" do
     it_behaves_like "a return to page", '/some/random/page?k=v&a=b'
   end
+
+  describe "#valid_after_sign_in_path?" do
+    it "prevents open redirects to other domains" do
+      @dummy.valid_after_sign_in_path?('http://someotherdomain.com/home').should be_false
+    end
+    it "allows redirects to canonical host" do
+      ENV['CANONICAL_HOST'].should be_present
+      path = "http://#{ENV['CANONICAL_HOST']}/some/path"
+      @dummy.valid_after_sign_in_path?(path).should be_true
+    end
+  end
 end

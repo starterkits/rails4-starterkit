@@ -28,6 +28,6 @@ module DeviseRoutesHelper
       "^#{StarterKit::AuthConfig.omniauth.path_prefix}/",
       "^#{StarterKit::AuthConfig.devise.path_prefix}/"
     ]
-    p.present? && p.path.match(prevent_urls.join('|')).blank?
+    p.present? and (p.host.blank? or p.host == ENV['CANONICAL_HOST']) and p.path.match(prevent_urls.join('|')).blank?
   end
 end
