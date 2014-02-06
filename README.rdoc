@@ -64,6 +64,9 @@ bundle exec guard
 zeus test spec/
 ```
 
+Running `rails server` will start WEBrick. To run unicorn in development, use `unicorn -c config/unicorn.rb`.
+
+
 ## Configuring
 
 All app specific configuration is located in `config/application.yml`.
