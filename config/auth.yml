@@ -32,7 +32,7 @@ defaults: &defaults
 
     twitter:
       name: Twitter
-      logout: 'https://twitter.com/i/#!/logout'
+      logout: 'https://twitter.com/logout'
       anywhere_key:
       key: <%= ENV['AUTH_TWITTER_KEY'] %>
       secret: <%= ENV['AUTH_TWITTER_SECRET'] %>
