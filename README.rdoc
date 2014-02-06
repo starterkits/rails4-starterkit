@@ -241,6 +241,25 @@ Rails 4.1 introduced mailer previews. StarterKit now has two ways to preview ema
 * http://localhost:3000/rails/mailers
 * http://localhost:3000/p/email
 
+There's a [bug in Rails 4.1.0.beta1](https://github.com/rails/rails/issues/13372) that
+breaks default_url_options from being picked up properly in email templates.
+
+This issue is currently breaking both sending and previewing emails.
+
+There's also a new way to intercept mail previews using Premailer that looks like
+it will be available in the official Rails 4.1 release.
+https://github.com/rails/rails/issues/13622
+
+
+Debugging
+=========
+
+```
+# Add pry or byebug to code
+binding.pry
+byebug
+```
+
 
 
 
