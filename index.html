@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Rails4 Starter Kit : Rails 4.1 Starter App with Devise, OmniAuth, CanCan, Sidekiq and other goodies" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Rails4 Starter Kit</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/10hacks/rails4-starterkit">View on GitHub</a>
+
+          <h1 id="project_title">Rails4 Starter Kit</h1>
+          <h2 id="project_tagline">Rails 4.1 Starter App with Devise, OmniAuth, CanCan, Sidekiq and other goodies</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/10hacks/rails4-starterkit/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/10hacks/rails4-starterkit/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="readme" class="anchor" href="#readme"><span class="octicon octicon-link"></span></a>README</h1>
+
+<p>The goal of this skeleton project is to provide rock solid security and performance
+without significant configuration or rewriting code. It is currently used in
+several production apps.</p>
+
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>
+<a href="http://bem.info/method/">BEM CSS</a> – makes it easier to search and replace and maintain larger CSS projects</li>
+</ul><h2>
+<a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h2>
+
+<p>Install StarkerKit:</p>
+
+<div class="highlight highlight-bash"><pre>git clone https://github.com/10hacks/rails4-starterkit.git
+<span class="nb">cd </span>rails4-starterkit
+bundle install
+
+<span class="c"># For OSX</span>
+gem install rb-fsevent
+
+<span class="c"># For Linux</span>
+gem install rb-inotify
+
+<span class="c"># Make sure postgresql and redis are running locally, then</span>
+rake db:setup
+
+
+</pre></div>
+
+<p>Update local development security tokens:</p>
+
+<ol>
+<li>Replace security tokens in <code>config/application.yml</code>
+
+<ol>
+<li>For each of DEVISE_SECRET_KEY, DEVISE_PEPPER, and SECRET_KEY_BASE generate a new key:
+
+<ol>
+<li><code>rake secret</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol><p>Production server security tokens should be set as ENV vars.</p>
+
+<p>Rename your app:</p>
+
+<ol>
+<li>Search and replace <code>StarterKit</code> with your app name</li>
+</ol><p>Add additional account fields as needed:</p>
+
+<ol>
+<li>Edit RegistrationController and migrations to customize User fields</li>
+</ol><p>Spring is enabled by default. To use Zeus, comment out spring gems in Gemfile and
+uncomment zeus.</p>
+
+<div class="highlight highlight-bash"><pre><span class="c"># Spring</span>
+rails server
+bundle <span class="nb">exec </span>guard
+bin/rspec spec/
+
+<span class="c"># Zeus</span>
+zeus start
+zeus server
+bundle <span class="nb">exec </span>guard
+zeus <span class="nb">test </span>spec/
+</pre></div>
+
+<h2>
+<a name="configuring" class="anchor" href="#configuring"><span class="octicon octicon-link"></span></a>Configuring</h2>
+
+<p>All app specific configuration is located in <code>config/application.yml</code>.</p>
+
+<p>Keys in the <code>defaults.env</code> section are automatically overridden by any ENV vars
+with the same name. Set defaults in the <code>application.yml</code> file to development
+values and then set ENV vars on production and staging servers.</p>
+
+<h2>
+<a name="github" class="anchor" href="#github"><span class="octicon octicon-link"></span></a>Github</h2>
+
+<p>If you're using Github you probably want to add an upstream remote to
+keep in sync with StarterKit changes.</p>
+
+<div class="highlight highlight-bash"><pre>git remote add upstream https://github.com/10hacks/rails4-starterkit.git
+
+<span class="c"># Fetch latest upstream changes</span>
+git fetch upstream
+</pre></div>
+
+<h2>
+<a name="heroku" class="anchor" href="#heroku"><span class="octicon octicon-link"></span></a>Heroku</h2>
+
+<div class="highlight highlight-bash"><pre>heroku create <span class="o">[</span>app name<span class="o">]</span>
+
+<span class="c"># Copy and paste</span>
+heroku addons:add heroku-postgresql
+heroku addons:add memcachier
+heroku addons:add newrelic
+heroku addons:add pgbackups
+heroku addons:add redistogo
+heroku addons:add sendgrid
+heroku config:add <span class="nv">DEVISE_SECRET_KEY</span><span class="o">=</span><span class="s2">"$(bundle exec rake secret)"</span>
+heroku config:add <span class="nv">DEVISE_PEPPER</span><span class="o">=</span><span class="s2">"$(bundle exec rake secret)"</span>
+heroku config:add <span class="nv">SECRET_KEY_BASE</span><span class="o">=</span><span class="s2">"$(bundle exec rake secret)"</span>
+
+<span class="c"># Needs customization</span>
+heroku config:add <span class="nv">MAIL_HOST</span><span class="o">=[</span>YOUR APP URL<span class="o">]</span>
+
+git push heroku master
+
+heroku run rake db:migrate
+heroku open
+
+<span class="c"># Be sure to configure social login keys to get Facebook/Twitter/etc. login to work.</span>
+</pre></div>
+
+<h2>
+<a name="install-errbit" class="anchor" href="#install-errbit"><span class="octicon octicon-link"></span></a>Install Errbit</h2>
+
+<p>StarterKit is setup to use Airbrake or Errbit for error tracking and reporting.</p>
+
+<p>See <a href="https://github.com/errbit/errbit">https://github.com/errbit/errbit</a> for installation.</p>
+
+<p>A common approach for production is to run StarterKit and Errbit as separate Heroku apps.</p>
+
+<p>After setting up Airbrake or Errbit, update your server ENV vars.</p>
+
+<div class="highlight highlight-bash"><pre><span class="c"># In rails4-starterkit dir</span>
+
+heroku config:add <span class="nv">AIRBRAKE_API_KEY</span><span class="o">=[</span>YOUR KEY<span class="o">]</span>
+heroku config:add <span class="nv">AIRBRAKE_HOST</span><span class="o">=[</span>YOUR-ERRBIT-APP.herokuapp.com<span class="o">]</span>
+
+<span class="c"># Send test</span>
+rake airbrake:test
+</pre></div>
+
+<h2>
+<a name="update-gems" class="anchor" href="#update-gems"><span class="octicon octicon-link"></span></a>Update Gems</h2>
+
+<p>StarterKit Gemfile does not specify gem versions in order to make upgrading easier.</p>
+
+<div class="highlight highlight-bash"><pre>bundle update
+</pre></div>
+
+<h2>
+<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<p>Twitter demo app credentials uses a callback url of <a href="http://0.0.0.0:3000/auth/twitter/callback">http://0.0.0.0:3000/auth/twitter/callback</a></p>
+
+<h1>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h1>
+
+<ul>
+<li>add support for username</li>
+<li>Setup Rack::Cache <a href="https://devcenter.heroku.com/articles/rack-cache-memcached-rails31">https://devcenter.heroku.com/articles/rack-cache-memcached-rails31</a>
+</li>
+<li>Install Devise Security Extension <a href="https://github.com/phatworx/devise_security_extension">https://github.com/phatworx/devise_security_extension</a>
+</li>
+<li>Review config/initializers/devise.rb</li>
+<li>Convert to lazy registration <a href="https://github.com/mwlang/lazy_registration_demos">https://github.com/mwlang/lazy_registration_demos</a>
+</li>
+<li>Use decorators <a href="https://github.com/drapergem/draper">https://github.com/drapergem/draper</a>
+</li>
+<li>Make sure rspecs follow best practices: <a href="http://betterspecs.org/">http://betterspecs.org/</a>
+</li>
+<li>Run should_clean -d spec/</li>
+</ul><h1>
+<a name="compatibility" class="anchor" href="#compatibility"><span class="octicon octicon-link"></span></a>Compatibility</h1>
+
+<ul>
+<li>IE 8+ unless additional shims are added
+
+<ul>
+<li>See app/assets/stylesheets/icons_social.scss</li>
+</ul>
+</li>
+</ul><h1>
+<a name="configure" class="anchor" href="#configure"><span class="octicon octicon-link"></span></a>Configure</h1>
+
+<p>Replace values in config/env.rb with development values or delete the file if not needed.</p>
+
+<h1>
+<a name="debugging" class="anchor" href="#debugging"><span class="octicon octicon-link"></span></a>Debugging</h1>
+
+<p>Use <code>byebug</code> instead of <code>debugger</code>.</p>
+
+<h1>
+<a name="sidekiq" class="anchor" href="#sidekiq"><span class="octicon octicon-link"></span></a>Sidekiq</h1>
+
+<p>For demo on Heroku, StarterKit spawns a sidekiq worker in the web dyno.</p>
+
+<p>To use traditional workers in their own dyno, modify Procfile and config/unicorn.rb</p>
+
+<h1>
+<a name="auth-flows" class="anchor" href="#auth-flows"><span class="octicon octicon-link"></span></a>Auth Flows</h1>
+
+<ul>
+<li>origin = page user was on when auth flow started</li>
+<li>after auth = page where user can be prompted to enter any
+additional required account info like email address</li>
+</ul><h3>
+<a name="sign-up" class="anchor" href="#sign-up"><span class="octicon octicon-link"></span></a>Sign Up</h3>
+
+<p>Start at /a/signup</p>
+
+<p><strong>OAuth:</strong></p>
+
+<ol>
+<li>RegistrationsController#after_auth</li>
+<li>If user.valid?, redirect to origin or user_root_path</li>
+<li>If user.invalid?, show interrupt page so user can add additional info
+
+<ol>
+<li>Post to RegistrationsController#create</li>
+</ol>
+</li>
+</ol><p>If user already had an account via the OAuth provider, he/she is simply logged in.</p>
+
+<p><strong>Username/Password:</strong></p>
+
+<ol>
+<li>Post to RegistrationsController#create</li>
+<li>Redirect to origin or user_root_path</li>
+</ol><h3>
+<a name="login" class="anchor" href="#login"><span class="octicon octicon-link"></span></a>Login</h3>
+
+<p><strong>OAuth:</strong></p>
+
+<p>If user does not already have an account via the OAuth provider, redirect to signup page.</p>
+
+<p>Otherwise, login user and redirect to either...</p>
+
+<ol>
+<li>RegistrationsController#after_auth if additional account info is needed</li>
+<li>Origin page if specified</li>
+<li>user_root_path</li>
+</ol><p><strong>Username/Password:</strong></p>
+
+<p>Same as OAuth flow above.</p>
+
+<h1>
+<a name="philosophy" class="anchor" href="#philosophy"><span class="octicon octicon-link"></span></a>Philosophy</h1>
+
+<p>BDD is fun. Best practices increase productivity. Setting up frameworks is a waste of time.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Rails4 Starter Kit maintained by <a href="https://github.com/10hacks">10hacks</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
