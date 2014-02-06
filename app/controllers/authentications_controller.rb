@@ -4,6 +4,7 @@ class AuthenticationsController < ApplicationController
 
   def index
     @failed = params[:failed]
+    @return_to = user_authentications_path
     @authentications = @user.authentications.grouped_with_oauth
   end
 

@@ -16,12 +16,12 @@
         - auths = @authentications[provider]
         - if auths.present?
           - auths.each do |authentication|
-            = render 'authentications/card', authentication: authentication, size: :thumb, disconnect_modal: "##{disconnect_modal_id}"
+            = render 'authentications/card', authentication: authentication, size: :thumb, disconnect_modal: "##{disconnect_modal_id}", return_to: @return_to
 
         - if auths.blank? or Authentication.allow_multiple_for?(provider)
           %li
             - another = auths.present? ? 'Another ' : ''
-            = link_to provider_auth_path(provider), class: 'btn btn-primary btn-sm', data: {flow: 'connect'} do
+            = link_to provider_auth_path(provider, origin: @return_to), class: 'btn btn-primary btn-sm', data: {flow: 'connect'} do
               %i{class: "sico-#{provider} sico-fixed"}
               Connect #{another}#{Authentication.provider_name(provider)}
             - if auths.present? && provider == 'twitter'
