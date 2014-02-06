@@ -32,12 +32,14 @@ ActiveRecord::Schema.define(version: 20140204233952) do
 
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
 
-  create_table "oauth_data_caches", force: true do |t|
-    t.integer  "authentication_id"
-    t.text     "data_json"
+  create_table "oauth_caches", id: false, force: true do |t|
+    t.integer  "authentication_id", null: false
+    t.text     "data_json",         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "oauth_caches", ["authentication_id"], name: "index_oauth_caches_on_authentication_id", using: :btree
 
   create_table "rails_admin_histories", force: true do |t|
     t.text     "message"

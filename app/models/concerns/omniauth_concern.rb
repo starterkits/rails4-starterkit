@@ -15,23 +15,24 @@ module Concerns::OmniauthConcern
     if self.class.needs_oauth_normalizing?(data)
       data, attrs = self.class.normalize_oauth(data)
     end
-    @oauth_data = data
-    oauth_data_cache.data_json = data.to_json
+    oauth_cache.data = data
     save_oauth_data
+    data
   end
 
   def oauth_data
-    @oauth_data ||= JSON.parse oauth_data_cache.data_json
+    oauth_cache.data
   end
 
-  def oauth_data_cache
-    @oauth_data_cache ||= build_oauth_data_cache
+  def oauth_cache
+    @oauth_cache ||= (super or build_oauth_cache)
   end
 
   def save_oauth_data
-    if persisted? and oauth_data_cache.data_json.present? and
-        (oauth_data_cache.new_record? or oauth_data_cache.changed?)
-      oauth_data_cache.save!
+    if persisted? and oauth_cache.data_json.present? and
+        (oauth_cache.new_record? or oauth_cache.changed?)
+      oauth_cache.authentication = self
+      oauth_cache.save!
     end
   end
 

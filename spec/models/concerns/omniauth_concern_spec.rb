@@ -4,6 +4,7 @@ describe Concerns::OmniauthConcern do
   include OmniauthHelpers
 
   let(:auth) { FactoryGirl.build(:authentication) }
+  let(:oc) { auth.oauth_cache }
 
   before :all do
     @data = user_data
@@ -50,6 +51,13 @@ describe Concerns::OmniauthConcern do
     it_should_behave_like "normalized oauth"
   end
 
+  describe "#update_from_omniauth" do
+    it "updates oauth_cache" do
+      auth.update_from_omniauth @omniauth_mocks['facebook']
+      auth.oauth_cache.data
+    end
+  end
+
   describe "#oauth_data=" do
     it "normalizes data" do
       auth.oauth_data = @omniauth_mocks['facebook']
@@ -57,22 +65,44 @@ describe Concerns::OmniauthConcern do
     end
   end
 
-  describe "#oauth_data_cache" do
-    it "saves when authentication saves" do
-      auth.oauth_data_cache.data_json.should be_blank
-      auth.oauth_data = @omniauth_mocks['facebook']
-      auth.oauth_data_cache.data_json.should be_present
+  def oauth_cache
+    @oauth_cache ||= (super or build_oauth_cache)
+  end
+
+  describe "#oauth_cache" do
+    it "builds new instance on demand" do
+      auth.oauth_cache.should be_instance_of(OauthCache)
+    end
+    it "loads existing instance on demand" do
+      auth.id = 99
       auth.save
-      auth.oauth_data_cache.reload.should be_persisted
-      JSON.parse(auth.oauth_data_cache.data_json)['provider'].should == 'facebook'
-      auth.oauth_data_cache.authentication_id.should == auth.id
+      oauth = OauthCache.create(data_json: '{}', authentication_id: 99)
+      auth.oauth_cache.should == oauth
+    end
+    it "saves when authentication saves" do
+      oc.data_json.should be_blank
+      auth.oauth_data = @omniauth_mocks['facebook']
+      oc.data_json.should be_present
+      auth.save!
+      oc.reload.should be_persisted
+      oc.data['provider'].should == 'facebook'
+      oc.id.should == auth.id
+      oc.authentication_id.should == auth.id
     end
     it "saves when oauth_data updates" do
-      auth.save! if auth.new_record?
-      auth.oauth_data_cache.should be_instance_of(OauthDataCache)
-      auth.oauth_data_cache.should be_new_record
+      auth.save!
+      oc.should be_new_record
       auth.oauth_data = @omniauth_mocks['facebook']
-      auth.oauth_data_cache.should be_persisted
+      oc.should be_persisted
+      oc.data_json.should be_present
+      oc.updated_at.should be_present
+    end
+    it "update data_json when data is set" do
+      oc.data_json.should be_blank
+      data = Authentication.normalize_oauth(@omniauth_mocks['facebook'])
+      oc.data = data
+      JSON.parse(oc.data_json).should_not == 'null'
+      oc.data.should == data
     end
   end
 end

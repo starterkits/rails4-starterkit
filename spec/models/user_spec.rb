@@ -139,7 +139,7 @@ describe User do
       user.should have_many(:authentications).dependent(:destroy)
     end
     describe "#grouped_with_oauth" do
-      it "groups by provider and includes oauth_data_cache" do
+      it "groups by provider and includes oauth_cache" do
         user.save
         FactoryGirl.create(:authentication, user: user, provider: 'facebook')
         FactoryGirl.create(:authentication, user: user, provider: 'twitter')

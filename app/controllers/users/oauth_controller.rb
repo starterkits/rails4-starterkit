@@ -63,7 +63,8 @@ class Users::OauthController < ApplicationController
     # Auth credentials are new and the user is logged in.
     elsif user_signed_in?
       @auth = Authentication.build_from_omniauth(@omniauth)
-      current_user.authentications << @auth
+      @auth.user = current_user
+      @auth.save!
       flash[:notice] = I18n.t 'accounts.connected'
       redirect_to @origin
 
