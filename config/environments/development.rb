@@ -13,6 +13,11 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  # Logging
+  config.log_level = :debug
+  config.logger = ActiveSupport::Logger.new(STDOUT)
+  config.colorize_logging = true
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: ENV['MAIL_HOST'] }
