@@ -110,6 +110,7 @@ group :development, :test do
   # Testing
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'ffaker'
   gem 'capybara-webkit'
   # gem 'poltergeist'           # alternative to capybara-webkit
   # gem 'capybara-firebug'
@@ -128,7 +129,6 @@ group :test do
   gem 'minitest'                # include minitest to prevent require 'minitest/autorun' warnings
 
   # Helpers
-  gem 'ffaker'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   # gem 'timecop'               # Mock Time

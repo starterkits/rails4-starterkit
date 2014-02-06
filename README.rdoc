@@ -230,6 +230,16 @@ Otherwise, login user and redirect to either...
 Same as OAuth flow above.
 
 
+Mail Previews
+=============
+
+Rails 4.1 introduced mailer previews. StarterKit now has two ways to preview emails:
+
+* http://localhost:3000/rails/mailers
+* http://localhost:3000/p/email
+
+
+
 
 Philosophy
 ==========
