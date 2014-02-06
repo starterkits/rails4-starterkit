@@ -12,5 +12,5 @@ require 'spec_helper'
 ###
 
 describe "Auth flows" do
-	pending "Add auth feature specs"
+  pending "Add auth feature specs"
 end

@@ -37,8 +37,8 @@ class Users::OauthController < ApplicationController
     session.delete(:cached_auth_for_display)
 
     # Account Merge
-    # Auth credentials exist and user is logged in
-    # Typical action is to prompt user to merge or switch accounts
+    # Auth credentials exist and user is logged in.
+    # Typical action is to prompt user to merge or switch accounts.
     if @auth && user_signed_in? && @auth.user != current_user
       set_cached_user_for_prompt
       @flow = :merge
@@ -52,15 +52,15 @@ class Users::OauthController < ApplicationController
       redirect_to @origin
 
     # Reconnecting Existing Account
-    # Auth exists but user is not in login or signup flow
-    # Used after prompting user to reimport data from a provider
-    # Typical action is to return user to origin; probably connect accounts page
+    # Auth exists and user is not in login or signup flow.
+    # Used after prompting user to reimport data from a provider.
+    # Typical action is to return user to origin; probably connect accounts page.
     elsif @auth
       flash[:notice] = I18n.t 'accounts.updated'
       redirect_to @origin
 
     # Connecting New Account
-    # Auth credentials are new and the user is logged in
+    # Auth credentials are new and the user is logged in.
     elsif user_signed_in?
       @auth = Authentication.build_from_omniauth(@omniauth)
       current_user.authentications << @auth

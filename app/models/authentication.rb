@@ -21,7 +21,7 @@ class Authentication < ActiveRecord::Base
 
   # Attempt to fill in oauth_data name fields for availabile data
   def populate_names
-    return nil unless oauth_data
+    return nil unless oauth_data.present?
     split_names = (name or '').split(' ')
     split_names.fill '', split_names.length..1
     oauth_data['first_name'] ||= split_names[0].presence or oauth_data['nickname'].presence or oauth_data['username'].presence

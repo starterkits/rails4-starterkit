@@ -78,7 +78,6 @@ if defined? RailsAdmin
     #     configure :refresh_token, :string
     #     configure :secret, :string
     #     configure :expires_at, :datetime
-    #     configure :oauth_data_json, :text
     #     configure :username, :string
     #     configure :image_url, :string
     #     configure :created_at, :datetime
