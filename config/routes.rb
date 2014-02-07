@@ -40,7 +40,7 @@ Rails.application.routes.draw do
 
   # Dummy preview pages for testing.
   get '/p/test' => 'pages#test', as: 'test'
-  get '/p/email' => 'pages#email'
+  get '/p/email' => 'pages#email' if ENV['ALLOW_EMAIL_PREVIEW'].present?
 
   get 'robots.:format' => 'robots#index'
 
