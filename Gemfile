@@ -80,8 +80,10 @@ group :development do
   # gem 'capistrano'
 
   # Guard
-  gem 'terminal-notifier-guard' # osx only
-  gem 'terminal-notifier'       # osx only
+  if `uname` =~ /Darwin/        # osx only
+    gem 'terminal-notifier-guard'
+    gem 'terminal-notifier'
+  end
   gem 'guard-rspec'
   # gem 'guard-livereload'
   # gem 'rack-livereload'
@@ -121,8 +123,11 @@ group :development, :test do
   gem 'quiet_assets'
 
   # Events
-  gem 'rb-fsevent'              # osx only
-  # gem 'rb-inotify'            # linux only
+  if `uname` =~ /Darwin/
+    gem 'rb-fsevent'            # osx only
+  else
+    gem 'rb-inotify'            # linux only
+  end
 end
 
 group :test do
