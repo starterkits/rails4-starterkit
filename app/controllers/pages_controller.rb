@@ -7,7 +7,7 @@ class PagesController < ApplicationController
     tpl = (params[:layout] || 'hero').to_sym
     tpl = :hero unless [:email, :hero, :simple].include? tpl
     file = 'user_mailer/welcome_email'
-    @user = User.first || User.new
+    @user = User.new FactoryGirl.attributes_for(:user)
     render file, layout: "emails/#{tpl}"
     if params[:premail] == 'true'
       puts "\n!!! USING PREMAILER !!!\n\n"
