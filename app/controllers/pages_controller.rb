@@ -11,7 +11,7 @@ class PagesController < ApplicationController
     render file, layout: "emails/#{tpl}"
     if params[:premail] == 'true'
       puts "\n!!! USING PREMAILER !!!\n\n"
-      pre = Premailer.new(response_body[0],  warn_level: Premailer::Warnings::SAFE)
+      pre = Premailer.new(response_body[0],  warn_level: Premailer::Warnings::SAFE, with_html_string: true)
       reset_response
       # pre.warnings
       render text: pre.to_inline_css, layout: false
