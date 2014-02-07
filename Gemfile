@@ -96,9 +96,8 @@ group :development, :test do
   # gem 'zeus'                  # required in gemfile for guard
 
   # Debugging
-  gem 'awesome_print'
-  gem 'byebug'                  # ruby 2.0 debugger with built-in pry
-  gem 'pry'                     # better than irb
+  # gem 'pry'                   # better than irb
+  # gem 'byebug'                # ruby 2.0 debugger with built-in pry
   gem 'pry-rails'               # adds rails specific commands to pry
   gem 'pry-byebug'              # add debugging commands to pry
   gem 'pry-stack_explorer'      # navigate call stack
@@ -108,6 +107,7 @@ group :development, :test do
   # gem 'pry-remote'            # connect remotely to pry console
   # gem 'coolline'              # sytax highlighting as you type
   # gem 'coderay'               # use with coolline
+  gem 'awesome_print'           # pretty pring debugging output
 
   # Testing
   gem 'rspec-rails'
