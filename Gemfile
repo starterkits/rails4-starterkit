@@ -1,8 +1,19 @@
-# Use ruby 2.0.0-p247 or higher for byebug compatibility
-
 source 'https://rubygems.org'
 ruby '2.1.0'
+
 gem 'rails', '~> 4.1.0.beta'
+
+#
+# PLATFORM SPECIFIC
+#
+# OSX
+gem 'rb-fsevent', group: [:development, :test]        # monitor file changes without hammering the disk
+gem 'terminal-notifier-guard', group: [:development]  # notify terminal when specs run
+gem 'terminal-notifier', group: [:development]
+# LINUX
+# gem 'rb-inotify', :group => [:development, :test]   # monitor file changes without hammering the disk
+
+
 
 # Monitoring
 gem 'rack-timeout', '~> 0.1.0beta3'
@@ -10,8 +21,6 @@ gem 'newrelic_rpm'
 gem 'airbrake'                # use with airbrake.io or errbit
 # gem 'airbrake_user_attributes'  # use with self-hosted errbit; see config/initializers/airbrake.rb
 # gem 'rack-google-analytics'
-
-
 
 # Data
 gem 'pg'
@@ -86,10 +95,6 @@ group :development do
   # gem 'capistrano'
 
   # Guard
-  if `uname` =~ /Darwin/        # osx only
-    gem 'terminal-notifier-guard'
-    gem 'terminal-notifier'
-  end
   gem 'guard-rspec'
   # gem 'guard-livereload'
   # gem 'rack-livereload'
@@ -127,13 +132,6 @@ group :development, :test do
 
   # Logging
   gem 'quiet_assets'
-
-  # Events
-  if `uname` =~ /Darwin/
-    gem 'rb-fsevent'            # osx only
-  else
-    gem 'rb-inotify'            # linux only
-  end
 end
 
 group :test do
