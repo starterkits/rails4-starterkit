@@ -19,7 +19,7 @@ if defined? RailsAdmin
     # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
     # Set the admin name here (optional second array element will appear in red). For example:
-    #config.main_app_name = [Rails.application.config.settings.app_name, 'Admin']
+    #config.main_app_name = [I18n.t('brand.name'), 'Admin']
     # or for a more dynamic name:
     config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
 

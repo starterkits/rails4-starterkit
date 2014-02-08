@@ -21,11 +21,11 @@
 
 en:
   brand:
-    name: '<%= Rails.application.config.settings.app_name %>'
+    name: '<%= Rails.application.config.settings.brand_name %>'
 
   emails:
     welcome:
-      subject: 'Welcome to <%= Rails.application.config.settings.app_name %>'
+      subject: 'Welcome to <%= Rails.application.config.settings.brand_name %>'
 
   auth:
     login:
@@ -63,7 +63,7 @@ en:
       prompt: 'Disconnect this social account?'
       tooltip: 'Disconnect social account and remove related data'
       warning: ''
-      notice: 'Your social account will be disconnected form your <%= Rails.application.config.settings.app_name %> account. You can reconnect the social account at any time.'
+      notice: 'Your social account will be disconnected form your <%= Rails.application.config.settings.brand_name %> account. You can reconnect the social account at any time.'
       submit: 'Yes, disconnect the account'
       cancel: 'Cancel'
     reconnect:
