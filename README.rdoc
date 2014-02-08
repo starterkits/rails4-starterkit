@@ -12,10 +12,10 @@ several production apps.
 
 ## Setup
 
-Install StarkerKit:
+Install StarterKit:
 
 ```bash
-git clone https://github.com/simple10/rails4-starterkit.git
+git clone https://github.com/starterkit/rails4-starterkit.git
 cd rails4-starterkit
 bundle install
 
@@ -41,7 +41,9 @@ Production server security tokens should be set as ENV vars.
 
 Rename your app:
 
-1. Search and replace `StarterKit` with your app name
+1. Replace `StarterKit` and `starterkit` with your app name in...
+  1. config/application.rb
+  1. config/application.yml
 
 Add additional account fields as needed:
 
@@ -82,7 +84,7 @@ If you're using Github you probably want to add an upstream remote to
 keep in sync with StarterKit changes.
 
 ```bash
-git remote add upstream https://github.com/simple10/rails4-starterkit.git
+git remote add upstream https://github.com/starterkit/rails4-starterkit.git
 
 # Fetch latest upstream changes
 git fetch upstream

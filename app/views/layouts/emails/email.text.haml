@@ -5,8 +5,8 @@
 
 = I18n.t('brand.name')
 = root_url
-= StarterKit::Settings.contact.phone
-= StarterKit::Settings.contact.email
+= Rails.application.config.settings.contact.phone
+= Rails.application.config.settings.contact.email
 
 - if @unsubscribe_url
  Unsubscribe:

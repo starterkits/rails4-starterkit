@@ -15,14 +15,14 @@ Rails.application.routes.draw do
   get '/privacy' => 'pages#privacy', as: 'privacy'
 
   # OAuth
-  oauth_prefix = StarterKit::AuthConfig.omniauth.path_prefix
+  oauth_prefix = Rails.application.config.auth.omniauth.path_prefix
   get "#{oauth_prefix}/:provider/callback" => 'users/oauth#create'
   get "#{oauth_prefix}/failure" => 'users/oauth#failure'
   get "#{oauth_prefix}/:provider" => 'users/oauth#passthru', as: 'provider_auth'
   get oauth_prefix => redirect("#{oauth_prefix}/login")
 
   # Devise
-  devise_prefix = StarterKit::AuthConfig.devise.path_prefix
+  devise_prefix = Rails.application.config.auth.devise.path_prefix
   devise_for :users, path: devise_prefix,
     controllers: {registrations: 'users/registrations', sessions: 'users/sessions',
       passwords: 'users/passwords', confirmations: 'users/confirmations', unlocks: 'users/unlocks'},

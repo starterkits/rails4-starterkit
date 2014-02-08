@@ -10,7 +10,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = StarterKit::Settings.mail.from
+  config.mailer_sender = Rails.application.config.settings.mail.from
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -150,7 +150,7 @@ Devise.setup do |config|
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
-  config.timeout_in = StarterKit::Settings.session.expire_after.seconds
+  config.timeout_in = Rails.application.config.settings.session.expire_after.seconds
 
   # If true, expires auth token on session timeout.
   # config.expire_auth_token_on_timeout = false

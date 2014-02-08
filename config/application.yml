@@ -1,6 +1,13 @@
-# Application settings available as StarterKit::Settings
+# Application settings available as Rails.application.config.settings
+#
+# All values in this file are namespaced under Rails.application.config.settings
+# and will not conflict with other configuration values in Rails.application.config.
+# Settings are manually applied to the correct config var as needed in specific initializers.
+# e.g. config/initializers/devise.rb
 
 common: &common
+  app_name: 'StarterKit'
+
   social:
     facebook: 'https://www.facebook.com/simple10'
     twitter: 'https://twitter.com/joejohnston'

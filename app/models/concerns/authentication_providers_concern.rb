@@ -17,18 +17,18 @@ module Concerns::AuthenticationProvidersConcern
     def providers(type = :login)
       case type
       when :login
-        StarterKit::AuthConfig.login_providers || StarterKit::AuthConfig.providers.keys
+        Rails.application.config.auth.login_providers || Rails.application.config.auth.providers.keys
       else
-        StarterKit::AuthConfig.providers.keys
+        Rails.application.config.auth.providers.keys
       end
     end
 
     def allow_multiple_for?(provider)
-      StarterKit::AuthConfig.allow_multiple.include? provider
+      Rails.application.config.auth.allow_multiple.include? provider
     end
 
     def provider_name(provider)
-      StarterKit::AuthConfig.providers[provider]['name']
+      Rails.application.config.auth.providers[provider]['name']
     end
 
     def username_for_display(username, provider = nil)
@@ -41,7 +41,7 @@ module Concerns::AuthenticationProvidersConcern
     end
 
     def logout_url(provider)
-      StarterKit::AuthConfig.providers[provider]['logout']
+      Rails.application.config.auth.providers[provider]['logout']
     end
   end
 end

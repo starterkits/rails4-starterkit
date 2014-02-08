@@ -17,7 +17,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: starterkit_development
+  database: <%= Rails.application.config.settings.app_name.downcase %>_development
   pool: 5
   username: postgres
   password:
@@ -46,7 +46,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: starterkit_test
+  database: <%= Rails.application.config.settings.app_name.downcase %>_test
   pool: 5
   username: postgres
   password:
@@ -54,7 +54,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: starterkit_production
+  database: <%= Rails.application.config.settings.app_name.downcase %>_production
   pool: 5
   username: postgres
   password:

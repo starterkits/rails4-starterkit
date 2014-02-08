@@ -1,6 +1,6 @@
 - width ||= 420
 .facepile
-  %iframe{src: "https://www.facebook.com/plugins/facepile.php?app_id=#{StarterKit::AuthConfig.providers.facebook.key}&width=#{width}&max_rows=4&size=medium",
+  %iframe{src: "https://www.facebook.com/plugins/facepile.php?app_id=#{Rails.application.config.auth.providers.facebook.key}&width=#{width}&max_rows=4&size=medium",
     scrolling: 'no',
     frameborder: '0',
     style: "border:none; overflow:hidden; width:#{width}px; height: 90px",

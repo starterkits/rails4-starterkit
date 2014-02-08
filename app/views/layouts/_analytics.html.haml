@@ -1,8 +1,8 @@
-- if StarterKit::AnalyticsConfig.google.id
+- if Rails.application.config.analytics.google.id
   - content_for :on_ready do
     :plain
       var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '#{StarterKit::AnalyticsConfig.google.id}']);
+      _gaq.push(['_setAccount', '#{Rails.application.config.analytics.google.id}']);
       _gaq.push(['_trackPageview']);
       $(document).on('page:change', function(){
         _gaq.push(['_trackPageview'])

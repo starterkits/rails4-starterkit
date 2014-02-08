@@ -25,8 +25,8 @@ module DeviseRoutesHelper
     p = Addressable::URI.parse(path)
     prevent_urls = [
       "^#{root_path}$",
-      "^#{StarterKit::AuthConfig.omniauth.path_prefix}/",
-      "^#{StarterKit::AuthConfig.devise.path_prefix}/"
+      "^#{Rails.application.config.auth.omniauth.path_prefix}/",
+      "^#{Rails.application.config.auth.devise.path_prefix}/"
     ]
     p.present? and (p.host.blank? or p.host == ENV['CANONICAL_HOST']) and p.path.match(prevent_urls.join('|')).blank?
   end

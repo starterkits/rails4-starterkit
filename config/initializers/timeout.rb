@@ -1,6 +1,6 @@
 if defined?(Rack::Timeout)
   if Rails.env.production? || Rails.env.staging?
-    Rack::Timeout.timeout = StarterKit::Settings.rack.timeout # seconds
+    Rack::Timeout.timeout = Rails.application.config.settings.rack.timeout # seconds
   else
     Rails.configuration.middleware.delete Rack::Timeout
     # Rack::Timeout.unregister_state_change_observer(:logger)

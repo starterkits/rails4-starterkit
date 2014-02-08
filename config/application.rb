@@ -33,7 +33,7 @@ module StarterKit
     config.assets.initialize_on_precompile = false
 
     config.to_prepare do
-      Devise::Mailer.layout StarterKit::Settings.mail.layout
+      Devise::Mailer.layout Rails.application.config.settings.mail.layout
     end
   end
 end

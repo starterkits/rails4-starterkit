@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: StarterKit::Settings.mail.from
+  default from: Rails.application.config.settings.mail.from
   layout 'emails/email'
 
   def welcome_email(user)

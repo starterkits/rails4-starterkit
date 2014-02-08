@@ -78,23 +78,23 @@
                         %table.six.columns
                           %tr
                             %td.left-text-pad
-                              - if StarterKit::Settings.social.facebook
+                              - if Rails.application.config.settings.social.facebook
                                 %table.tiny-button.facebook
                                   %tr
                                     %td
-                                      %a{href: StarterKit::Settings.social.facebook} Facebook
+                                      %a{href: Rails.application.config.settings.social.facebook} Facebook
                                 %br/
-                              - if StarterKit::Settings.social.twitter
+                              - if Rails.application.config.settings.social.twitter
                                 %table.tiny-button.twitter
                                   %tr
                                     %td
-                                      %a{href: StarterKit::Settings.social.twitter} Twitter
+                                      %a{href: Rails.application.config.settings.social.twitter} Twitter
                                 %br/
-                              - if StarterKit::Settings.social.google_plus
+                              - if Rails.application.config.settings.social.google_plus
                                 %table.tiny-button.google-plus
                                   %tr
                                     %td
-                                      %a{href: StarterKit::Settings.social.google_plus} Google +
+                                      %a{href: Rails.application.config.settings.social.google_plus} Google +
                             %td.expander
                       %td.wrapper.last
                         %table.six.columns
@@ -102,10 +102,10 @@
                             %td.last.right-text-pad
                               %p
                                 Phone:
-                                = StarterKit::Settings.contact.phone
+                                = Rails.application.config.settings.contact.phone
                               %p
                                 Email:
-                                %a{href: "mailto:#{StarterKit::Settings.contact.email}"}= StarterKit::Settings.contact.email
+                                %a{href: "mailto:#{Rails.application.config.settings.contact.email}"}= Rails.application.config.settings.contact.email
                             %td.expander
                   %table.row
                     %tr
