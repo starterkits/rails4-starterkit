@@ -24,7 +24,7 @@ module OmniauthHelpers
       location: 'San Francisco, CA USA',
       image_url: 'http://graph.facebook.com/534166665/picture?type=square',
       bio: 'I live in SF and like to turn ideas into reality.',
-      website: 'http://www.10hacks.com',
+      website: 'http://twitter.com/joejohnston',
       nickname: 'simple10',
       verified: true
     })

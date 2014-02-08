@@ -15,7 +15,7 @@ several production apps.
 Install StarkerKit:
 
 ```bash
-git clone https://github.com/10hacks/rails4-starterkit.git
+git clone https://github.com/simple10/rails4-starterkit.git
 cd rails4-starterkit
 bundle install
 
@@ -82,7 +82,7 @@ If you're using Github you probably want to add an upstream remote to
 keep in sync with StarterKit changes.
 
 ```bash
-git remote add upstream https://github.com/10hacks/rails4-starterkit.git
+git remote add upstream https://github.com/simple10/rails4-starterkit.git
 
 # Fetch latest upstream changes
 git fetch upstream

@@ -8,8 +8,8 @@ common: &common
     linkedin: 'http://www.linkedin.com/in/startupjoe'
 
   contact:
-    email: 'joe@10hacks.com'
-    phone: '415-555-1234'
+    email: 'joe@example.com'
+    phone: '555-555-5555'
 
   session:
     key: '_starterkit_session'
