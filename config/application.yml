@@ -6,11 +6,9 @@
 # e.g. config/initializers/devise.rb
 
 common: &common
-  # Name of your app as seen by users.
-  brand_name: 'Starter Kit'
-
   # Downcased and trimmed app name for namespaces.
   # Safest to start with a letter rather than a number.
+  # See locales/en.yml for setting your app's user facing brand name.
   app_name: 'starterkit'
 
   social:

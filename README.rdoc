@@ -41,9 +41,12 @@ Production server security tokens should be set as ENV vars.
 
 Rename your app:
 
-1. Replace `StarterKit` and `starterkit` with your app name in...
-  1. config/application.rb
+1. Replace `StarterKit` with your app brand name (the name users will see) in...
+	1. config/locales/en.yml
+1. Replace `starterkit` with your namespace friendly app name in...
   1. config/application.yml
+1. Replace `StarterKit` with your camelcased app name in...
+  1. config/application.rb
 
 Add additional account fields as needed:
 
