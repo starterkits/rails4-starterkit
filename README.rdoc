@@ -7,7 +7,17 @@ several production apps.
 
 ## Features
 
+* Sidekiq for fast background jobs
+  * Emails from User and Devise are enqueued before sending
 * [BEM CSS](http://bem.info/method/) – makes it easier to search and replace and maintain larger CSS projects
+
+
+## Best Practices
+
+Respond to requests ASAP
+* Never do anything in the foreground that can be done by a worker
+* Emails are always enqueued before sending
+* Ideally, POST, PUT, and DELETE are enqueued — not currently implemented
 
 
 ## Setup

@@ -4,6 +4,14 @@ describe User do
   let(:user) { FactoryGirl.build(:user) }
   let(:authentication) { FactoryGirl.build(:authentication) }
 
+  describe "#create" do
+    it "enqueues welcome email" do
+      Sidekiq::Extensions::DelayedMailer.jobs.should be_empty
+      user.save
+      Sidekiq::Extensions::DelayedMailer.jobs.size.should == 1
+    end
+  end
+
   describe "#valid?" do
     it "requires password or authentication" do
       user.password = nil

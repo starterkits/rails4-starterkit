@@ -145,6 +145,8 @@ group :test do
   # Coverage
   gem 'simplecov', require: false
   # gem 'coveralls', :require => false
+
+  gem 'rspec-sidekiq'
 end
 
 group :production do
