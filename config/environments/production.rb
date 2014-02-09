@@ -57,7 +57,7 @@ Rails.application.configure do
   # If using Memcachier on Heroku, the memcachier gem will auto config servers
   # config.cache_store = :memory_store
   # config.cache_store = :mem_cache_store, ENV['MEMCACHE_SERVERS].split(','),
-  #   { namespace: Rails.application.config.settings.app_name.downcase, expires_in: 30.day, compress: true }
+  #   { namespace: Rails.application.config.settings.app_name, expires_in: 30.day, compress: true }
   config.cache_store = :dalli_store
 
   #
