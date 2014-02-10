@@ -1,5 +1,10 @@
 language: ruby
 rvm:
   - 2.1.0
-  - 2.0.0-p353
-script: bundle exec rake install; bundle exec rspec spec
+services:
+  - postgresql
+  - redis
+env:
+  - RAILS_ENV=test
+script:
+  - bundle exec rake spec
