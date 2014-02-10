@@ -15,7 +15,9 @@ accounts after sign up.
 
 == Demo
 
-{View Demo}[https://rails4-starterkit.herokuapp.com]
+{Demo}[https://rails4-starterkit.herokuapp.com]
+
+{Email Template Preview}[https://rails4-starterkit.herokuapp.com/p/email?premail=true&layout=email] — with inline CSS via Premailer
 
 
 == Features
