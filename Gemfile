@@ -92,12 +92,6 @@ group :development do
   gem 'guard-rspec'
   # gem 'guard-livereload'
   # gem 'rack-livereload'
-
-  # Temporary fix for default_url_host not being properly set in Rails 4.1.0.beta1
-  # https://github.com/rails/rails/issues/13372
-  # TODO: remove this gem when 4.1 is released.
-  # To verify, visit http://localhost:3000/rails/mailers/user/welcome_email
-  # gem 'actionmailer-with-request'
 end
 
 group :development, :test do
