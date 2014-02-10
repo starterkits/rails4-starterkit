@@ -1,241 +1,262 @@
-README
-======
+= Overview
 
-The goal of this skeleton project is to provide rock solid security and performance
-without significant configuration or rewriting code. It is currently used in
-several production apps.
+Rails4 StarterKit is a <b>starter app with production ready performance, security, and authentication.</b>
 
-## Features
+This project was extracted from several apps running in production over the past couple of years and upgraded to Rails 4.1.
 
-* Sidekiq for fast background jobs
-  * Emails from User and Devise are enqueued before sending
-* [BEM CSS](http://bem.info/method/) – makes it easier to search and replace and maintain larger CSS projects
+Unlike most starter apps that simply kick start development, Rails4 StarterKit is opinionated and production ready.
+It aims to combine great gems, best practices, and optimal configuration to minimize common mistakes and repetitious
+framework setup.
 
+Beyond configuration and tests, the bulk of Rails4 StarterKit code is the authentication flows.
+While Devise provides excellent reference views for password sign up and login, it does not handle social logins.
+StarterKit adds well designed UX flows for social logins (Facebook, Twitter, etc.) as well as connecting additional
+accounts after sign up.
 
-## Best Practices
+== Demo
 
-Respond to requests ASAP
-* Never do anything in the foreground that can be done by a worker
-* Emails are always enqueued before sending
-* Ideally, POST, PUT, and DELETE are enqueued — not currently implemented
+{View Demo}[https://rails4-starterkit.herokuapp.com]
 
 
-## Setup
+== Features
 
-Install StarterKit:
+<b>UI/UX</b>
+* Turbolinks[https://github.com/rails/turbolinks] — fast page rendering; configured to place nice with HeadJS, AJAX, etc.
+* HeadJS[http://headjs.com/] — fast and flexible JavaScript loading
+* NProgress[https://github.com/rstacruz/nprogress] — mobile app style loading indicator for AJAX requests
+* Fully baked authentication flows
+  * Devise[https://github.com/plataformatec/devise] + Omniauth[https://github.com/intridea/omniauth] — password and OAuth logins
+  * Intelligent handling of login, sign up and connect account flows
+  * Pre-filling of registration forms from social data
+  * Extracted from several years of production apps and real world UX testing
+  * Stubbed out code for merging accounts; common social login UX problem
 
-```bash
-git clone https://github.com/starterkits/rails4-starterkit.git
-cd rails4-starterkit
-bundle install
+<b>Configuration</b>
+* All app settings are in config/application.yml with automatic overriding by ENV vars
+* Development secrets are checked into git for convenience
+* Production secrets are configured via server ENV vars
 
-# For OSX
-gem install rb-fsevent
+<b>BDD/TDD</b>
+* Spring[https://github.com/rails/spring] / Zeus[https://github.com/burke/zeus] — fast development and testing startup; Spring is enabled by default
+* Rspec[http://rspec.info/] — tests, somewhat following BetterSpecs[http://betterspecs.org/]
+* SimpleCov[https://github.com/colszowka/simplecov] — code coverage
+* Guard[https://github.com/guard/guard] — automatically run tests on code change
 
-# For Linux
-gem install rb-inotify
+<b>Admin</b>
+* RailsAdmin[https://github.com/sferik/rails_admin] — admin interface for app data
 
-# Make sure postgresql and redis are running locally, then
-rake db:setup
+<b>Background Jobs</b>
+* Sidekiq[https://github.com/mperham/sidekiq] — fast, memory efficient background jobs
+
+<b>Error Reporting</b>
+* Airbrake[https://github.com/airbrake/airbrake] or Errbit[https://github.com/errbit/errbit]
+
+<b>Maintainable CSS</b>
+* Bootstrap3[http://getbootstrap.com/] enabled — easily modifiable for Foundation[http://foundation.zurb.com/], Topcoat[http://topcoat.io/] or custom framework
+* BEM[http://bem.info/method/] class names — prevents class name collision
+* SASS @extend[http://sass-lang.com/documentation/file.SASS_REFERENCE.html#extend] — keeps Bootstrap specific class names out of the views, making it easier to switch CSS frameworks
+
+<b>Emails</b>
+* Ink[http://zurb.com/ink/] — Zurb's email templates for maximum email client compatibility
+* Premailer[http://premailer.dialect.ca/] — automatically inlines CSS styles, making it easy to customize email templates without sacrificing compatibility
+* Previewable — easily preview emails in development
+* Scalable — User and Devise are configured to send emails via background jobs
+
+<b>Databases</b>
+* PostgreSQL[http://www.postgresql.org/] — app data; switchable to MySQL, MongoDB, etc.
+* Redis[http://redis.io/] — background job queues
+* Memcahced[http://memcached.org/] — session data; only required in production
+
+<b>Production Ready</b>
+* Heroku[https:/www.heroku.com] ready — git clone, configure, git push heroku master and you're done
+* Free hosting — configured to run web and job processes in single Heroku dyno to get started
+* Unicorn[http://unicorn.bogomips.org/] — web server
 
 
-```
 
-Update local development security tokens:
+= Installation
 
-1. Replace security tokens in `config/application.yml`
-  1. For each of DEVISE_SECRET_KEY, DEVISE_PEPPER, and SECRET_KEY_BASE generate a new key:
-    1. `rake secret`
+Gemfile is configured for OSX development. See comments in Gemfile for Linux.
 
-Production server security tokens should be set as ENV vars.
+  git clone https://github.com/starterkits/rails4-starterkit.git
+  cd rails4-starterkit
+  bundle install
 
-Rename your app:
+  # Make sure postgresql and redis are running locally, then
+  rake db:setup
 
-1. Replace `StarterKit` with your app brand name (the name users will see) in...
-	1. config/locales/en.yml
-1. Replace `starterkit` with your namespace friendly app name in...
-  1. config/application.yml
-1. Replace `StarterKit` with your camelcased app name in...
-  1. config/application.rb
+Modify vars in config/application.yml. Generate new secret tokens or your app will be hackable!
 
-Add additional account fields as needed:
+Modify config/locales/en.yml. Replace references to StarterKit.
 
-1. Edit RegistrationController and migrations to customize User fields
+Modify config/application.rb. Replace references to StarterKit.
 
+
+
+= Development
 
 Spring is enabled by default. To use Zeus, comment out spring gems in Gemfile and
 uncomment zeus.
 
-```bash
-# Spring
-rails server
-bundle exec guard
-bin/rspec spec/
+  # Spring
+  rails server
+  bundle exec guard
 
-# Zeus
-zeus start
-zeus server
-bundle exec guard
-zeus test spec/
-```
+  # Zeus
+  zeus start
+  zeus server
+  bundle exec guard
 
-Running `rails server` will start WEBrick. To run unicorn in development, use `unicorn -c config/unicorn.rb`.
+Open in browser: http://0.0.0.0:3000
 
+Running `rails server` will start WEBrick. To run unicorn in development, use `unicorn -c config/unicorn.rb` or foreman[https://github.com/ddollar/foreman].
 
-## Configuring
+Twitter and Facebook demo app credentials use callback urls for http://0.0.0.0:3000
 
-All app specific configuration is located in `config/application.yml`.
+= Debugging
 
-Keys in the `defaults.env` section are automatically overridden by any ENV vars
-with the same name. Set defaults in the `application.yml` file to development
-values and then set ENV vars on production and staging servers.
+Ruby 2.0+ uses byebug instead of debugger. StarterKit is configured to use pry or byebug.
 
-
-## Github
-
-If you're using Github you probably want to add an upstream remote to
-keep in sync with StarterKit changes.
-
-```bash
-git remote add upstream https://github.com/starterkits/rails4-starterkit.git
-
-# Fetch latest upstream changes
-git fetch upstream
-```
-
-## Heroku
-
-```bash
-heroku create [app name]
-
-# Copy and paste
-heroku addons:add heroku-postgresql
-heroku addons:add memcachier
-heroku addons:add newrelic
-heroku addons:add pgbackups
-heroku addons:add redistogo
-heroku addons:add sendgrid
-heroku config:add DEVISE_SECRET_KEY="$(bundle exec rake secret)"
-heroku config:add DEVISE_PEPPER="$(bundle exec rake secret)"
-heroku config:add SECRET_KEY_BASE="$(bundle exec rake secret)"
-
-# Needs customization
-heroku config:add MAIL_HOST=[YOUR APP URL]
-
-git push heroku master
-
-heroku run rake db:migrate
-heroku open
-
-# Be sure to configure social login keys to get Facebook/Twitter/etc. login to work.
-```
+  # Add pry or byebug to code
+  binding.pry
+  byebug
 
 
-## Install Errbit
+= Testing
 
-StarterKit is setup to use Airbrake or Errbit for error tracking and reporting.
+{<img src="https://travis-ci.org/starterkits/rails4-starterkit.png?branch=master" alt="Build Status" />}[https://travis-ci.org/starterkits/rails4-starterkit]
 
-See [https://github.com/errbit/errbit](https://github.com/errbit/errbit) for installation.
+For BDD/TDD, just keep guard running in the background. The relevant tests will automatically run when code is added or modified.
 
-A common approach for production is to run StarterKit and Errbit as separate Heroku apps.
+To run the full test suite without guard...
+
+  # Spring
+  rspec spec
+
+  # Without Spring
+  DISABLE_SPRING=true rspec spec
+
+  # Zeus
+  zeus test spec
+
+
+
+
+
+= Production
+
+<b>Setup Heroku</b>
+
+  heroku create [app name]
+
+  # Copy and paste
+  heroku addons:add heroku-postgresql
+  heroku addons:add memcachier
+  heroku addons:add newrelic
+  heroku addons:add pgbackups
+  heroku addons:add redistogo
+  heroku addons:add sendgrid
+  heroku config:add DEVISE_SECRET_KEY="$(bundle exec rake secret)"
+  heroku config:add DEVISE_PEPPER="$(bundle exec rake secret)"
+  heroku config:add SECRET_KEY_BASE="$(bundle exec rake secret)"
+
+  # Needs customization
+  heroku config:add MAIL_HOST=[YOUR APP URL]
+
+  git push heroku master
+
+  heroku run rake db:migrate
+  heroku open
+
+  # Be sure to configure social login keys to get Facebook/Twitter/etc. login to work.
+
+
+<b>Install Errbit</b>
+
+StarterKit is setup to use Airbrake or Errbit for error tracking and reporting. Errbit is an
+open source alternative to Airbrake that can be hosted for free on Heroku.
+
+See https://github.com/errbit/errbit for installation.
 
 After setting up Airbrake or Errbit, update your server ENV vars.
 
-```bash
-# In rails4-starterkit dir
+  # In rails4-starterkit dir
+  heroku config:add AIRBRAKE_API_KEY=[YOUR KEY]
+  heroku config:add AIRBRAKE_HOST=[YOUR-ERRBIT-APP.herokuapp.com]
 
-heroku config:add AIRBRAKE_API_KEY=[YOUR KEY]
-heroku config:add AIRBRAKE_HOST=[YOUR-ERRBIT-APP.herokuapp.com]
-
-# Send test
-rake airbrake:test
-```
+  # Send test
+  rake airbrake:test
 
 
-## Update Gems
+= Updating
 
 StarterKit Gemfile does not specify gem versions in order to make upgrading easier.
 
-```bash
-bundle update
-```
+  bundle update
+
+To merge changes from StarterKit
+
+  git remote add upstream https://github.com/starterkits/rails4-starterkit.git
+
+  # Fetch latest upstream changes
+  git fetch upstream
+
+  git merge upstream/master
+  # or
+  git cherry-pick [COMMIT REF]
 
 
-## Demo
 
-Twitter demo app credentials uses a callback url of http://0.0.0.0:3000/auth/twitter/callback
-
-
-TODO
-====
-
-* add support for username
-* Setup Rack::Cache https://devcenter.heroku.com/articles/rack-cache-memcached-rails31
-* Install Devise Security Extension https://github.com/phatworx/devise_security_extension
-* Review config/initializers/devise.rb
-* Convert to lazy registration https://github.com/mwlang/lazy_registration_demos
-* Use decorators https://github.com/drapergem/draper
-* Make sure rspecs follow best practices: http://betterspecs.org/
-* Run should_clean -d spec/
-
-
-Compatibility
-=============
+= Compatibility
 
 * IE 8+ unless additional shims are added
   * See app/assets/stylesheets/icons_social.scss
 
 
-Configure
-=========
 
-Replace values in config/env.rb with development values or delete the file if not needed.
+= Auth Flows
 
-Debugging
-=========
+There are three hard coded auth flows:
+1. signup — new user registration flow
+2. login — returning user authentication flow
+3. connect — authenticated user social account connection flow
 
-Use `byebug` instead of `debugger`.
+In each flow, the user is returned to the page he/she was on at the beginning of the flow
+if appropriate.
+
+Signup and login flows have an intermediate step (RegistrationsController#after_auth) that
+prompts the user for any missing required information. This is useful when new required fields
+are added to User, terms of service updates, etc. It's also useful for minimizing
+input fields on the first sign up page. For instance, the app might just ask for the
+user's desired username on the first page and then use the intermediate page to
+get first name, email, etc.
 
 
-Sidekiq
-=======
-
-For demo on Heroku, StarterKit spawns a sidekiq worker in the web dyno.
-
-To use traditional workers in their own dyno, modify Procfile and config/unicorn.rb
-
-
-Auth Flows
-==========
-
-* origin = page user was on when auth flow started
-* after auth = page where user can be prompted to enter any
-  additional required account info like email address
-
-### Sign Up
+== Sign Up
 
 Start at /a/signup
 
-**OAuth:**
+*OAuth*
 
 1. RegistrationsController#after_auth
-2. If user.valid?, redirect to origin or user_root_path
-3. If user.invalid?, show interrupt page so user can add additional info
+2. If user.valid? redirect to origin or user_root_path
+3. If user.invalid? show intermediate page so user can add additional info
   1. Post to RegistrationsController#create
 
 If user already had an account via the OAuth provider, he/she is simply logged in.
 
-**Username/Password:**
+*Username/Password*
 
 1. Post to RegistrationsController#create
+2. Show intermediate page if additional info is needed
 2. Redirect to origin or user_root_path
 
 
-### Login
+== Login
 
-**OAuth:**
+*OAuth*
 
-If user does not already have an account via the OAuth provider, redirect to signup page.
+If user does not already have an account via the OAuth provider, redirect to sign up page.
 
 Otherwise, login user and redirect to either...
 
@@ -243,18 +264,17 @@ Otherwise, login user and redirect to either...
 2. Origin page if specified
 3. user_root_path
 
-**Username/Password:**
+*Username/Password*
 
 Same as OAuth flow above.
 
 
-Mail Previews
-=============
+= Mail Previews
 
 Rails 4.1 introduced mailer previews. StarterKit now has two ways to preview emails:
 
-* [http://localhost:3000/rails/mailers](http://localhost:3000/rails/mailers) – Rails 4.1 built-in method
-* [http://0.0.0.0:3000/p/email?premail=true&layout=email](http://0.0.0.0:3000/p/email?premail=true&layout=email) – StarterKit method with query param configs
+* http://localhost:3000/rails/mailers – Rails 4.1 built-in method
+* http://0.0.0.0:3000/p/email?premail=true&layout=email – StarterKit method with query param configs
 
 Mail previews are only available in development by default. To make StarterKit previews
 available in other environments, set the ALLOW_EMAIL_PREVIEW='1'.
@@ -265,19 +285,15 @@ it will be available in the official Rails 4.1 release.
 https://github.com/rails/rails/issues/13622
 
 
-Debugging
-=========
+= TODO
 
-```
-# Add pry or byebug to code
-binding.pry
-byebug
-```
+* Add code comments for rdoc
+* Add examples for adding User#username field
+* Setup Rack::Cache https://devcenter.heroku.com/articles/rack-cache-memcached-rails31
+* Install Devise Security Extension https://github.com/phatworx/devise_security_extension
+* Review config/initializers/devise.rb in detail
+* Convert to lazy registration https://github.com/mwlang/lazy_registration_demos
+* Use decorators https://github.com/drapergem/draper
+* Make sure rspecs follow best practices: http://betterspecs.org/
+* Run should_clean -d spec/
 
-
-
-
-Philosophy
-==========
-
-BDD is fun. Best practices increase productivity. Setting up frameworks is a waste of time.
