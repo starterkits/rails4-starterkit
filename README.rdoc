@@ -121,6 +121,15 @@ Ruby 2.0+ uses byebug instead of debugger. StarterKit is configured to use pry o
   binding.pry
   byebug
 
+To debug a background worker, start the rails server and sidekiq in separate processes.
+
+  rails server
+  bundle exec sidekiq -C config/sidekiq.yml
+
+  # Add byebug to worker code to debug
+
+Use Sidekiq's web UI to restart jobs if needed: http://0.0.0.0:3000/admin/sidekiq/jobs/retries
+
 
 = Testing
 
