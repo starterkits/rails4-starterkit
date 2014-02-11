@@ -82,3 +82,6 @@ RSpec::Sidekiq.configure do |config|
   config.warn_when_jobs_not_processed_by_sidekiq = false # default => true
 end
 
+# Disable annoying Sidekiq logging in tests
+Sidekiq::Logging.logger = nil
+
