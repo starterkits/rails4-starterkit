@@ -92,8 +92,13 @@ en:
     edit:
       link: 'Social'
 
+  # See rails_admin locale file for more settings
   admin:
-    link: 'Admin'
+    link: 'Admin'           # Name of admin link in application drop down menu
+    home:
+      name: 'Application'   # Name of link back to app in admin dashboard
+    dashboard:
+      name: 'Admin'         # Title of admin dashboard on the left
 
   errors:
     unknown: 'Oops! Something went wrong. Please try again.'

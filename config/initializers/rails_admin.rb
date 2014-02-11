@@ -2,6 +2,24 @@
 # See github.com/sferik/rails_admin for more informations
 
 if defined? RailsAdmin
+
+  # Override RailsAdmin default application helpers.
+  module ApplicationHelperOverrides
+    def edit_user_Link &block
+      return nil unless authorized?(:edit, _current_user.class, _current_user) && _current_user.respond_to?(:email)
+      return nil unless abstract_model = RailsAdmin.config(_current_user.class).abstract_model
+      return nil unless edit_action = RailsAdmin::Config::Actions.find(:edit, controller: controller, abstract_model: abstract_model, object: _current_user)
+      content = if block_given?
+        yield
+      else
+        _current_user.email
+      end
+      link_to content, url_for(action: edit_action.action_name, model_name: abstract_model.to_param, id: _current_user.id, controller: 'rails_admin/main')
+    end
+  end
+  RailsAdmin::ApplicationHelper.send :include, ApplicationHelperOverrides
+
+
   RailsAdmin.config do |config|
 
     ################  Global configuration  ################
@@ -19,9 +37,9 @@ if defined? RailsAdmin
     # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
     # Set the admin name here (optional second array element will appear in red). For example:
-    #config.main_app_name = [I18n.t('brand.name'), 'Admin']
     # or for a more dynamic name:
-    config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
+    # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
+    config.main_app_name = Proc.new { |controller| [I18n.t('brand.name'), I18n.t('admin.dashboard.name')] }
 
     # If you want to track changes on your models:
     # config.audit_with :history, 'User'
