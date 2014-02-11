@@ -151,6 +151,7 @@ To run the full test suite without guard...
   zeus test spec
 
 
+Note that Sidekiq does not process jobs in tests.
 
 
 
