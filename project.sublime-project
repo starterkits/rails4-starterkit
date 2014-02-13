@@ -1,0 +1,10 @@
+{
+  "folders":
+  [
+    {
+      "path": ".",
+      "folder_exclude_patterns": [".git", "bin", ".bundle", "vendor", "tmp", "coverage", "log"],
+      "follow_symlinks": true
+    }
+  ]
+}

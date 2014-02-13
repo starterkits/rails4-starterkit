@@ -19,3 +19,6 @@
 .zeus.sock
 .env
 
+# Ignore Sublime Text workspace files
+/*.sublime-workspace
+
