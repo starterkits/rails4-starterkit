@@ -7,6 +7,6 @@ services:
 env:
   - RAILS_ENV=test
 before_script:
-  - bundle exec rake db:create db:migrate
+  - bundle exec rake db:create db:schema:load
 script:
   - bundle exec rspec spec
