@@ -7,4 +7,5 @@ services:
 env:
   - RAILS_ENV=test
 script:
+  - bundle exec rake db:migrate
   - bundle exec rspec spec
