@@ -4,7 +4,6 @@ class Authentication < ActiveRecord::Base
   include Concerns::AuthenticationProvidersConcern
 
   belongs_to :user
-  has_one :oauth_cache, dependent: :destroy, inverse_of: :authentication
 
   validates :user_id, :provider, :proid, presence: true
 

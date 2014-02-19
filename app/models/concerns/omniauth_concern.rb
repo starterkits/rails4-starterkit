@@ -3,6 +3,12 @@ module Concerns::OmniauthConcern
 
   included do
     after_save :save_oauth_data
+    has_one :oauth_cache, dependent: :destroy, inverse_of: :authentication
+
+    # Override oauth_cache association helper method
+    def oauth_cache
+      @oauth_cache ||= (super or build_oauth_cache)
+    end
   end
 
   def update_from_omniauth(oauth)
@@ -22,10 +28,6 @@ module Concerns::OmniauthConcern
 
   def oauth_data
     oauth_cache.data
-  end
-
-  def oauth_cache
-    @oauth_cache ||= (super or build_oauth_cache)
   end
 
   def save_oauth_data
