@@ -6,6 +6,7 @@ services:
   - redis
 env:
   - RAILS_ENV=test
+before_script:
+  - bundle exec rake db:create db:migrate
 script:
-  - bundle exec rake db:migrate
   - bundle exec rspec spec
