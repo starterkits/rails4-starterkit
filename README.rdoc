@@ -291,11 +291,6 @@ Rails 4.1 introduced mailer previews. StarterKit now has two ways to preview ema
 Mail previews are only available in development by default. To make StarterKit previews
 available in other environments, set the ALLOW_EMAIL_PREVIEW='1'.
 
-Currently, the Rails 4.1.0.beta1 does not support Premailer in the previews.
-There's a new way to intercept mail previews using Premailer that looks like
-it will be available in the official Rails 4.1 release.
-https://github.com/rails/rails/issues/13622
-
 
 = TODO
 

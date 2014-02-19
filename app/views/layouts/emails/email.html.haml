@@ -1,4 +1,5 @@
--# http://zurb.com/ink/templates.php
+-# Ink v1.0.5 - Copyright 2013 ZURB Inc
+-# http://zurb.com/ink/downloads/templates/hero.html
 !!! Strict
 %html{xmlns: "http://www.w3.org/1999/xhtml"}
   %head
@@ -25,12 +26,13 @@
                               %td.six.sub-columns
                                 %img{src: "http://placehold.it/200x50"}/
                               %td.six.sub-columns.last{align: "right", style: "text-align:right; vertical-align:middle;"}
-                                %span.template-label
+                                %span.template-label= I18n.t 'brand.name'
                               %td.expander
             %br/
             %table.container
               %tr
                 %td
+                  / content start
                   %table.row
                     %tr
                       %td.wrapper.last
@@ -50,7 +52,7 @@
                           %table.twelve.columns
                             %tr
                               %td.panel
-                                %p= yield :callout
+                                = yield :callout
                               %td.expander
                   %table.row
                     %tr

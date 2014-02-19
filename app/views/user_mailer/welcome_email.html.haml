@@ -1,3 +1,5 @@
+-# Be sure to also modify welcome_email.text.haml whenever editing this file
+
 - @image_url = 'http://placehold.it/580x300'
 - @unsubscribe_url = user_home_url
 
@@ -10,7 +12,8 @@
     = link_to I18n.t('brand.name'), root_url
 
 - content_for :callout do
-  We're calling you out to pay attention to what we're saying here.
+  %p
+    We're calling you out to pay attention to what we're saying here.
 
 - content_for :action_button do
   = link_to 'Get Active', root_url
