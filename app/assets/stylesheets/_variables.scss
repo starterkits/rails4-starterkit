@@ -18,3 +18,7 @@ $grid-float-breakpoint: 480px;
 // Import bootstrap variables to make all variables available from this file.
 // Useful for situations where only this file is imported.
 @import "bootstrap/variables";
+
+
+$avatar-background-color: $gray-light;
+$avatar-default-color: darken($avatar-background-color, 20%);
