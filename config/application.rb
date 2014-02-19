@@ -41,3 +41,5 @@ module StarterKit
     end
   end
 end
+
+require File.expand_path('../settings', __FILE__)
