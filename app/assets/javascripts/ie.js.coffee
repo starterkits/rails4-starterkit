@@ -1,4 +1,5 @@
 # IE specific shivs
 #
-#= require html5shiv
+# Head.js already includes html5shiv.
+#
 #= require respond
