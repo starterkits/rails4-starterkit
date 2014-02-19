@@ -12,7 +12,7 @@
     = csrf_meta_tags
     = yield :head
     = render 'layouts/airbrake'
-  %body{class: "#{controller_name} #{action_name}"}
+  %body{class: "controller__#{controller_name} action__#{action_name}"}
     = render 'layouts/navigation'
     .container
       .errors__container
