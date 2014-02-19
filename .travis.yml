@@ -7,4 +7,4 @@ services:
 env:
   - RAILS_ENV=test
 script:
-  - bundle exec rake spec
+  - bundle exec rspec spec
