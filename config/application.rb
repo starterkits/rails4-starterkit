@@ -38,12 +38,6 @@ module StarterKit
 
     config.to_prepare do
       Devise::Mailer.layout Rails.application.config.settings.mail.layout
-
-      # Temporary fix for default_url_host not being properly set in ActionMailer 4.1.0.beta1
-      # https://github.com/rails/rails/issues/13372
-      # TODO: remove this when 4.1 is officially released
-      # To verify, visit http://localhost:3000/rails/mailers/user/welcome_email
-      ActionMailer::Base.default_url_options[:host] = ENV['MAIL_HOST']
     end
   end
 end
