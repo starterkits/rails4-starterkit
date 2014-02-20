@@ -6,5 +6,5 @@
     - if logout_path.present?
       %li= link_to content_tag('span', t('admin.misc.log_out'), :class => 'label label-important'), logout_path, :method => Devise.sign_out_via
     %li
-      = edit_user_Link do
+      = edit_user_link do
         - image_tag _current_user.image_url(size: :tiny, ssl: request.ssl?)
