@@ -6,7 +6,7 @@
 -#    User has clicked on the Sign up link
 -#    User submitted registration form but there was an error
 
-- if resource.email
+- if resource.email.present?
   - login_link = link_to I18n.t('auth.login.link'), add_to_url(new_user_session_path, email: resource.email)
 - else
   - login_link = link_to I18n.t('auth.login.link'), new_user_session_path
