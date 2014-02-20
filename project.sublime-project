@@ -3,7 +3,7 @@
   [
     {
       "path": ".",
-      "folder_exclude_patterns": [".git", "bin", ".bundle", "vendor", "tmp", "coverage", "log"],
+      "folder_exclude_patterns": [".git", "bin", ".bundle", "vendor", "tmp", "coverage", "log", "doc", "lib/assets/certs"],
       "follow_symlinks": true
     }
   ]
