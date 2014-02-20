@@ -36,6 +36,9 @@ module StarterKit
     # Enable faster precompiles
     config.assets.initialize_on_precompile = false
 
+    # Serve vendor fonts
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+
     config.to_prepare do
       Devise::Mailer.layout Rails.application.config.settings.mail.layout
     end
