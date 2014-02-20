@@ -10,6 +10,11 @@
     %hr/
     %span or
 
+  - if @failed_login.present?
+    .alert-box.warning{data: {alert: ''}}
+      = @failed_login
+      %a.close{href: '#', 'aria-hidden' => true} &times;
+
   = simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
     - if devise_mapping.rememberable?
       = f.input :remember_me, as: :hidden, input_html: {value: true}
@@ -26,3 +31,4 @@
 
 - content_for :on_ready do
   $('input[name="user[email]"]').on('click keydown', function(){$(this).closest('form').find('.collapse').addClass('in')});
+  var $alert = $('.alert-box,.alert'); if ($alert.length) { $.scrollTo($alert, 300); }
