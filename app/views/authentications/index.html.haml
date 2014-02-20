@@ -16,7 +16,8 @@
         - auths = @authentications[provider]
         - if auths.present?
           - auths.each do |authentication|
-            = render 'authentications/card', authentication: authentication, size: :thumb, disconnect_modal: "##{disconnect_modal_id}", return_to: @return_to
+            %li
+              = render 'authentications/card', authentication: authentication, size: :thumb, disconnect_modal: "##{disconnect_modal_id}", return_to: @return_to
 
         - if auths.blank? or Authentication.allow_multiple_for?(provider)
           %li
