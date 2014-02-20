@@ -1,10 +1,11 @@
 .card__user {
-  background-color: $well-bg;
-  border-radius: $border-radius-base;
+  @extend .vcard;
+
   position: relative;
   overflow: hidden;
   padding: 10px;
   margin: 0 10px 10px 0;
+  width: 100%;
 
   .avatar {
     position: absolute;
@@ -14,6 +15,7 @@
   h4 {
     padding: 0;
     margin: 0;
+    line-height: 1em;
   }
 }
 
@@ -35,10 +37,7 @@
 .card__actions {
   margin-top: 5px;
   a {
-    @extend .btn;
-    @extend .btn-default;
-    @extend .btn-xs;
-    margin-right: 2px;
+    margin-right: 10px;
   }
 }
 

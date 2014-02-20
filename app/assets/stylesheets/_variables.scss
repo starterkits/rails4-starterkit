@@ -1,24 +1,20 @@
 //
-// Put application and Bootstrap variables in this file.
+// Put application and framework variables in this file.
 //
 
-// Refer to _variables.scss in bootstrap-sass gem
-//$ bundle open bootstrap-sass
-
-// Example:
-// $font-size-base: 20px;
-
-// Tighten up grid padding.
-$grid-gutter-width: 20px;
-
-// Don't collapse until screen is 480px or smaller.
-// This effects when the topnav collapses.
-$grid-float-breakpoint: 480px;
-
-// Import bootstrap variables to make all variables available from this file.
+// Import Foundation variables to make all variables available from this file.
 // Useful for situations where only this file is imported.
-@import "bootstrap/variables";
+@import "foundation/settings";
+@import "foundation/components/global";
 
+$gray-light: #CCC;
+$gray-lighter: #DDD;
 
-$avatar-background-color: $gray-light;
-$avatar-default-color: darken($avatar-background-color, 20%);
+$well-bg: #DDD;
+$border-radius-base: 2px;
+
+$navbar-default-link-color: #FFF;
+$link-color: #333;
+
+$avatar-background-color: #333;
+$avatar-default-color: #FFF;

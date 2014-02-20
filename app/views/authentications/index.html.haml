@@ -22,15 +22,12 @@
         - if auths.blank? or Authentication.allow_multiple_for?(provider)
           %li
             - another = auths.present? ? 'Another ' : ''
-            = link_to provider_auth_path(provider, origin: @return_to), class: 'btn btn-primary btn-sm', data: {flow: 'connect'} do
+            = link_to provider_auth_path(provider, origin: @return_to), class: 'button', data: {flow: 'connect', provider: provider} do
               %i{class: "sico-#{provider} sico-fixed"}
               Connect #{another}#{Authentication.provider_name(provider)}
             - if auths.present? && provider == 'twitter'
-              .help-block
+              %p
                 You may need to first
                 = link_to 'sign out of Twitter', Authentication.logout_url(:twitter), target: '_blank'
 
 = render 'layouts/destroy_modal', id: disconnect_modal_id, i18n_prefix: 'auth.destroy'
-
-- content_for :on_ready do
-  $('#authentications-index [title]').tooltip({container: 'body', placement: 'bottom'})

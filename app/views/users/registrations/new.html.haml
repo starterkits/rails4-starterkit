@@ -16,9 +16,9 @@
 
 .auth__form
   - unless @auth
-    %h3.title
-      = I18n.t('auth.signup.title').html_safe
-      .help-block
+    %h2.title
+      = I18n.t 'auth.signup.title'
+      %small
         = I18n.t('auth.signup.help', login_link: login_link).html_safe
 
     = render 'authentications/providers', flow: 'signup', icons: true, color: true
@@ -33,7 +33,7 @@
       = @auth.display_name
     %p
       Not you?
-      = link_to 'Reset', destroy_user_session_path, rel: :nofollow, class: 'btn btn-default btn-xs'
+      = link_to 'Reset', destroy_user_session_path, rel: :nofollowfor
 
     - unless @existing_account
       %p
@@ -48,8 +48,9 @@
       - login_with_link = link_to I18n.t('auth.login.link_with', provider: Authentication.provider_name(provider)), url
     - else
       - login_with_link = login_link
-    .alert.alert-warning
+    .alert-box.warning{data: {alert: ''}}
       = I18n.t('auth.signup.email_taken', login_link: login_with_link).html_safe
+      %a.close{href: '#', 'aria-hidden' => true} &times;
 
   = render 'users/registrations/form', hide_password: @auth.present?
 
@@ -63,4 +64,4 @@
   = render 'users/social/facepile'
 
 - content_for :on_ready do
-  $('input[name="user[email]"]').on('click keydown', function(){$(this).closest('form').find('.collapse').addClass('in')});
+  var $alert = $('.error'); if ($alert.length) { $.scrollTo($alert, 300); }

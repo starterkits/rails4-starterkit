@@ -1,24 +1,31 @@
-%nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
-  .navbar-header
-    %button.navbar-toggle{type: 'button', data: {toggle: 'collapse', target: '.navbar-collapse'}}
-      %span.sr-only
-      %span.icon-bar
-      %span.icon-bar
-      %span.icon-bar
-    = link_to I18n.t('brand.name'), root_path, class: 'navbar-brand'
-
-  .collapse.navbar-collapse
-    %ul.nav.navbar-nav.navbar-right
+%nav.top-bar{data: {topbar: '', options: "custom_back_text: false"}}
+  %ul.title-area
+    %li.name
+      %h1
+        = link_to I18n.t('brand.name'), root_path, class: 'navbar-brand'
+    %li.toggle-topbar.menu-icon
+      %a{href: "#"}
+  %section.top-bar-section
+    %ul.right
       - if user_signed_in?
-        %li.dropdown
-          %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+        %li.divider
+        %li.has-dropdown
+          %a.dropdown-toggle{href: user_home_path, data: {toggle: 'dropdown'}}
             = render 'users/avatar', size: :tiny
-            %b.caret
-          %ul.dropdown-menu
+          %ul.dropdown
             - if current_user.is_admin?
               %li= link_to I18n.t('admin.link'), rails_admin_path, data: {"no-turbolink" => true}
+            %li.divider
+            %li
+              %label= I18n.t 'account.section.name'
             %li= link_to I18n.t('account.edit.link'), edit_user_registration_path
+            %li= link_to I18n.t('auth.edit.link'), user_authentications_path(current_user)
+            %li.divider
             %li= link_to I18n.t('auth.logout.link'), destroy_user_session_path, rel: :nofollow
-      - unless user_signed_in?
+            %li.divider
+
+      - else
+        %li.divider
         %li= link_to I18n.t('auth.signup.link'), new_user_registration_path
         %li= link_to I18n.t('auth.login.link'), new_user_session_path
+

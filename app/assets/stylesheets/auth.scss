@@ -1,5 +1,5 @@
 .auth__form {
-  @extend .row;
+
   max-width: 420px;
   margin: 0 auto;
 
@@ -10,11 +10,6 @@
   .title {
     text-align: center;
     margin-bottom: 2em;
-    .help-block {
-      font-size: $font-size-base;
-      font-weight: normal;
-      margin: 20px 0 -10px;
-    }
   }
 
   abbr[title=required] {
@@ -22,18 +17,7 @@
   }
 
   ul {
-    @extend .list-unstyled;
-  }
-
-  .collapse {
-    max-height: 0;
-    display: block;
-    overflow: hidden;
-    opacity: 1;
-    @include transition(max-height .5s ease);
-    &.in {
-      max-height: 300px;
-    }
+    @extend .no-bullet;
   }
 
   .facepile {
@@ -43,12 +27,12 @@
 
 .auth__or {
   position: relative;
-  font-size: $font-size-h4;
-  color: darken($gray-lighter, 15%);
+  font-size: $h4-font-size;
+  color: $gray-light;
   margin: 20px 0;
   padding: 10px 0;
   hr {
-    background-color: darken($gray-lighter, 10%);
+    background-color: $gray-lighter;
     height: 1px;
     margin-top: 0px !important;
     margin-bottom: 0px !important;
@@ -66,7 +50,6 @@
 }
 
 .auth__links {
-  @extend .help-block;
   margin: 30px 0;
 }
 
@@ -79,15 +62,14 @@
 }
 
 .auth__providers__provider {
-  @extend .col-xs-6;
-  @extend .col-sm-6;
+  @extend .small-6, .columns;
   margin-bottom: 10px;
   a {
     width: 100%;
   }
 }
 
-.btn {
+.button {
   &[data-provider=twitter] {
     background: #00ACED;
     border-color: #0099D3;

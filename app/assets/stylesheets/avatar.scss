@@ -8,34 +8,37 @@
   &.tiny {
     width: 24px;
     height: 24px;
+    line-height: 20px;
     img {
       max-width: 24px;
     }
     .default {
-      font-size: 20px;
-      margin-top: 2px;
+      font-size: 26px;
+      margin-top: 0;
     }
   }
   &.thumb {
     width: 48px;
     height: 48px;
+    line-height: 44px;
     img {
       max-width: 48px;
     }
     .default {
-      font-size: 38px;
-      margin-top: 8px;
+      font-size: 50px;
+      margin-top: 2px;
     }
   }
   &.large {
     width: 73px;
     height: 73px;
+    line-height: 70px;
     img {
       max-width: 73px;
     }
     .default {
-      font-size: 60px;
-      margin-top: 10px;
+      font-size: 80px;
+      margin-top: 0;
     }
   }
 

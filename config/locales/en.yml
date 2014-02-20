@@ -34,13 +34,14 @@ en:
 
   auth:
     login:
-      title: 'Please Log In, or %{signup_link}'
+      title: 'Log In'
       link: 'Log In'
+      help: 'or %{signup_link}'
       link_with: 'Log In with %{provider}'
     signup:
       title: 'Sign Up'
       link: 'Sign Up'
-      help: 'Already registered? %{login_link}'
+      help: 'or %{login_link}'
       email_taken: 'An account with your email already exists. %{login_link}'
     logout:
       link: 'Logout'
@@ -76,8 +77,10 @@ en:
       tooltip: 'Update your social data'
 
   account:
+    section:
+      name: 'Account'
     edit:
-      link: 'Account'
+      link: 'Profile'
     destroy:
       link: 'Delete my account'
       prompt: 'Delete your account?'

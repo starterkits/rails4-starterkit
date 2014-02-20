@@ -10,12 +10,14 @@
 
   - if resource.new_record?
     - unless hide_password
-      %div{class: resource.errors.empty? ? 'collapse fade' : ''}
+      %div{class: resource.errors.empty? ? 'hide' : ''}
         = f.input :password, required: true, autocomplete: 'off'
+      - content_for :on_ready do
+        $('input[name="user[email]"]').on('click keydown', function(){$(this).closest('form').find('.hide').slideDown('slow')});
 
   - else # updating resource
     = f.input :password, autocomplete: 'off'
     - if resource.password_required?
       = f.input :current_password, autocomplete: 'off'
 
-  = f.button :submit, class: 'btn-primary'
+  = f.button :submit

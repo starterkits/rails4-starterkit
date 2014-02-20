@@ -2,10 +2,9 @@
   = render 'layouts/account_tabs'
 
   - if devise_mapping.confirmable? and not resource.confirmed?
-    .alert.alert-warning.alert-dismissable
-      %button.close{'data-dismiss' => 'alert', 'aria-hidden' => true} &times;
+    .panel.callout
       %p= I18n.t 'devise.registrations.signed_up_but_unconfirmed'
-      %p= button_to I18n.t('auth.confirm.submit'), confirmation_path(resource_name), class: 'btn btn-warning btn-xs'
+      = link_to I18n.t('auth.confirm.submit'), confirmation_path(resource_name), method: :post
 
   = render 'users/registrations/form', show_all: true
 

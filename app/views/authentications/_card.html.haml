@@ -3,9 +3,9 @@
 
 = render layout: 'users/card', locals: {user: authentication, size: size, username: username, profile_url: authentication.profile_url, target: '_blank'} do
   .card__actions
-    = link_to [current_user, authentication], data: {confirm: I18n.t('auth.destroy.prompt'), confirm_modal: disconnect_modal}, method: :delete, rel: 'tooltip', title: I18n.t('auth.destroy.tooltip') do
-      %i.glyphicon.glyphicon-remove-circle
+    = link_to [current_user, authentication], class: 'has-tip', data: {confirm: I18n.t('auth.destroy.prompt'), confirm_modal: disconnect_modal, tooltip: ''}, method: :delete, title: I18n.t('auth.destroy.tooltip') do
+      %i.fi-x-circle
       = I18n.t('auth.destroy.link')
-    = link_to provider_auth_path(authentication.provider, origin: return_to), data: {flow: 'connect'}, rel: 'tooltip', title: I18n.t('auth.reconnect.tooltip') do
-      %i.glyphicon.glyphicon-repeat
+    = link_to provider_auth_path(authentication.provider, origin: return_to), class: 'has-tip', data: {flow: 'connect', tooltip: ''}, title: I18n.t('auth.reconnect.tooltip') do
+      %i.fi-refresh
       = I18n.t('auth.reconnect.link')
