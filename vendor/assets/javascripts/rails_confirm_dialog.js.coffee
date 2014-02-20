@@ -1,7 +1,7 @@
 #
-# Rails 3+ Twitter Bootstrap 2+ Confirm Dialog, plugin to hande rails confirm dialogs with a Twitter Bootstrap modal
-# version 0.2
-# (c) 2011 joe johnston [joe@simple10.com]
+# Rails 3+ with Twitter Bootstrap 2+ or Zurb Foundation 5+ Confirm Dialog Modal
+# version 0.3
+# (c) 2014 joe johnston [joe@simple10.com]
 # released under the MIT license
 #
 # Dependencies:
@@ -23,7 +23,7 @@
 #          %span.label.label-danger Warning
 #          This cannot be undone.
 #        .modal-footer
-#          %button.btn.btn-danger.ok Yes, delete my account
+#          %button.btn.btn-danger{data: {confirm: 'true', dismiss: 'modal'} Yes, delete my account
 #          %button.btn.btn-default{data: {dismiss: 'modal'}} Cancel
 
 Confirm =
@@ -46,7 +46,13 @@ Confirm =
       $.rails.allowAction = @allowAction
 
   showModal: ($modal, elem) ->
-    $modal.modal()
-    $modal.find('.btn.ok').on('click', => @confirmed(elem))
+    if $modal.hasClass 'reveal-modal'
+      # Foundation
+      $modal.foundation 'reveal', 'open'
+      $modal.find('[data-dismiss]').on('click', => $modal.foundation 'reveal', 'close')
+    else
+      # Bootstrap
+      $modal.modal()
+    $modal.find('[data-confirm]').on('click', => @confirmed(elem))
 
 $ -> Confirm.initRailsHook()
