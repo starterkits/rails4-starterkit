@@ -37,8 +37,6 @@ GEM
     bcrypt-ruby (3.1.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.1.0.2)
-      sass (~> 3.2)
     builder (3.2.2)
     byebug (2.6.0)
       columnize (~> 0.3)
@@ -98,6 +96,9 @@ GEM
     font-awesome-rails (4.0.3.1)
       railties (>= 3.2, < 5.0)
     formatador (0.2.4)
+    foundation-rails (5.1.1.0)
+      railties (>= 3.1.0)
+      sass (>= 3.2.0)
     guard (2.4.0)
       formatador (>= 0.2.4)
       listen (~> 2.1)
@@ -353,7 +354,6 @@ DEPENDENCIES
   addressable
   airbrake
   awesome_print
-  bootstrap-sass
   cancan
   capybara-webkit
   coffee-rails
@@ -363,6 +363,7 @@ DEPENDENCIES
   devise-async
   factory_girl_rails
   ffaker
+  foundation-rails
   guard-rspec
   haml-rails
   headjs-rails

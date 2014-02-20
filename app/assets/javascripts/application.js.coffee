@@ -12,7 +12,7 @@
 #
 #= require jquery_2
 #= require jquery_ujs
-#= require bootstrap
+#= require foundation
 #= require jquery.turbolinks
 #= require turbolinks
 #= require nprogress

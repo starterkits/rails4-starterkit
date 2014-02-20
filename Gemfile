@@ -46,7 +46,7 @@ gem 'coffee-rails'
 # gem 'therubyracer', platforms: :ruby
 
 # Design
-gem 'bootstrap-sass'
+gem 'foundation-rails'
 # gem 'bourbon'
 # gem 'neat'
 # gem 'country_select'
