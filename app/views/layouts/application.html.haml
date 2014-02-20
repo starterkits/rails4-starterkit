@@ -1,6 +1,7 @@
 !!!
 %html.no-js{lang: 'en'}
   %head
+    %meta{charset: "utf-8"}/
     %meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
     %title= content_for?(:title) ? yield(:title) : I18n.t('brand.name')
     %meta{content: (content_for?(:description) ? yield(:description) : I18n.t('brand.name')), name: 'description'}
