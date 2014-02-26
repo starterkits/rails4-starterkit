@@ -3,7 +3,7 @@ class CreateAuthentications < ActiveRecord::Migration
     create_table :authentications do |t|
       t.belongs_to  :user
 
-      t.string    :provider, null: false
+      t.string    :provider, null: false, index: true
       t.string    :proid, null: false
       t.string    :token
       t.string    :refresh_token
@@ -15,7 +15,5 @@ class CreateAuthentications < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    add_index :authentications, :provider
   end
 end

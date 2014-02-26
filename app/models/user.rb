@@ -17,6 +17,16 @@ class User < ActiveRecord::Base
     first_name.presence || email.split('@')[0]
   end
 
+  # Case insensitive email lookup.
+  #
+  # See Devise.config.case_insensitive_keys.
+  # Devise does not automatically downcase email lookups.
+  def self.find_by_email(email)
+    find_by(email: email.downcase)
+    # Use ILIKE if using PostgreSQL and Devise.config.case_insensitive_keys=[]
+    #where('email ILIKE ?', email).first
+  end
+
   # Override Devise to allow for Authentication or password.
   #
   # An invalid authentication is allowed for a new record since the record

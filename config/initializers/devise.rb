@@ -42,6 +42,8 @@ Devise.setup do |config|
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
   config.case_insensitive_keys = [ :email ]
+  # No need to downcase email when using a case insensitive index and custom User.find_by_email.
+  # config.case_insensitive_keys = []
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or

@@ -178,4 +178,12 @@ describe User do
       user.email.should_not == email
     end
   end
+
+  describe "case insensitive email lookup" do
+    it "finds email" do
+      user.email = 'ABC-abc@TestExample.com'
+      user.save
+      User.find_by_email('abc-ABC@tEstEXample.COM').should == user
+    end
+  end
 end
