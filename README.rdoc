@@ -1,23 +1,35 @@
+= Rails 4.1 Starter Kit
+
+Bootstrap 3 / Foundation 5 + CoffeeScript + Sass + Devise + everything else you need to get into production, fast.
+
 = Overview
 
-Rails4 StarterKit is a <b>starter app with production ready performance, security, and authentication.</b>
+Rails 4.1 Starter Kit is a starter app with production ready performance, security, and authentication.
 
 This project was extracted from several apps running in production over the past couple of years and upgraded to Rails 4.1.
 
-Unlike most starter apps that simply kick start development, Rails4 StarterKit is opinionated and production ready.
-It aims to combine great gems, best practices, and optimal configuration to minimize common mistakes and repetitious
+Unlike most starter apps that focus on kick starting development, Rails 4.1 Starter Kit is opinionated and production ready.
+It combines the best gems, best practices, and optimized configuration to minimize common mistakes and repetitious
 framework setup.
 
-Beyond configuration and tests, the bulk of Rails4 StarterKit code is the authentication flows.
-While Devise provides excellent reference views for password sign up and login, it does not handle social logins.
-StarterKit adds well designed UX flows for social logins (Facebook, Twitter, etc.) as well as connecting additional
+Beyond configuration and tests, the bulk of Rails 4.1 Starter Kit code is the authentication flows.
+The app provides well designed UX flows for social logins (Facebook, Twitter, etc.) as well as connecting additional
 accounts after sign up.
+
 
 == Demo
 
-{Demo}[https://rails4-starterkit.herokuapp.com]
+{Demo}[https://rails4-starterkit.herokuapp.com] — Bootstrap 3
 
 {Email Template Preview}[https://rails4-starterkit.herokuapp.com/p/email?premail=true&layout=email] — with inline CSS via Premailer
+
+
+== Status
+
+* *Configuration*: excellent — all configuration keys are in one file and overridable with ENV vars
+* *Development*: good — support for Zeus and Spring
+* *Test*: fair — 65% code coverage; auth flows need more tests
+* *Production*: good — used in several production apps
 
 
 == Features
@@ -54,7 +66,8 @@ accounts after sign up.
 * Airbrake[https://github.com/airbrake/airbrake] or Errbit[https://github.com/errbit/errbit]
 
 <b>Maintainable CSS</b>
-* Bootstrap3[http://getbootstrap.com/] enabled — easily modifiable for Foundation[http://foundation.zurb.com/], Topcoat[http://topcoat.io/] or custom framework
+* Bootstrap3[http://getbootstrap.com/] enabled — master[https://github.com/starterkits/rails4-starterkit/tree/master] branch
+* Foundation5[http://foundation.zurb.com/] enabled — foundation[https://github.com/starterkits/rails4-starterkit/tree/foundation] branch 
 * BEM[http://bem.info/method/] class names — prevents class name collision
 * SASS @extend[http://sass-lang.com/documentation/file.SASS_REFERENCE.html#extend] — keeps Bootstrap specific class names out of the views, making it easier to switch CSS frameworks
 
@@ -82,6 +95,11 @@ Gemfile is configured for OSX development. See comments in Gemfile for Linux.
 
   git clone https://github.com/starterkits/rails4-starterkit.git
   cd rails4-starterkit
+  
+  # For Bootstrap 3, stay in master branch
+  # For Foundation 5, check out foundation branch
+  git checkout foundation
+  
   bundle install
 
   # Make sure postgresql and redis are running locally, then
@@ -117,7 +135,7 @@ Twitter and Facebook demo app credentials use callback urls for http://0.0.0.0:3
 
 = Debugging
 
-Ruby 2.0+ uses byebug instead of debugger. StarterKit is configured to use pry or byebug.
+Ruby 2.0+ uses byebug instead of debugger. Starter Kit is configured to use pry or byebug.
 
   # Add pry or byebug to code
   binding.pry
@@ -185,7 +203,7 @@ Note that Sidekiq does not process jobs in tests.
 
 <b>Install Errbit</b>
 
-StarterKit is setup to use Airbrake or Errbit for error tracking and reporting. Errbit is an
+Starter Kit is setup to use Airbrake or Errbit for error tracking and reporting. Errbit is an
 open source alternative to Airbrake that can be hosted for free on Heroku.
 
 See https://github.com/errbit/errbit for installation.
@@ -202,11 +220,11 @@ After setting up Airbrake or Errbit, update your server ENV vars.
 
 = Updating
 
-StarterKit Gemfile does not specify gem versions in order to make upgrading easier.
+Starter Kit Gemfile does not specify gem versions in order to make upgrading easier.
 
   bundle update
 
-To merge changes from StarterKit
+To merge changes from Starter Kit
 
   git remote add upstream https://github.com/starterkits/rails4-starterkit.git
 
@@ -283,12 +301,12 @@ Same as OAuth flow above.
 
 = Mail Previews
 
-Rails 4.1 introduced mailer previews. StarterKit now has two ways to preview emails:
+Rails 4.1 introduced mailer previews. Starter Kit now has two ways to preview emails:
 
 * http://localhost:3000/rails/mailers – Rails 4.1 built-in method
-* http://0.0.0.0:3000/p/email?premail=true&layout=email – StarterKit method with query param configs
+* http://0.0.0.0:3000/p/email?premail=true&layout=email – Starter Kit method with query param configs
 
-Mail previews are only available in development by default. To make StarterKit previews
+Mail previews are only available in development by default. To make Starter Kit previews
 available in other environments, set the ALLOW_EMAIL_PREVIEW='1'.
 
 
