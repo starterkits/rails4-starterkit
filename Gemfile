@@ -30,7 +30,8 @@ gem 'schema_plus'             # add better index and foreign key support
 # Assets
 gem 'sass-rails'
 gem 'haml-rails'
-gem 'simple_form'
+# Temporary fix for simple_form gem requiring < Rails 4.1
+gem 'simple_form', git: 'git://github.com/plataformatec/simple_form.git'
 gem 'uglifier'
 gem 'headjs-rails'
 
