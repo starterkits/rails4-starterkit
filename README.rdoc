@@ -80,7 +80,7 @@ accounts after sign up.
 <b>Databases</b>
 * PostgreSQL[http://www.postgresql.org/] — app data; switchable to MySQL, MongoDB, etc.
 * Redis[http://redis.io/] — background job queues
-* Memcahced[http://memcached.org/] — session data; only required in production
+* Memcached[http://memcached.org/] — session data; only required in production
 
 <b>Production Ready</b>
 * Heroku[https:/www.heroku.com] ready — git clone, configure, git push heroku master and you're done
