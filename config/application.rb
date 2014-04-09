@@ -36,6 +36,8 @@ module StarterKit
     # Enable faster precompiles
     config.assets.initialize_on_precompile = false
 
+    config.assets.precompile += %w( head )
+
     # Serve vendor fonts
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
 
