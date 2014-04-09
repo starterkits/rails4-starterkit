@@ -15,5 +15,5 @@
             = warning
         %p= I18n.t "#{i18n_prefix}notice"
       .modal-footer
-        %button.btn.btn-danger.ok= I18n.t "#{i18n_prefix}submit"
+        %button.btn.btn-danger{data: {confirm: '', dismiss: 'modal'}}= I18n.t "#{i18n_prefix}submit"
         %button.btn.btn-default{data: {dismiss: 'modal'}}= I18n.t "#{i18n_prefix}cancel"
