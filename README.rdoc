@@ -189,6 +189,7 @@ Note that Sidekiq does not process jobs in tests.
   heroku config:add DEVISE_SECRET_KEY="$(bundle exec rake secret)"
   heroku config:add DEVISE_PEPPER="$(bundle exec rake secret)"
   heroku config:add SECRET_KEY_BASE="$(bundle exec rake secret)"
+  heroku config:set REDIS_URL=`heroku config:get REDISTOGO_URL`
 
   # Needs customization
   heroku config:add MAIL_HOST=[YOUR APP URL]

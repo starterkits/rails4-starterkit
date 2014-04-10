@@ -62,7 +62,7 @@ default_env: &default_env
   SECRET_KEY_BASE: '16e628ec083d6127ca30716ac69c578ba47a900702f0d498c149b87d06eeebd1bc0be22929e16e2180cb137e9be8bc7f77dd3b9c13fbb306330bb6450cfbc051'
 
   # Redis server used by Sidekiq, cache, etc.
-  REDIS_URL: <%= ENV['REDISTOGO_URL'] || 'redis://localhost:6379/0' %>
+  REDIS_URL: 'redis://localhost:6379/0'
 
   # Airbrake/Errbit configuration
   AIRBRAKE_API_KEY: ''
