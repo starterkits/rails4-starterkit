@@ -219,6 +219,21 @@ After setting up Airbrake or Errbit, update your server ENV vars.
   rake airbrake:test
 
 
+<b>Additional Steps</b>
+
+StarterKit is pre-configured to make it easy to deploy apps into production environments.
+However, it's a good idea to consider the following steps to make your app production ready:
+
+* split worker and web processes into separate servers or dynos
+* add SSL with CloudFlare, Heroku SSL, or similar
+* add Pingdom or other monitoring service with HTML parsing to analyze page content
+* setup Errbit or Airbrake and configure StarterKit to track errors
+* send syslogs to a central logger that supports searching and filtering
+* use a security service to analyze site for common security holes (XSS, etc.)
+
+
+
+
 = Updating
 
 Starter Kit Gemfile does not specify gem versions in order to make upgrading easier.
