@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 20140204233952) do
     t.text     "data_json",         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["authentication_id"], :name => "fk__oauth_caches_authentication_id"
     t.index ["authentication_id"], :name => "index_oauth_caches_on_authentication_id"
   end
 
