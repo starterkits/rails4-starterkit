@@ -280,7 +280,7 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
-    schema_plus (1.5.0)
+    schema_plus (1.5.3)
       activerecord (>= 3.2)
       valuable
     sdoc (0.4.0)
