@@ -95,7 +95,7 @@ GEM
     font-awesome-rails (4.0.3.1)
       railties (>= 3.2, < 5.0)
     formatador (0.2.4)
-    foundation-rails (5.2.2.0)
+    foundation-rails (5.3.1.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
     guard (2.6.0)
