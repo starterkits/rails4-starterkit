@@ -20,7 +20,7 @@ development:
   database: <%= Rails.application.config.settings.app_name %>_development
   pool: 5
   username: postgres
-  password:
+  password: AqdmTraL
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -49,7 +49,7 @@ test:
   database: <%= Rails.application.config.settings.app_name %>_test
   pool: 5
   username: postgres
-  password:
+  password: AqdmTraL
 
 production:
   adapter: postgresql

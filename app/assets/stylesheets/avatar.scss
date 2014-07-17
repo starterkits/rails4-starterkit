@@ -1,3 +1,9 @@
+// Moved all "avatar" stuff from app/assets/stylesheets/_variables.scss here
+//
+
+$avatar-background-color: $gray-light;
+$avatar-default-color: darken($avatar-background-color, 20%);
+
 .avatar {
   display: inline-block;
   background-color: $avatar-background-color;

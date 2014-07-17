@@ -48,6 +48,10 @@ gem 'coffee-rails'
 
 # Design
 gem 'bootstrap-sass'
+## Bootswatch and Fontawesome added by okebydesign 17.07.2014:1845
+gem 'bootswatch-rails'
+gem "font-awesome-rails"
+## Bootswatch and Fontawesome added by okebydesign 17.07.2014:1845
 # gem 'bourbon'
 # gem 'neat'
 # gem 'country_select'

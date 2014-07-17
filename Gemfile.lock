@@ -38,6 +38,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
+    bootswatch-rails (3.2.0)
+      railties (>= 3.1)
     builder (3.2.2)
     byebug (2.7.0)
       columnize (~> 0.3)
@@ -357,6 +359,7 @@ DEPENDENCIES
   airbrake
   awesome_print
   bootstrap-sass
+  bootswatch-rails
   cancan
   capybara-webkit
   coffee-rails
@@ -366,6 +369,7 @@ DEPENDENCIES
   devise-async
   factory_girl_rails
   ffaker
+  font-awesome-rails
   guard-rspec
   haml-rails
   headjs-rails
