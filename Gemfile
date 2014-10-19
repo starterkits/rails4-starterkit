@@ -57,7 +57,7 @@ gem 'premailer-rails'
 
 # Authentication
 gem 'devise'
-gem 'cancan'
+gem 'cancancan', '~> 1.9'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
