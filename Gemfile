@@ -116,7 +116,7 @@ group :development, :test do
   gem 'awesome_print'           # pretty pring debugging output
 
   # Testing
-  gem 'rspec-rails'
+  gem 'rspec-rails', '2.99'
   gem 'factory_girl_rails'
   gem 'ffaker'
   gem 'capybara-webkit'
