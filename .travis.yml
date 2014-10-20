@@ -7,6 +7,7 @@ services:
   - memcached
 env:
   - RAILS_ENV=test
+bundler_args: --without development production
 before_install:
   - bundle config build.nokogiri --use-system-libraries
 before_script:
