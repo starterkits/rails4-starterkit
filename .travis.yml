@@ -4,6 +4,7 @@ rvm:
 services:
   - postgresql
   - redis-server
+  - memcached
 env:
   - RAILS_ENV=test
 before_install:
