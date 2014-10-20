@@ -53,13 +53,6 @@ Rails.application.configure do
   config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
-  # Use a different cache store in production.
-  # If using Memcachier on Heroku, the memcachier gem will auto config servers
-  # config.cache_store = :memory_store
-  # config.cache_store = :mem_cache_store, ENV['MEMCACHE_SERVERS].split(','),
-  #   { namespace: Rails.application.config.settings.app_name, expires_in: 30.day, compress: true }
-  config.cache_store = :dalli_store
-
   #
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
