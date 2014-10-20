@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
+ruby '2.1.3'
 
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 4.1.6'
 
 #
 # PLATFORM SPECIFIC
@@ -16,7 +16,7 @@ gem 'terminal-notifier', group: [:development]
 
 
 # Monitoring
-gem 'rack-timeout', '~> 0.1.0beta3'
+gem 'rack-timeout', '~> 0.1.0beta4'
 gem 'newrelic_rpm'
 gem 'airbrake'                # use with airbrake.io or errbit
 # gem 'airbrake_user_attributes'  # use with self-hosted errbit; see config/initializers/airbrake.rb
