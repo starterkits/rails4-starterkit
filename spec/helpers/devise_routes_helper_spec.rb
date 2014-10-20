@@ -67,12 +67,12 @@ describe DeviseRoutesHelper do
 
   describe "#valid_after_sign_in_path?" do
     it "prevents open redirects to other domains" do
-      @dummy.valid_after_sign_in_path?('http://someotherdomain.com/home').should be_false
+      @dummy.valid_after_sign_in_path?('http://someotherdomain.com/home').should be_falsey
     end
     it "allows redirects to canonical host" do
       ENV['CANONICAL_HOST'].should be_present
       path = "http://#{ENV['CANONICAL_HOST']}/some/path"
-      @dummy.valid_after_sign_in_path?(path).should be_true
+      @dummy.valid_after_sign_in_path?(path).should be_truthy
     end
   end
 end

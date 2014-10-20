@@ -13,7 +13,7 @@ describe Concerns::UserImagesConcern do
       user.image_url = nil
       user.image_url.should =~ /gravatar\.com/
     end
-    pending it "should check facebook, linkedin, twitter sizes"
+    skip it "should check facebook, linkedin, twitter sizes"
   end
 
   describe "#gravatar_url" do

@@ -142,6 +142,7 @@ group :test do
   # gem 'coveralls', :require => false
 
   gem 'rspec-sidekiq'
+  gem 'rspec-activemodel-mocks'
 end
 
 group :production do
