@@ -10,3 +10,5 @@ before_script:
   - bundle exec rake db:create db:schema:load
 script:
   - bundle exec rspec spec
+addons:
+  postgresql: "9.3"
