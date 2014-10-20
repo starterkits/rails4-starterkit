@@ -352,7 +352,7 @@ PLATFORMS
 
 DEPENDENCIES
   addressable
-  airbrake (< 4.0.0)
+  airbrake (~> 3.2.1)
   awesome_print
   cancancan (~> 1.9)
   capybara-webkit
