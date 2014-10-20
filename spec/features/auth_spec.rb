@@ -11,6 +11,6 @@ require 'spec_helper'
 # - ...
 ###
 
-describe "Auth flows" do
+describe "Auth flows", :type => :feature do
   skip "Add auth feature specs"
 end

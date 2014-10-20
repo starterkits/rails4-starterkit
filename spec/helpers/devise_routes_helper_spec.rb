@@ -10,7 +10,7 @@ class DummyClass
   include DeviseRoutesHelper
 end
 
-describe DeviseRoutesHelper do
+describe DeviseRoutesHelper, :type => :helper do
   before(:each) do
     @dummy = DummyClass.new
     @dummy.stub(request: @request)
@@ -25,10 +25,10 @@ describe DeviseRoutesHelper do
     before(:each) { @request.stub(fullpath: page_path) }
 
     it "does not include return_to param for login" do
-      @dummy.new_user_session_path.should == login
+      expect(@dummy.new_user_session_path).to eq(login)
     end
     it "does not include return_to param for sign up" do
-      @dummy.new_user_registration_path.should == signup
+      expect(@dummy.new_user_registration_path).to eq(signup)
     end
   end
 
@@ -38,10 +38,10 @@ describe DeviseRoutesHelper do
     before(:each) { @request.stub(fullpath: page_path) }
 
     it "includes return_to param" do
-      @dummy.new_user_session_path.should == login
+      expect(@dummy.new_user_session_path).to eq(login)
     end
     it "includes return_to param" do
-      @dummy.new_user_registration_path.should == signup
+      expect(@dummy.new_user_registration_path).to eq(signup)
     end
   end
 
@@ -67,12 +67,12 @@ describe DeviseRoutesHelper do
 
   describe "#valid_after_sign_in_path?" do
     it "prevents open redirects to other domains" do
-      @dummy.valid_after_sign_in_path?('http://someotherdomain.com/home').should be_falsey
+      expect(@dummy.valid_after_sign_in_path?('http://someotherdomain.com/home')).to be_falsey
     end
     it "allows redirects to canonical host" do
-      ENV['CANONICAL_HOST'].should be_present
+      expect(ENV['CANONICAL_HOST']).to be_present
       path = "http://#{ENV['CANONICAL_HOST']}/some/path"
-      @dummy.valid_after_sign_in_path?(path).should be_truthy
+      expect(@dummy.valid_after_sign_in_path?(path)).to be_truthy
     end
   end
 end

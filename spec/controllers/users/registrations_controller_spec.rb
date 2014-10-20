@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Users::RegistrationsController do
+describe Users::RegistrationsController, :type => :controller do
   describe "#after_sign_in_path_for" do
     it "does not include return_to param when return_to is user_root_path" do
       @request.env['devise.mapping'] = Devise.mappings[:user]
@@ -8,7 +8,7 @@ describe Users::RegistrationsController do
       controller.send(:store_location!)
       controller.send(:build_resource)
       path = controller.send(:after_sign_in_path_for, controller.resource)
-      path.should == user_root_path
+      expect(path).to eq(user_root_path)
     end
 
     it "includes return_to param" do
@@ -17,7 +17,7 @@ describe Users::RegistrationsController do
       controller.send(:store_location!)
       controller.send(:build_resource)
       path = controller.send(:after_sign_in_path_for, controller.resource)
-      path.should == test_path
+      expect(path).to eq(test_path)
     end
   end
 end

@@ -1,32 +1,32 @@
 require 'spec_helper'
 
-describe User do
+describe User, :type => :model do
   let(:user) { FactoryGirl.build(:user) }
   let(:authentication) { FactoryGirl.build(:authentication) }
 
   describe "#create" do
     it "enqueues welcome email" do
-      Sidekiq::Extensions::DelayedMailer.jobs.should be_empty
+      expect(Sidekiq::Extensions::DelayedMailer.jobs).to be_empty
       user.save
-      Sidekiq::Extensions::DelayedMailer.jobs.size.should == 1
+      expect(Sidekiq::Extensions::DelayedMailer.jobs.size).to eq(1)
     end
   end
 
   describe "#valid?" do
     it "requires password or authentication" do
       user.password = nil
-      user.should_not be_valid
+      expect(user).not_to be_valid
       user.password = 'testpass'
-      user.should be_valid
+      expect(user).to be_valid
       user.password = nil
       user.authentications << authentication
-      user.should be_valid
+      expect(user).to be_valid
     end
     it "requires email" do
       user.email = nil
-      user.should_not be_valid
+      expect(user).not_to be_valid
       user.email = 'test@example.com'
-      user.should be_valid
+      expect(user).to be_valid
     end
   end
 
@@ -40,21 +40,21 @@ describe User do
           user
         }
         it "is always false when new record" do
-          user.should be_new_record
-          user.should_not be_persisted
-          user.should_not be_password_required
+          expect(user).to be_new_record
+          expect(user).not_to be_persisted
+          expect(user).not_to be_password_required
           # Invalid provider
           user.authentications.first.provider = nil
-          user.should_not be_password_required
+          expect(user).not_to be_password_required
           # Invalid + valid provider
           user.authentications << FactoryGirl.build(:authentication)
-          user.should_not be_password_required
+          expect(user).not_to be_password_required
           # Not updating password
           user.password = user.password_confirmation = nil
-          user.should_not be_password_required
+          expect(user).not_to be_password_required
           # Updating password
           user.password = user.password_confirmation = 'abcabcabc'
-          user.should_not be_password_required
+          expect(user).not_to be_password_required
         end
       end
       context "and persisted" do
@@ -64,33 +64,33 @@ describe User do
           user
         }
         it "is persisted" do
-          user.should be_persisted
+          expect(user).to be_persisted
         end
         it "is false when has at least one valid authentication" do
           user.encrypted_password = nil
           authentication.provider = nil
           user.authentications << [authentication, FactoryGirl.build(:authentication)]
-          user.should_not be_password_required
+          expect(user).not_to be_password_required
         end
         it "is false when has saved password" do
           user.encrypted_password = '123123'
-          user.should_not be_password_required
+          expect(user).not_to be_password_required
           user.authentications.first.provider = nil
-          user.should_not be_password_required
+          expect(user).not_to be_password_required
         end
         it "is true when no saved password and invalid authentication" do
           user.encrypted_password = ''
-          user.should_not be_password_required
+          expect(user).not_to be_password_required
           user.authentications.first.provider = nil
-          user.should be_password_required
+          expect(user).to be_password_required
         end
         it "is true when password is present" do
-          user.should_not be_password_required
+          expect(user).not_to be_password_required
           user.password = 'abcabc'
-          user.should be_password_required
+          expect(user).to be_password_required
           user.password = nil
           user.password_confirmation = 'abcabc'
-          user.should be_password_required
+          expect(user).to be_password_required
         end
       end
     end
@@ -102,19 +102,19 @@ describe User do
           user
         }
         it "is always true when new record" do
-          user.should be_new_record
-          user.should_not be_persisted
-          user.should be_password_required
+          expect(user).to be_new_record
+          expect(user).not_to be_persisted
+          expect(user).to be_password_required
           user.password = user.password_confirmation = nil
-          user.should be_password_required
+          expect(user).to be_password_required
           user.password = user.password_confirmation = ''
-          user.should be_password_required
+          expect(user).to be_password_required
           user.password = '123123123'
           user.password_confirmation = nil
-          user.should be_password_required
+          expect(user).to be_password_required
           user.password = nil
           user.password_confirmation = 'abcabcabc'
-          user.should be_password_required
+          expect(user).to be_password_required
         end
       end
       context "and persisted" do
@@ -126,17 +126,17 @@ describe User do
         it "is true when password is present" do
           user.password = 'abc'
           user.password_confirmation = nil
-          user.should be_password_required
+          expect(user).to be_password_required
           user.password = nil
           user.password_confirmation = '123'
-          user.should be_password_required
+          expect(user).to be_password_required
         end
         it "is true when saved password is not present" do
           user.encrypted_password = ''
-          user.should be_password_required
+          expect(user).to be_password_required
         end
         it "is false when password is not present" do
-          user.should_not be_password_required
+          expect(user).not_to be_password_required
         end
       end
     end
@@ -144,7 +144,7 @@ describe User do
 
   describe "#authentications" do
     it "has many dependent authentications" do
-      user.should have_many(:authentications).dependent(:destroy)
+      expect(user).to have_many(:authentications).dependent(:destroy)
     end
     describe "#grouped_with_oauth" do
       it "groups by provider and includes oauth_cache" do
@@ -155,10 +155,10 @@ describe User do
         FactoryGirl.create(:authentication, user: user, provider: 'facebook')
         FactoryGirl.create(:authentication, user: user, provider: 'twitter')
         auths = user.authentications.grouped_with_oauth
-        auths.keys.length.should == 3
-        auths['facebook'].length.should == 2
-        auths['twitter'].length.should == 2
-        auths['linkedin'].length.should == 1
+        expect(auths.keys.length).to eq(3)
+        expect(auths['facebook'].length).to eq(2)
+        expect(auths['twitter'].length).to eq(2)
+        expect(auths['linkedin'].length).to eq(1)
       end
     end
   end
@@ -169,13 +169,13 @@ describe User do
       email = 'auth@domain.com'
       authentication.oauth_data = {email: email}
       user.reverse_merge_attributes_from_auth(authentication)
-      user.email.should == email
+      expect(user.email).to eq(email)
     end
     it "does not merge email" do
       email = 'somerandom@email.com'
       authentication.oauth_data = {email: email}
       user.reverse_merge_attributes_from_auth(authentication)
-      user.email.should_not == email
+      expect(user.email).not_to eq(email)
     end
   end
 
@@ -183,7 +183,7 @@ describe User do
     it "finds email" do
       user.email = 'ABC-abc@TestExample.com'
       user.save
-      User.find_by_email('abc-ABC@tEstEXample.COM').should == user
+      expect(User.find_by_email('abc-ABC@tEstEXample.COM')).to eq(user)
     end
   end
 end
