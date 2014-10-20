@@ -11,7 +11,7 @@ class DummyController < DeviseController
   def is_navigational_format?; true; end
 end
 
-describe DeviseReturnToConcern do
+describe DeviseReturnToConcern, :type => :controller do
   let(:controller) { DummyController.new }
 
   describe "store_location!" do
@@ -19,15 +19,15 @@ describe DeviseReturnToConcern do
       path = '/some/test/path'
       controller.params = { return_to: path }
       controller.store_location!
-      controller.session[:"#{controller.resource_name}_return_to"].should == path
-      controller.session[:"#{controller.resource_name}_return_to_timestamp"].should >= Time.now.utc.to_i
-      controller.stored_location_for(controller.resource_name).should == path
+      expect(controller.session[:"#{controller.resource_name}_return_to"]).to eq(path)
+      expect(controller.session[:"#{controller.resource_name}_return_to_timestamp"]).to be >= Time.now.utc.to_i
+      expect(controller.stored_location_for(controller.resource_name)).to eq(path)
     end
     it "does not change session when return_to is missing" do
       controller.store_location!
-      controller.session[:"#{controller.resource_name}_return_to"].should be_nil
-      controller.session[:"#{controller.resource_name}_return_to_timestamp"].should be_nil
-      controller.stored_location_for(controller.resource_name).should be_nil
+      expect(controller.session[:"#{controller.resource_name}_return_to"]).to be_nil
+      expect(controller.session[:"#{controller.resource_name}_return_to_timestamp"]).to be_nil
+      expect(controller.stored_location_for(controller.resource_name)).to be_nil
     end
   end
 
@@ -36,7 +36,7 @@ describe DeviseReturnToConcern do
       path = '/some/test/path'
       controller.params = { return_to: path }
       controller.store_location!
-      controller.after_sign_in_path_for(controller.resource_name).should == path
+      expect(controller.after_sign_in_path_for(controller.resource_name)).to eq(path)
     end
     it "does not return stored path if expired" do
       path = '/some/test/path'
@@ -46,8 +46,8 @@ describe DeviseReturnToConcern do
       controller.store_location!
       controller.session[:"#{controller.resource_name}_return_to_timestamp"] = \
         Time.now.utc.to_i - DummyController::RETURN_TO_TIMEOUT - 10
-      controller.after_sign_in_path_for(controller.resource_name).should_not == path
-      controller.after_sign_in_path_for(controller.resource_name).should == user_root_path
+      expect(controller.after_sign_in_path_for(controller.resource_name)).not_to eq(path)
+      expect(controller.after_sign_in_path_for(controller.resource_name)).to eq(user_root_path)
     end
   end
 end

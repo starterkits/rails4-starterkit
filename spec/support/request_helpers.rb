@@ -48,7 +48,7 @@ module RequestHelpers
   end
 
   def as_visitor(user=nil, &block)
-    current_user = user || FactoryGirl.stub(:user)
+    current_user = user || allow(FactoryGirl).to(receive(:user))
     if defined? request and request.present?
       sign_out(current_user)
     else

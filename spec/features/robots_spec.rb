@@ -4,7 +4,7 @@ feature "Robots" do
   context "canonical host" do
     scenario "allow robots to index the site" do
       Rails.env = 'production'
-      Rails.env.production?.should be_truthy
+      expect(Rails.env.production?).to be_truthy
       Capybara.app_host = "http://#{ENV['CANONICAL_HOST']}"
       visit '/robots.txt'
       expect(page).to have_content('User-agent: *')
@@ -16,7 +16,7 @@ feature "Robots" do
   context "non-canonical host" do
     scenario "deny robots to index the site" do
       Rails.env = 'test'
-      Rails.env.production?.should be_falsey
+      expect(Rails.env.production?).to be_falsey
       Capybara.app_host = nil
       visit '/robots.txt'
       expect(page).to have_content('User-agent: *')

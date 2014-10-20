@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Users::OauthController do
+describe Users::OauthController, :type => :controller do
   describe "#set_vars" do
     def test_path(path, test = 'should')
       controller.send(:set_vars)

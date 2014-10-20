@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Concerns::OmniauthConcern do
+describe Concerns::OmniauthConcern, :type => :model do
   include OmniauthHelpers
 
   let(:auth) { FactoryGirl.build(:authentication) }
@@ -19,10 +19,10 @@ describe Concerns::OmniauthConcern do
       oauth_data = @omniauth_mocks[@provider]
       norm_data, auth_attrs = Authentication.normalize_oauth(oauth_data)
       @keys_to_test.each {|key|
-        norm_data[key].should == @data[key]
+        expect(norm_data[key]).to eq(@data[key])
       }
-      norm_data[:profile_url].should_not be_nil
-      norm_data[:urls].should include(['Website', @data[:website]]) if @check_website
+      expect(norm_data[:profile_url]).not_to be_nil
+      expect(norm_data[:urls]).to include(['Website', @data[:website]]) if @check_website
     end
   end
 
@@ -61,7 +61,7 @@ describe Concerns::OmniauthConcern do
   describe "#oauth_data=" do
     it "normalizes data" do
       auth.oauth_data = @omniauth_mocks['facebook']
-      auth.oauth_data[:email].should == @data.email
+      expect(auth.oauth_data[:email]).to eq(@data.email)
     end
   end
 
@@ -71,38 +71,38 @@ describe Concerns::OmniauthConcern do
 
   describe "#oauth_cache" do
     it "builds new instance on demand" do
-      auth.oauth_cache.should be_instance_of(OauthCache)
+      expect(auth.oauth_cache).to be_instance_of(OauthCache)
     end
     it "loads existing instance on demand" do
       auth.id = 99
       auth.save
       oauth = OauthCache.create(data_json: '{}', authentication_id: 99)
-      auth.oauth_cache.should == oauth
+      expect(auth.oauth_cache).to eq(oauth)
     end
     it "saves when authentication saves" do
-      oc.data_json.should be_blank
+      expect(oc.data_json).to be_blank
       auth.oauth_data = @omniauth_mocks['facebook']
-      oc.data_json.should be_present
+      expect(oc.data_json).to be_present
       auth.save!
-      oc.reload.should be_persisted
-      oc.data['provider'].should == 'facebook'
-      oc.id.should == auth.id
-      oc.authentication_id.should == auth.id
+      expect(oc.reload).to be_persisted
+      expect(oc.data['provider']).to eq('facebook')
+      expect(oc.id).to eq(auth.id)
+      expect(oc.authentication_id).to eq(auth.id)
     end
     it "saves when oauth_data updates" do
       auth.save!
-      oc.should be_new_record
+      expect(oc).to be_new_record
       auth.oauth_data = @omniauth_mocks['facebook']
-      oc.should be_persisted
-      oc.data_json.should be_present
-      oc.updated_at.should be_present
+      expect(oc).to be_persisted
+      expect(oc.data_json).to be_present
+      expect(oc.updated_at).to be_present
     end
     it "update data_json when data is set" do
-      oc.data_json.should be_blank
+      expect(oc.data_json).to be_blank
       data = Authentication.normalize_oauth(@omniauth_mocks['facebook'])
       oc.data = data
-      JSON.parse(oc.data_json).should_not == 'null'
-      oc.data.should == data
+      expect(JSON.parse(oc.data_json)).not_to eq('null')
+      expect(oc.data).to eq(data)
     end
   end
 end
