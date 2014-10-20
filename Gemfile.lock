@@ -42,7 +42,7 @@ GEM
     byebug (2.7.0)
       columnize (~> 0.3)
       debugger-linecache (~> 1.2)
-    cancan (1.6.10)
+    cancancan (1.9.2)
     capybara (2.3.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -354,7 +354,7 @@ DEPENDENCIES
   airbrake
   awesome_print
   bootstrap-sass
-  cancan
+  cancancan (~> 1.9)
   capybara-webkit
   coffee-rails
   dalli
