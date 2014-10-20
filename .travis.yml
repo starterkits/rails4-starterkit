@@ -6,10 +6,11 @@ services:
   - redis-server
 env:
   - RAILS_ENV=test
-before_script:
+before_install:
   - bundle config build.nokogiri --use-system-libraries
+before_script:
   - bundle exec rake db:create db:schema:load
 script:
-  - RAILS_ENV=test bundle exec rspec spec
+  - bundle exec rspec spec
 addons:
   postgresql: "9.3"
