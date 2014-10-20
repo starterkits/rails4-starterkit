@@ -28,7 +28,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.6)
-    airbrake (4.1.0)
+    airbrake (3.2.1)
       builder
       multi_json
     arel (5.0.1.20140414130214)
@@ -351,7 +351,7 @@ PLATFORMS
 
 DEPENDENCIES
   addressable
-  airbrake
+  airbrake (< 4.0.0)
   awesome_print
   bootstrap-sass
   cancancan (~> 1.9)
