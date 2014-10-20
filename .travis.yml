@@ -9,7 +9,7 @@ env:
 before_install:
   - bundle config build.nokogiri --use-system-libraries
 before_script:
-  - bundle exec rake db:create db:schema:load
+  - bundle exec rake db:create db:structure:load
 script:
   - bundle exec rspec spec
 addons:
