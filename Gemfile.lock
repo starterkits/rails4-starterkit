@@ -387,6 +387,7 @@ DEPENDENCIES
   rails_admin
   rb-fsevent
   rspec-rails
+  rspec-activemodel-mocks
   rspec-sidekiq
   sass-rails
   schema_plus
