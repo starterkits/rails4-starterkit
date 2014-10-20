@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 # Capybara docs: http://rubydoc.info/github/jnicklas/capybara/master
 

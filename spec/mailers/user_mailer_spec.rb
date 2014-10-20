@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe UserMailer, :type => :mailer do
   # http://guides.rubyonrails.org/action_mailer_basics.html#mailer-testing

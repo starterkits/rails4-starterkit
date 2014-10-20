@@ -1,4 +1,2 @@
 --color
---order=random
---profile
-
+--require spec_helper

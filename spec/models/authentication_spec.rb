@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Authentication, :type => :model do
   let(:authentication) {FactoryGirl.build(:authentication)}

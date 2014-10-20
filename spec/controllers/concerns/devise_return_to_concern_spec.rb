@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 class DummyController < DeviseController
   include DeviseReturnToConcern
@@ -41,7 +41,7 @@ describe DeviseReturnToConcern, :type => :controller do
     it "does not return stored path if expired" do
       path = '/some/test/path'
       user_root_path = '/user/root'
-      controller.stub(user_root_path: user_root_path)
+      allow(controller).to receive_messages(user_root_path: user_root_path)
       controller.params = { return_to: path }
       controller.store_location!
       controller.session[:"#{controller.resource_name}_return_to_timestamp"] = \
