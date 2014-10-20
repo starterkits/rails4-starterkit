@@ -1,10 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Users::OauthController, :type => :controller do
   describe "#set_vars" do
-    def test_path(path, test = 'should')
+    def test_path(path, test = 'to')
       controller.send(:set_vars)
-      controller.instance_variable_get('@origin').send(test) == path
+      expect(controller.instance_variable_get '@origin').send test, eq(path)
     end
 
     it "sets @origin from omniauth.origin" do
@@ -20,10 +20,10 @@ describe Users::OauthController, :type => :controller do
     end
 
     it "sets @origin to default path when origin is home, login, or sign up page" do
-      test_path(request.env['omniauth.origin'] = new_user_registration_path, 'should_not')
-      test_path(request.env['omniauth.origin'] = new_user_session_path, 'should_not')
-      test_path(request.env['omniauth.origin'] = root_path, 'should_not')
-      test_path(request.env['omniauth.origin'] = nil, 'should_not')
+      test_path(request.env['omniauth.origin'] = new_user_registration_path, 'not_to')
+      test_path(request.env['omniauth.origin'] = new_user_session_path, 'not_to')
+      test_path(request.env['omniauth.origin'] = root_path, 'not_to')
+      test_path(request.env['omniauth.origin'] = nil, 'not_to')
     end
   end
 end

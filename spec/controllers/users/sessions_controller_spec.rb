@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Users::SessionsController, :type => :controller do
   let(:user) { FactoryGirl.create(:user, password: 'testpass') }

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 # Use non-overridden url helpers for testing
 def urls
@@ -8,12 +8,13 @@ end
 class DummyClass
   include Rails.application.routes.url_helpers
   include DeviseRoutesHelper
+  def request; end
 end
 
 describe DeviseRoutesHelper, :type => :helper do
   before(:each) do
     @dummy = DummyClass.new
-    @dummy.stub(request: @request)
+    allow(@dummy).to receive_messages(request: @request)
   end
 
   # The page_path is the page the user is currently on.
@@ -22,7 +23,7 @@ describe DeviseRoutesHelper, :type => :helper do
   shared_examples "a non-return to page" do |page_path|
     let(:login) { urls.new_user_session_path }
     let(:signup) { urls.new_user_registration_path }
-    before(:each) { @request.stub(fullpath: page_path) }
+    before(:each) { allow(@request).to receive_messages(fullpath: page_path) }
 
     it "does not include return_to param for login" do
       expect(@dummy.new_user_session_path).to eq(login)
@@ -35,7 +36,7 @@ describe DeviseRoutesHelper, :type => :helper do
   shared_examples "a return to page" do |page_path|
     let(:login) { urls.new_user_session_path(return_to: page_path) }
     let(:signup) { urls.new_user_registration_path(return_to: page_path) }
-    before(:each) { @request.stub(fullpath: page_path) }
+    before(:each) { allow(@request).to receive_messages(fullpath: page_path) }
 
     it "includes return_to param" do
       expect(@dummy.new_user_session_path).to eq(login)

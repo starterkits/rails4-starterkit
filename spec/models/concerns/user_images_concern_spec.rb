@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Concerns::UserImagesConcern, :type => :model do
   let(:user) { FactoryGirl.build(:user) }
