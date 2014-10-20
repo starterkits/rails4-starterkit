@@ -287,9 +287,6 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
-    schema_plus (1.6.0)
-      activerecord (>= 3.2)
-      valuable
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -344,7 +341,6 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    valuable (0.9.8)
     warden (1.2.3)
       rack (>= 1.0)
     xpath (2.0.0)
@@ -394,7 +390,6 @@ DEPENDENCIES
   rspec-rails
   rspec-sidekiq
   sass-rails
-  schema_plus
   sdoc
   settingslogic
   shoulda-matchers

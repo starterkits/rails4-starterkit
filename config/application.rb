@@ -17,6 +17,9 @@ Bundler.require(*Rails.groups)
 
 module StarterKit
   class Application < Rails::Application
+    # Use sql instead of ruby to support case insensitive indices for postgres
+    config.active_record.schema_format = :sql
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

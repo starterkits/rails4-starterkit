@@ -1,5 +1,5 @@
 # Monkey patch SchemaPlus to not use foreign keys in tests
-if Rails.env.test?
+if defined? SchemaPlus and Rails.env.test?
   module SchemaPlus::ActiveRecord::ConnectionAdapters
     module TableDefinition
       def add_foreign_key(*args)
