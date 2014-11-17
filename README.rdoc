@@ -80,13 +80,22 @@ accounts after sign up.
 <b>Databases</b>
 * PostgreSQL[http://www.postgresql.org/] — app data; switchable to MySQL, MongoDB, etc.
 * Redis[http://redis.io/] — background job queues
-* Memcached[http://memcached.org/] — session data; only required in production
+* Memcached[http://memcached.org/] — session data
 
 <b>Production Ready</b>
 * Heroku[https:/www.heroku.com] ready — git clone, configure, git push heroku master and you're done
 * Free hosting — configured to run web and job processes in single Heroku dyno to get started
 * Unicorn[http://unicorn.bogomips.org/] — web server
 
+
+= Requirements
+
+The following services need to be running on localhost in order for rails server
+to start without modifying config files.
+
+* PostgreSQL[http://www.postgresql.org/] — app data; switchable to MySQL, MongoDB, etc.
+* Redis[http://redis.io/] — background job queues
+* Memcached[http://memcached.org/] — session data
 
 
 = Installation
@@ -102,7 +111,13 @@ Gemfile is configured for OSX development. See comments in Gemfile for Linux.
   
   bundle install
 
-  # Make sure postgresql and redis are running locally, then
+  # Make sure postgres, memcached and redis are running locally
+  # On OSX with brew...
+  /usr/local/opt/memcached/bin/memcached
+  redis-server /usr/local/etc/redis.conf
+  postgres -D /usr/local/var/postgres
+  
+  # Setup the db
   rake db:setup
 
 Modify vars in config/application.yml. Generate new secret tokens or your app will be hackable!
