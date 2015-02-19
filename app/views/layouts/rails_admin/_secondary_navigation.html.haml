@@ -1,4 +1,4 @@
-%ul.nav.pull-right
+%ul.nav.navbar-nav.navbar-right
   - if main_app_root_path = (main_app.root_path rescue false)
     %li= link_to t('admin.home.name'), main_app_root_path
   %li= link_to 'Sidekiq', main_app.sidekiq_path
