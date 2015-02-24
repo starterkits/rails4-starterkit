@@ -35,7 +35,7 @@ accounts after sign up.
 == Features
 
 <b>UI/UX</b>
-* Turbolinks[https://github.com/rails/turbolinks] — fast page rendering; configured to place nice with HeadJS, AJAX, etc.
+* Turbolinks[https://github.com/rails/turbolinks] — fast page rendering; configured to play nice with HeadJS, AJAX, etc.
 * HeadJS[http://headjs.com/] — fast and flexible JavaScript loading
 * NProgress[https://github.com/rstacruz/nprogress] — mobile app style loading indicator for AJAX requests
 * Fully baked authentication flows
