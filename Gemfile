@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.1.3'
+ruby '2.2.1'
 
-gem 'rails', '~> 4.1.6'
+gem 'rails', '4.2.0'
 
 #
 # PLATFORM SPECIFIC
@@ -29,7 +29,7 @@ gem 'dalli'                     # memcached
 # gem 'jbuilder'
 
 # Assets
-gem 'sass-rails'
+gem 'sass-rails', '~> 5.0'
 gem 'haml-rails'
 gem 'simple_form'
 gem 'uglifier'
@@ -43,7 +43,7 @@ gem 'nprogress-rails'
 
 # CoffeeScript
 # Not needed in production if precompiling assets
-gem 'coffee-rails'
+gem 'coffee-rails', '~> 4.1.0'
 # Uncomment if node.js is not installed
 # gem 'therubyracer', platforms: :ruby
 
@@ -58,7 +58,7 @@ gem 'premailer-rails'
 
 # Authentication
 gem 'devise'
-gem 'cancancan', '~> 1.9'
+gem 'cancancan', '~> 1.10.1'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
@@ -78,9 +78,10 @@ gem 'sinatra', require: false
 gem 'addressable'
 gem 'settingslogic'
 
+# Docs
+gem 'sdoc', '~> 0.4.0', group: :doc
+
 group :development do
-  # Docs
-  gem 'sdoc', require: false    # bundle exec rake doc:rails
 
   # Errors
   # gem 'better_errors'
@@ -128,6 +129,7 @@ group :development, :test do
 
   # Logging
   gem 'quiet_assets'
+  gem 'web-console', '~> 2.0'
 end
 
 group :test do
