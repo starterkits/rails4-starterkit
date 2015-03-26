@@ -22,3 +22,5 @@
 # Ignore Sublime Text workspace files
 /*.sublime-workspace
 
+# Ignore mongoid.yml
+/config/mongoid.yml
