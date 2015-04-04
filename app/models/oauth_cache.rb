@@ -1,4 +1,6 @@
-class OauthCache < ActiveRecord::Base
+class OauthCache #< ActiveRecord::Base
+  include Mongoid::Document
+  
   self.primary_key = 'authentication_id'
 
   belongs_to :authentication, inverse_of: :oauth_cache

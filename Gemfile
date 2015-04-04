@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.1.3'
 
-gem 'rails', '~> 4.1.6'
+gem 'rails', '~> 4.2'
 
 #
 # PLATFORM SPECIFIC
@@ -23,8 +23,10 @@ gem 'airbrake', '~> 3.2.1'         # use with airbrake.io or errbit
 # gem 'rack-google-analytics'
 
 # Data
-gem 'pg'
+#gem 'pg'
 gem 'dalli'                     # memcached
+gem 'mongoid'
+gem 'bson_ext'
 # gem 'schema_plus'             # add better index and foreign key support
 # gem 'jbuilder'
 
@@ -83,9 +85,9 @@ group :development do
   gem 'sdoc', require: false    # bundle exec rake doc:rails
 
   # Errors
-  # gem 'better_errors'
-  # gem 'binding_of_caller'     # extra features for better_errors
-  # gem 'meta_request'          # for rails_panel chrome extension
+  gem 'better_errors'
+  gem 'binding_of_caller'     # extra features for better_errors
+  gem 'meta_request'          # for rails_panel chrome extension
 
   # Deployment
   # gem 'capistrano'
@@ -120,7 +122,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'ffaker'
-  gem 'capybara-webkit'
+  # gem 'capybara-webkit'
   # gem 'poltergeist'           # alternative to capybara-webkit
   # gem 'capybara-firebug'
   # gem 'launchy'               # save_and_open_page support for rspec

@@ -1,4 +1,6 @@
-class Authentication < ActiveRecord::Base
+class Authentication #< ActiveRecord::Base
+  include Mongoid::Document
+  
   include Concerns::OmniauthConcern
   include Concerns::UserImagesConcern
   include Concerns::AuthenticationProvidersConcern
