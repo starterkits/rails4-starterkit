@@ -34,6 +34,9 @@ GEM
     arel (5.0.1.20140414130214)
     awesome_print (1.2.0)
     bcrypt (3.1.7)
+    better_errors (1.1.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.2)
@@ -353,6 +356,8 @@ DEPENDENCIES
   addressable
   airbrake (~> 3.2.1)
   awesome_print
+  better_errors
+  binding_of_caller
   bootstrap-sass
   cancancan (~> 1.9)
   capybara-webkit

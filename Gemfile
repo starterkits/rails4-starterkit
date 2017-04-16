@@ -115,6 +115,8 @@ group :development, :test do
   # gem 'coolline'              # sytax highlighting as you type
   # gem 'coderay'               # use with coolline
   gem 'awesome_print'           # pretty pring debugging output
+  gem 'better_errors'           # better error pages
+  gem 'binding_of_caller'
 
   # Testing
   gem 'rspec-rails'
